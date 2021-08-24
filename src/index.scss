@@ -1,0 +1,29 @@
+
+@font-face {
+  font-family: 'Light';
+  src: local('Light'), url(fonts/Roboto-Light.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Black';
+  src: local('Black'), url(fonts/Roboto-Black.ttf);
+}
+
+@font-face {
+  font-family: 'Bold';
+  src: local('Bold'), url(fonts/Roboto-Bold.ttf);
+}
+
+body{
+  margin: 0;
+  overflow: hidden;
+}
+
+*{
+  font-family: Light, serif;
+}
+
+h1,button{
+  font-family: Bold,sans-serif;
+}
