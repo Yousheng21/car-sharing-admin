@@ -1,0 +1,42 @@
+@import "../../../index";
+
+.navBar{
+  height: 100vh;
+  grid-area: 1/1/4/2;
+  display: grid;
+  grid-template-rows: 0.2fr 3fr;
+
+  &-header{
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding-top: 10px;
+    h1{
+      font-size: 20px;
+      align-self: center;
+    }
+  }
+
+  &-tab{
+    display: flex;
+    gap: 10px;
+    padding: 15px 0 15px 10%;
+    cursor: pointer;
+    color: #3D5170;
+    svg{
+      align-self: center;
+    }
+    &:hover{
+      color: $main-color;
+    }
+    &.active{
+      color: $main-color;
+      border-left: $main-color 5px solid;
+      svg{
+        path{
+          fill: $main-color;
+        }
+      }
+    }
+  }
+}
