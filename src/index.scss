@@ -1,3 +1,5 @@
+$main-color:#007BFF;
+$second-color:#CACEDB;
 
 @font-face {
   font-family: 'Light';
@@ -24,6 +26,10 @@ body{
   font-family: Light, serif;
 }
 
-h1,button{
+a{
+  text-decoration: none;
+}
+
+button{
   font-family: Bold,sans-serif;
 }
