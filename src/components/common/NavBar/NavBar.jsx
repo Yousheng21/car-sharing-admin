@@ -2,14 +2,10 @@ import React from "react";
 import "./navBar.scss";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
-import { useDispatch, useSelector } from "react-redux";
-import Logo from "../../../images/Logo Icon.svg";
+import Logo from "../../../images/Logo Icon small.svg";
 import { tabs } from "../../../reducers/data/dataMenu";
-import { setCurrentPage } from "../../../reducers/appReducer";
 
-const NavBar = () => {
-  const dispatch = useDispatch();
-  const currPage = useSelector((state) => state.app.currentPage);
+const NavBar = ({ page }) => {
   return (
     <div className="navBar">
       <div className="navBar-header">
@@ -22,9 +18,8 @@ const NavBar = () => {
             key={item.text}
             className={classNames({
               "navBar-tab": true,
-              active: index === currPage,
+              active: index === page,
             })}
-            onClick={() => dispatch(setCurrentPage(index))}
             to={`/car-sharing-admin${item.path}`}
           >
             {item.icon}

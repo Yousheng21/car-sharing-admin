@@ -1,10 +1,12 @@
 @import "../../../index";
 
 .navBar{
-  height: 100vh;
+  height: 100%;
   grid-area: 1/1/4/2;
   display: grid;
   grid-template-rows: 0.2fr 3fr;
+  box-shadow: 0 0 5px 5px $color-shadow;
+  grid-gap: 15px;
 
   &-header{
     display: flex;
@@ -13,6 +15,11 @@
     padding-top: 10px;
     h1{
       font-size: 20px;
+      align-self: center;
+      margin: 0;
+      color: #3D5170;
+    }
+    svg{
       align-self: center;
     }
   }
@@ -23,6 +30,7 @@
     padding: 15px 0 15px 10%;
     cursor: pointer;
     color: #3D5170;
+    font-weight: bold;
     svg{
       align-self: center;
     }
