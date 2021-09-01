@@ -1,0 +1,21 @@
+@import "src/index";
+.pagination{
+  justify-content: center;
+  color: $main-color;
+  font-weight: bold;
+  button{
+    outline: none;
+    border: none;
+    color: $main-color;
+    font-weight: bold;
+
+    &.active{
+      color: white;
+      border-radius: 50%;
+      height: 22px;
+      background-color: $main-color;
+      padding: 0 5px;
+      margin: 0 5px;
+    }
+  }
+}
