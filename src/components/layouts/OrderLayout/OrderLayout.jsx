@@ -4,12 +4,15 @@ import NavBar from "../../common/NavBar/NavBar";
 import Header from "../../common/Header/Header";
 import Footer from "../../common/Footer/Footer";
 
-const OrderLayout = ({ children }) => {
+const OrderLayout = ({ children, title, page }) => {
   return (
     <div className="order-layout">
-      <NavBar />
+      <NavBar page={page} />
       <Header />
-      {children}
+      <section className="main">
+        <h1>{title}</h1>
+        {children}
+      </section>
       <Footer />
     </div>
   );
