@@ -1,5 +1,6 @@
 $main-color:#007BFF;
 $second-color:#CACEDB;
+$color-shadow: rgba(20, 17, 19, 0.11);
 
 @font-face {
   font-family: 'Light';
@@ -19,7 +20,7 @@ $second-color:#CACEDB;
 
 body{
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 *{
@@ -28,8 +29,4 @@ body{
 
 a{
   text-decoration: none;
-}
-
-button{
-  font-family: Bold,sans-serif;
 }
