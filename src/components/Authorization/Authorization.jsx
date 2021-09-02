@@ -26,7 +26,10 @@ const Authorization = () => {
       </div>
       <main className="auth-content">
         <h2>Вход</h2>
-        <form action="">
+        <form
+          action="/car-sharing-admin"
+          onSubmit={() => dispatch(login(email.value, password.value))}
+        >
           <Input
             id="username"
             value={email.value}
@@ -52,10 +55,9 @@ const Authorization = () => {
               Запросить доступ
             </a>
             <button
-              type="button"
+              type="submit"
               className="btn btn-primary"
               disabled={!email.inputValid || !password.inputValid}
-              onClick={() => dispatch(login(email.value, password.value))}
             >
               Войти
             </button>
