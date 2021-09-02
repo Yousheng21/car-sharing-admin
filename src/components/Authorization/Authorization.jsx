@@ -4,7 +4,7 @@ import "./authorization.scss";
 import { useDispatch, useSelector } from "react-redux";
 import Logo from "../../images/Logo Icon.svg";
 import Input from "../common/Input/Input";
-import { useInput } from "../../utils/Validator/validator";
+import { useInput } from "../../utils/Validator/useInput";
 import { login } from "../../actions/login";
 
 const Authorization = () => {
