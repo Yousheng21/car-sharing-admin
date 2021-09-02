@@ -12,10 +12,15 @@ const Header = () => {
     if (value === "logout") dispatch(logout());
   };
   return (
-    <div className="header">
+    <header className="header">
       <section className="search">
         <SearchLogo />
-        <input type="text" name="search" id="search" placeholder="Поиск ..." />
+        <input
+          type="search"
+          name="search"
+          id="search"
+          placeholder="Поиск ..."
+        />
       </section>
       <section className="note">
         <Notifications />
@@ -32,7 +37,7 @@ const Header = () => {
           <option value="logout">Logout</option>
         </select>
       </section>
-    </div>
+    </header>
   );
 };
 

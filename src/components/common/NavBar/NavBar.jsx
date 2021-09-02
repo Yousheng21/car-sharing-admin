@@ -7,12 +7,12 @@ import { tabs } from "../../../reducers/data/dataMenu";
 
 const NavBar = ({ page }) => {
   return (
-    <div className="navBar">
+    <section className="navBar">
       <div className="navBar-header">
         <Logo />
         <h1>Need for drive</h1>
       </div>
-      <section>
+      <nav>
         {tabs.map((item, index) => (
           <Link
             key={item.text}
@@ -26,8 +26,8 @@ const NavBar = ({ page }) => {
             {item.text}
           </Link>
         ))}
-      </section>
-    </div>
+      </nav>
+    </section>
   );
 };
 
