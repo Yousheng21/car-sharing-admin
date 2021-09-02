@@ -9,6 +9,9 @@
     background: none;
     color: $main-color;
     font-weight: bold;
+    &:hover{
+      transform: scale(1.2);
+    }
 
     &.active{
       color: white;

@@ -3,15 +3,19 @@ import classNames from "classnames";
 import "./pagination.scss";
 import { getPaginateNumber } from "../../../actions/pagination";
 
-const Pagination = ({ paginate, orders, page }) => {
+const Pagination = ({ paginate, orders, page, prev, next }) => {
   const [text, setText] = useState([]);
   useEffect(() => {
     setText(getPaginateNumber(page, orders));
   }, [orders.length, page]);
 
-  return text.length ? (
+  if (!text.length) return null;
+
+  return (
     <div className="pagination">
-      «
+      <button type="button" onClick={() => prev(page)}>
+        «
+      </button>
       {text.map((item) =>
         item !== 0 ? (
           <button
@@ -28,10 +32,10 @@ const Pagination = ({ paginate, orders, page }) => {
           "..."
         )
       )}
-      »
+      <button type="button" onClick={() => next(page)}>
+        »
+      </button>
     </div>
-  ) : (
-    ""
   );
 };
 
