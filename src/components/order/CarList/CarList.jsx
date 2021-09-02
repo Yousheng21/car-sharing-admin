@@ -2,9 +2,9 @@ import React from "react";
 import "./carList.scss";
 import OrderLayout from "../../layouts/OrderLayout/OrderLayout";
 
-const CarList = () => {
+const CarList = ({ page }) => {
   return (
-    <OrderLayout>
+    <OrderLayout title="Список авто" page={page}>
       <main>CarList</main>
     </OrderLayout>
   );
