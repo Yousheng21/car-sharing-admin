@@ -1,5 +1,6 @@
 import React from "react";
 import { domain } from "../../reducers/data/api/server";
+import Photo from "../../images/no-image.png";
 
 const Image = ({ car }) => {
   const getSrc = () => {
@@ -12,9 +13,7 @@ const Image = ({ car }) => {
     <img
       crossOrigin="anonymous"
       referrerPolicy="origin"
-      src={
-        car ? getSrc() : "https://img.icons8.com/ios/100/000000/no-image.png"
-      }
+      src={car ? getSrc() : Photo}
       alt={car ? car.name : "photo"}
     />
   );
