@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/car-sharing-admin/static/css/main.e2dad36f.chunk.css",
-    "main.js": "/car-sharing-admin/static/js/main.c93a140f.chunk.js",
-    "main.js.map": "/car-sharing-admin/static/js/main.c93a140f.chunk.js.map",
+    "main.css": "/car-sharing-admin/static/css/main.cc7f3dd2.chunk.css",
+    "main.js": "/car-sharing-admin/static/js/main.01b1a2b8.chunk.js",
+    "main.js.map": "/car-sharing-admin/static/js/main.01b1a2b8.chunk.js.map",
     "runtime-main.js": "/car-sharing-admin/static/js/runtime-main.236e5d1e.js",
     "runtime-main.js.map": "/car-sharing-admin/static/js/runtime-main.236e5d1e.js.map",
     "static/css/2.983f79de.chunk.css": "/car-sharing-admin/static/css/2.983f79de.chunk.css",
-    "static/js/2.f1a19226.chunk.js": "/car-sharing-admin/static/js/2.f1a19226.chunk.js",
-    "static/js/2.f1a19226.chunk.js.map": "/car-sharing-admin/static/js/2.f1a19226.chunk.js.map",
+    "static/js/2.c180f5d4.chunk.js": "/car-sharing-admin/static/js/2.c180f5d4.chunk.js",
+    "static/js/2.c180f5d4.chunk.js.map": "/car-sharing-admin/static/js/2.c180f5d4.chunk.js.map",
     "index.html": "/car-sharing-admin/index.html",
     "static/css/2.983f79de.chunk.css.map": "/car-sharing-admin/static/css/2.983f79de.chunk.css.map",
-    "static/css/main.e2dad36f.chunk.css.map": "/car-sharing-admin/static/css/main.e2dad36f.chunk.css.map",
-    "static/js/2.f1a19226.chunk.js.LICENSE.txt": "/car-sharing-admin/static/js/2.f1a19226.chunk.js.LICENSE.txt",
-    "static/media/navBar.scss": "/car-sharing-admin/static/media/Roboto-Light.8be2d148.ttf"
+    "static/css/main.cc7f3dd2.chunk.css.map": "/car-sharing-admin/static/css/main.cc7f3dd2.chunk.css.map",
+    "static/js/2.c180f5d4.chunk.js.LICENSE.txt": "/car-sharing-admin/static/js/2.c180f5d4.chunk.js.LICENSE.txt",
+    "static/media/pagination.scss": "/car-sharing-admin/static/media/Roboto-Light.8be2d148.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.236e5d1e.js",
     "static/css/2.983f79de.chunk.css",
-    "static/js/2.f1a19226.chunk.js",
-    "static/css/main.e2dad36f.chunk.css",
-    "static/js/main.c93a140f.chunk.js"
+    "static/js/2.c180f5d4.chunk.js",
+    "static/css/main.cc7f3dd2.chunk.css",
+    "static/js/main.01b1a2b8.chunk.js"
   ]
 }
