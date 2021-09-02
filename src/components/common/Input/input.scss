@@ -1,8 +1,9 @@
+@import "src/index";;
 .input{
   display: flex;
   flex-direction: column;
 
   .error{
-    color: red;
+    color: $color-error;
   }
 }

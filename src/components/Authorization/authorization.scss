@@ -1,3 +1,4 @@
+@import "src/index";
 .auth{
   width: 30vw;
   margin: 20vh auto 0;
@@ -28,7 +29,7 @@
      align-self: center;
     }
     span.error{
-      color: red;
+      color: $color-error;
     }
   }
   &-footer{
