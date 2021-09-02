@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
-const regExp =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+import { regExpEmail } from "../../reducers/data/regExp";
 
 export const useValidation = (value, validations) => {
   const [isEmpty, setEmpty] = useState({ value: true, text: "" });
@@ -16,7 +15,7 @@ export const useValidation = (value, validations) => {
           else setEmpty({ value: true, text: validations[validation].text });
           break;
         case "isEmail":
-          if (regExp.test(String(value).toLowerCase()))
+          if (regExpEmail.test(String(value).toLowerCase()))
             setEmailError({ value: false, text: "" });
           else
             setEmailError({
