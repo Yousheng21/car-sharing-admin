@@ -1,4 +1,4 @@
-import { instanceAuth } from "../reducers/data/dataServer";
+import { instanceAuth } from "../reducers/data/api/server";
 import { logoutUser, setErrorForm, setUser } from "../reducers/userReducer";
 import { store } from "../reducers";
 

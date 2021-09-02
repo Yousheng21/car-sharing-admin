@@ -1,4 +1,4 @@
-import { instance } from "../reducers/data/dataServer";
+import { instance } from "../reducers/data/api/server";
 import { setNewOrders, setOrders } from "../reducers/appReducer";
 import { store } from "../reducers";
 

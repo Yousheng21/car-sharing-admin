@@ -2,10 +2,10 @@ import React from "react";
 import classNames from "classnames";
 import Image from "../../common/Image";
 import {
-  additional,
   orderCloseId,
   orderCompleteId,
-} from "../../../reducers/data/dataOrder";
+} from "../../../reducers/data/api/server";
+import { additional } from "../../../reducers/data/dataOrder";
 import Check from "../../../images/Check Icon.svg";
 import Reject from "../../../images/Reject Icon.svg";
 import Edit from "../../../images/Edit Icon.svg";

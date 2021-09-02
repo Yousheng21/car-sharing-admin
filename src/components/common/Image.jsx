@@ -1,5 +1,5 @@
 import React from "react";
-import { domain } from "../../reducers/data/dataServer";
+import { domain } from "../../reducers/data/api/server";
 
 const Image = ({ car }) => {
   const getSrc = () => {

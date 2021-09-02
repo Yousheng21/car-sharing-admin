@@ -2,7 +2,7 @@ import {
   orderCloseId,
   orderCompleteId,
   orderNewId,
-} from "../reducers/data/dataOrder";
+} from "../reducers/data/api/server";
 
 export const getDropdown = (storeModels, storeCities) => {
   const models = storeModels.map((model) => {
