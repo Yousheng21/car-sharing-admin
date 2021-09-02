@@ -1,5 +1,5 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import React, { useEffect } from "react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Authorization from "./Authorization/Authorization";
 import OrderList from "./order/OrderList/OrderList";
@@ -10,35 +10,36 @@ import { auth } from "../actions/login";
 const App = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.user.isAuth);
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     if (token) dispatch(auth());
+    else setToken(localStorage.getItem("token"));
   }, [token]);
 
   return (
     <BrowserRouter>
       {!isAuth ? (
-        <Switch>
-          <Route path="/car-sharing-admin" component={Authorization} />
-        </Switch>
+        <Redirect to="/car-sharing-admin/admin" />
       ) : (
-        <Switch>
-          <Route
-            exact
-            path="/car-sharing-admin"
-            render={() => <CardCar page={0} />}
-          />
-          <Route
-            path="/car-sharing-admin/cardList"
-            render={() => <CarList page={1} />}
-          />
-          <Route
-            path="/car-sharing-admin/orderList"
-            render={() => <OrderList page={2} />}
-          />
-        </Switch>
+        <Redirect to="/car-sharing-admin" />
       )}
+      <Switch>
+        <Route
+          exact
+          path="/car-sharing-admin"
+          render={() => <CardCar page={0} />}
+        />
+        <Route path="/car-sharing-admin/admin" component={Authorization} />
+        <Route
+          path="/car-sharing-admin/cardList"
+          render={() => <CarList page={1} />}
+        />
+        <Route
+          path="/car-sharing-admin/orderList"
+          render={() => <OrderList page={2} />}
+        />
+      </Switch>
     </BrowserRouter>
   );
 };
