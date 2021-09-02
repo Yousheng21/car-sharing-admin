@@ -1,8 +1,12 @@
 const SET_USER = "SET_USER";
+const LOGOUT_USER = "LOGOUT_USER";
 const SET_ERROR_FORM = "SET_ERROR_FORM";
 
 const defaultState = {
-  userId: "",
+  user: {
+    userId: "",
+    accessToken: "",
+  },
   isAuth: false,
   isErrorAuth: {
     value: false,
@@ -16,7 +20,10 @@ export default function userReducer(state = defaultState, action) {
       return {
         ...state,
         isAuth: true,
-        userId: action.id,
+        user: {
+          userId: action.user.user_id,
+          accessToken: action.user.access_token,
+        },
         isErrorAuth: {
           ...state.isErrorAuth,
           value: false,
@@ -30,16 +37,28 @@ export default function userReducer(state = defaultState, action) {
           value: true,
         },
       };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        isAuth: false,
+        user: {
+          ...defaultState.user,
+        },
+      };
     default:
       return state;
   }
 }
 
-export const setUser = (id) => ({
+export const setUser = (user) => ({
   type: SET_USER,
-  id,
+  user,
 });
 
 export const setErrorForm = () => ({
   type: SET_ERROR_FORM,
+});
+
+export const logoutUser = () => ({
+  type: LOGOUT_USER,
 });
