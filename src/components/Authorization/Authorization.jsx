@@ -3,7 +3,7 @@ import "./authorization.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 import Logo from "../../images/Logo Icon.svg";
-import Input from "../../utils/Input/Input";
+import Input from "../common/Input/Input";
 import { useInput } from "../../utils/Validator/validator";
 import { login } from "../../actions/login";
 
