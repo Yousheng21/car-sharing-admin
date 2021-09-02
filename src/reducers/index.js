@@ -10,17 +10,17 @@ export default function saveToLocalStorage(name, state) {
     const serializedState = JSON.stringify(state);
     localStorage.setItem(name, serializedState);
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 
 export function loadFromLocalStorage(name) {
   try {
     const serializedState = localStorage.getItem(name);
-    if (serializedState === null) return undefined;
+    if (serializedState === null) return false;
     return JSON.parse(serializedState);
   } catch (e) {
-    return undefined;
+    return null;
   }
 }
 
