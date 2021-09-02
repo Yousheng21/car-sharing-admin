@@ -1,0 +1,42 @@
+import { useState } from "react";
+import { useValidation } from "./validator";
+
+export const useInput = (initialState, validations) => {
+  const [value, setValue] = useState(initialState);
+  const [isDirty, setDirty] = useState(false);
+  const valid = useValidation(value, validations);
+
+  const onChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  const onBlur = () => {
+    setDirty(true);
+  };
+  const onFocus = () => {
+    setDirty(false);
+  };
+
+  const printError = (validators) => {
+    let flag = false;
+    return validators.map((item) => {
+      if (!flag) {
+        if (valid[item].value) {
+          flag = true;
+          return valid[item].text;
+        }
+      }
+      return true;
+    });
+  };
+
+  return {
+    value,
+    onChange,
+    onBlur,
+    onFocus,
+    isDirty,
+    printError,
+    ...valid,
+  };
+};
