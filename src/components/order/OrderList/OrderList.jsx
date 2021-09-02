@@ -24,6 +24,16 @@ const OrderList = ({ page }) => {
     setCurrentPage(pageNumber);
   };
 
+  const next = (pageNumber) => {
+    if (currentPage < newOrders.length) setCurrentPage(pageNumber + 1);
+    else setCurrentPage(1);
+  };
+
+  const prev = (pageNumber) => {
+    if (currentPage > 1) setCurrentPage(pageNumber - 1);
+    else setCurrentPage(newOrders.length);
+  };
+
   const indexOfLastOrder = currentPage * orderPerPage;
   const indexOfFirstOrder = indexOfLastOrder - orderPerPage;
   const currentOrders = newOrders.slice(indexOfFirstOrder, indexOfLastOrder);
@@ -33,7 +43,13 @@ const OrderList = ({ page }) => {
       <main className="order-list">
         <Filters paginate={paginate} />
         <Order orders={currentOrders} />
-        <Pagination page={currentPage} orders={newOrders} paginate={paginate} />
+        <Pagination
+          page={currentPage}
+          orders={newOrders}
+          next={next}
+          prev={prev}
+          paginate={paginate}
+        />
       </main>
     </OrderLayout>
   );
