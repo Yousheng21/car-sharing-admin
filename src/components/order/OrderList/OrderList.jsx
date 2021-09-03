@@ -5,13 +5,13 @@ import OrderLayout from "../../layouts/OrderLayout/OrderLayout";
 import getOrders from "../../../actions/order";
 import Filters from "./Filters";
 import Pagination from "../../common/Pagination/Pagination";
-import Order from "./Order";
+import Order from "./Order/Order";
 
 const OrderList = ({ page }) => {
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [orderPerPage] = useState(1);
+  const [orderPerPage] = useState(5);
 
   const orders = useSelector((state) => state.app.orders);
   const newOrders = useSelector((state) => state.app.newOrders);
@@ -25,13 +25,14 @@ const OrderList = ({ page }) => {
   };
 
   const next = (pageNumber) => {
-    if (currentPage < newOrders.length) setCurrentPage(pageNumber + 1);
+    if (currentPage < newOrders.length / orderPerPage)
+      setCurrentPage(pageNumber + 1);
     else setCurrentPage(1);
   };
 
   const prev = (pageNumber) => {
     if (currentPage > 1) setCurrentPage(pageNumber - 1);
-    else setCurrentPage(newOrders.length);
+    else setCurrentPage(newOrders.length / orderPerPage);
   };
 
   const indexOfLastOrder = currentPage * orderPerPage;
@@ -46,6 +47,7 @@ const OrderList = ({ page }) => {
         <Pagination
           page={currentPage}
           orders={newOrders}
+          perPage={orderPerPage}
           next={next}
           prev={prev}
           paginate={paginate}
