@@ -2,7 +2,16 @@ import { instance } from "../reducers/data/api/server";
 import { setNewOrders, setOrders } from "../reducers/appReducer";
 import { store } from "../reducers";
 
-const LIMIT = 10;
+const LIMIT = 55;
+
+const getUrl = (params) => {
+  let requestUrl = "";
+  Object.keys(params).map((param) => {
+    if (params[param]) requestUrl += `${param}=${params[param]}&`;
+    return requestUrl;
+  });
+  return requestUrl.substring(0, requestUrl.length - 1);
+};
 
 const getOrders = (parameters) => {
   const { accessToken } = store.getState().user.user;
@@ -10,17 +19,7 @@ const getOrders = (parameters) => {
     try {
       const response = await instance({
         method: "GET",
-        url: `/api/db/order?${
-          parameters
-            ? `${parameters.carId ? `carId=${parameters.carId}&` : ""}${
-                parameters.cityId ? `cityId=${parameters.cityId}&` : ""
-              }${
-                parameters.orderStatusId
-                  ? `orderStatusId=${parameters.orderStatusId}`
-                  : ""
-              }`
-            : ""
-        }`,
+        url: `/api/db/order?${parameters ? getUrl(parameters) : ""}`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
