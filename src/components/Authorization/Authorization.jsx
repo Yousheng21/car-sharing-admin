@@ -26,7 +26,12 @@ const Authorization = () => {
       </div>
       <main className="auth-content">
         <h2>Вход</h2>
-        <form onSubmit={() => dispatch(login(email.value, password.value))}>
+        <form
+          onSubmit={(event) => {
+            dispatch(login(email.value, password.value));
+            event.preventDefault();
+          }}
+        >
           <Input
             id="username"
             value={email.value}
