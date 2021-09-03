@@ -11,7 +11,7 @@ const Filters = ({ paginate }) => {
   const [dropdown, setDropdown] = useState([]);
 
   const [dataForm, setDataForm] = useState({
-    dateFrom: "",
+    "createdAt[$gt]": "",
     carId: "",
     cityId: "",
     orderStatusId: "",
@@ -56,7 +56,7 @@ const Filters = ({ paginate }) => {
           paginate(1);
         }}
         type="button"
-        className="btn btn-primary"
+        className="btn"
       >
         Применить
       </button>
