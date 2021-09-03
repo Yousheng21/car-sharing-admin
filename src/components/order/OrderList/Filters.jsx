@@ -42,6 +42,8 @@ const Filters = ({ paginate }) => {
           <div key={item.name} className="select">
             <select name={item.name} onChange={handleChange} id={item.name}>
               {item.options.map((el, index) => (
+                // Некоторые модели имеют одинаковый id
+                // eslint-disable-next-line react/no-array-index-key
                 <option key={index} value={el.id}>
                   {el.name}
                 </option>
