@@ -10,7 +10,7 @@ const OrderLayout = ({ children, title, page }) => {
       <NavBar page={page} />
       <Header />
       <section className="main">
-        <h1>{title}</h1>
+        <h1 className="title">{title}</h1>
         {children}
       </section>
       <Footer />
