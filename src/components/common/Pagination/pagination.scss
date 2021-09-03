@@ -3,12 +3,14 @@
   justify-content: center;
   color: $main-color;
   font-weight: bold;
+  margin-top: 30px;
   button{
     outline: none;
     border: none;
     background: none;
     color: $main-color;
     font-weight: bold;
+    align-self: center;
     &:hover{
       transform: scale(1.2);
     }

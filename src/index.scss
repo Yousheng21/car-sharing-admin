@@ -1,20 +1,25 @@
 $main-color:#007BFF;
 $second-color:#CACEDB;
+$third-color: #818EA3;
 $color-shadow: rgba(20, 17, 19, 0.11);
+$color-error: red;
+$color-title: #3D5170;
+$color-select: #BECAD6;
+$color-btn: #5A6169;
 
 @font-face {
-  font-family: 'Light';
+  font-family: 'Roboto-Light';
   src: local('Light'), url(fonts/Roboto-Light.ttf);
   font-weight: 500;
 }
 
 @font-face {
-  font-family: 'Black';
+  font-family: 'Roboto-Black';
   src: local('Black'), url(fonts/Roboto-Black.ttf);
 }
 
 @font-face {
-  font-family: 'Bold';
+  font-family: 'Roboto-Bold';
   src: local('Bold'), url(fonts/Roboto-Bold.ttf);
 }
 
@@ -24,7 +29,7 @@ body{
 }
 
 *{
-  font-family: Light, serif;
+  font-family: Roboto-Light, serif;
 }
 
 a{

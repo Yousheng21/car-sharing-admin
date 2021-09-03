@@ -1,15 +1,18 @@
+@import "src/index";
 .order-layout{
   display: grid;
   grid-template: 0.2fr 3fr 0.2fr/0.5fr 2fr;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   .main{
     grid-area: 2/2/3/3;
     display: grid;
     grid-template-rows: 0.1fr 1fr;
     padding: 25px;
     width: 100%;
-    height: 80%;
+    .title{
+      color: $color-title;
+    }
   }
 }
 

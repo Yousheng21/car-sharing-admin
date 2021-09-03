@@ -1,23 +1,25 @@
 @import "../../../index";
-$nav-color: #3D5170;
 .navBar{
   height: 100%;
   grid-area: 1/1/4/2;
   display: grid;
-  grid-template-rows: 0.2fr 3fr;
-  box-shadow: 0 0 5px 5px $color-shadow;
-  grid-gap: 15px;
+  grid-template-rows: 0.2fr 3fr 0.2fr;
+  //grid-gap: 15px;
+  box-shadow: 1px 1px 5px 10px $color-shadow;
 
   &-header{
     display: flex;
     justify-content: center;
     gap: 6px;
-    padding-top: 10px;
+    height: 100%;
+    padding: 20px;
+    border-bottom:0.5px $color-shadow solid;
     h1{
       font-size: 20px;
       align-self: center;
       margin: 0;
-      color: $nav-color;
+      color: $color-title;
+      font-weight: bold;
     }
     svg{
       align-self: center;
@@ -29,7 +31,7 @@ $nav-color: #3D5170;
     gap: 10px;
     padding: 15px 0 15px 10%;
     cursor: pointer;
-    color: $nav-color;
+    color: $color-title;
     font-weight: bold;
     svg{
       align-self: center;

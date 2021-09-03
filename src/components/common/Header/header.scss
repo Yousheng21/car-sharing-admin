@@ -5,7 +5,7 @@ $shadow: rgba(0, 0, 0, 0.1);
   grid-area: 1/2/2/3;
   display: grid;
   grid-template-columns: 6fr 0.5fr 1.5fr;
-  box-shadow: 0 1px 0 2px $shadow;
+  box-shadow: 0 1px 0 0.5px $shadow;
   width: 100%;
 
   &>section{
@@ -23,6 +23,10 @@ $shadow: rgba(0, 0, 0, 0.1);
     input{
       border: none;
       outline: none;
+      &::placeholder{
+        color: $third-color;
+        font-weight: bold;
+      }
     }
   }
   .note{
@@ -44,6 +48,8 @@ $shadow: rgba(0, 0, 0, 0.1);
       border: none;
       outline: none;
       border-radius: 3px;
+      color: $color-btn;
+      font-weight: bold;
     }
   }
 }
