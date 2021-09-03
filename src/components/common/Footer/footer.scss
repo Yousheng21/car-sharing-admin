@@ -2,7 +2,7 @@
 .footer{
   display: flex;
   justify-content: space-between;
-  padding: 0 25px;
+  padding: 0 10px 25px;
   grid-area: 3/2/4/3;
   width: 100%;
 
@@ -10,9 +10,23 @@
     display: flex;
     gap: 15px;
     color: $main-color;
+    align-items: flex-end;
   }
 
   span{
     color: $third-color;
+    align-self: flex-end;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .footer{
+    &-main{
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    span{
+      align-self: center;
+    }
   }
 }
