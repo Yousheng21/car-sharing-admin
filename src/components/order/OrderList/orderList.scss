@@ -1,4 +1,6 @@
 @import "src/index";
+$color-option:#868E96;
+$color-check-mark:#0EC261;
 %style-select-row{
   content: "";
   display: block;
@@ -21,7 +23,8 @@
     display: grid;
     grid-template-columns: 1fr 0.1fr;
     grid-gap: 10px;
-    margin-bottom: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px $color-border solid;
     .dropdown{
       display: flex;
       flex-wrap: wrap;
@@ -50,7 +53,7 @@
           height: 100%;
           border-radius: 5px;
           padding: 5px 10px;
-          color: gray;
+          color: $color-option;
         }
       }
     }
@@ -80,7 +83,6 @@
         padding-left: 20px;
         color: $third-color;
         span{
-          font-weight: bold;
           color: black;
         }
       }
@@ -92,10 +94,13 @@
           padding-left: 35px;
           margin-bottom: 12px;
           font-size: 16px;
+          color: gray;
+          font-weight: normal;
           &.active{
+            color: black;
             font-weight: bold;
             .check-mark{
-              border: #0EC261 2px solid;
+              border: $color-check-mark 2px solid;
               &:after{ display: block;}
             }
           }
@@ -141,7 +146,6 @@
           padding: 5px 10px;
           border: 1px $color-select solid;
           color: $color-btn;
-          font-weight: bold;
           &:first-child{
             border-bottom-left-radius: 5px;
             border-top-left-radius: 5px;
@@ -199,6 +203,9 @@
 @media screen and (max-width: 425px){
   .order-list{
     height: 100%;
+    .parameters button{
+      height: 20%;
+    }
     .orders{
       .order{
         grid-template-rows: repeat(3,1fr) 0.5fr 0.5fr;
