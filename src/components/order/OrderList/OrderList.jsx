@@ -32,7 +32,7 @@ const OrderList = ({ page }) => {
 
   const prev = (pageNumber) => {
     if (currentPage > 1) setCurrentPage(pageNumber - 1);
-    else setCurrentPage(newOrders.length / orderPerPage);
+    else setCurrentPage(Math.ceil(newOrders.length / orderPerPage));
   };
 
   const indexOfLastOrder = currentPage * orderPerPage;
