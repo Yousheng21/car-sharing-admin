@@ -6,6 +6,7 @@ $color-error: red;
 $color-title: #3D5170;
 $color-select: #BECAD6;
 $color-btn: #5A6169;
+$color-border: rgba(202, 206, 219, 0.5);
 
 @font-face {
   font-family: 'Roboto-Light';
@@ -29,9 +30,13 @@ body{
 }
 
 *{
+  font-weight: bold;
   font-family: Roboto-Light, serif;
 }
-
+h1,h2{
+  font-weight: bold;
+  color: $color-title;
+}
 a{
   text-decoration: none;
 }
