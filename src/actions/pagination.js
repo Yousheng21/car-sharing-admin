@@ -1,25 +1,32 @@
-export const getPaginateNumber = (page, orders) => {
-  const arrayNumber = [];
+export const getPaginateNumber = (currPage, total) => {
+  const perPageCenter = 1;
+  const borderLeft = currPage - perPageCenter;
+  const borderRight = currPage + perPageCenter;
+  const range = [];
+  const rangeWithDots = [];
+  let prevItem = 0;
 
-  if (orders.length > 3) {
-    arrayNumber.push(1);
-    if (page === 1) arrayNumber.push(page + 1, 0);
-    else if (page === orders.length) arrayNumber.push(0, page - 1);
-    else if (page >= 4 && page <= orders.length - 3) {
-      arrayNumber.push(0, page - 1, page, page + 1, 0);
-    } else if (page < 4 && page > 1) {
-      if (page - 1 !== 1) arrayNumber.push(page - 1);
-      arrayNumber.push(page, page + 1, 0);
-    } else if (page > orders.length - 3 && page < orders.length) {
-      arrayNumber.push(0, page - 1, page);
-      if (page + 1 !== orders.length) arrayNumber.push(page + 1);
+  // Получение основных страниц
+  for (let i = 1; i <= total; i += 1) {
+    if (i === 1 || i === total || (i >= borderLeft && i <= borderRight)) {
+      range.push(i);
     }
-    arrayNumber.push(orders.length);
-  } else if (orders.length >= 1) {
-    orders.map((order, index) => {
-      return arrayNumber.push(index + 1);
-    });
   }
 
-  return arrayNumber;
+  // Сравнение по парам
+  range.forEach((item) => {
+    if (prevItem) {
+      // Если между страницами промежуток в одну добавляем недостающую страницу
+      if (item - prevItem === 2) {
+        rangeWithDots.push(prevItem + 1);
+      }
+      // Если страницы не соседние добавляем троеточие
+      else if (item - prevItem !== 1) {
+        rangeWithDots.push("...");
+      }
+    }
+    rangeWithDots.push(item);
+    prevItem = item;
+  });
+  return rangeWithDots;
 };
