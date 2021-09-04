@@ -2,9 +2,9 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Authorization from "./Authorization/Authorization";
-import OrderList from "./order/OrderList/OrderList";
-import CardCar from "./order/CardCar/CardCar";
-import CarList from "./order/CarList/CarList";
+import OrderList from "./OrderList/OrderList";
+import CardCar from "./CardCar/CardCar";
+import CarList from "./CarList/CarList";
 import { auth } from "../actions/login";
 
 const App = () => {
