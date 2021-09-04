@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import "./pagination.scss";
-import { getPaginateNumber } from "../../../actions/pagination";
+import { getPaginateNumber } from "../../../../actions/pagination";
 
 const Pagination = ({ paginate, orders, page, prev, next, perPage }) => {
   const [text, setText] = useState([]);
