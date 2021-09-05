@@ -3,7 +3,7 @@ import { setNewOrders, setOrders } from "../reducers/appReducer";
 import { store } from "../reducers";
 
 const getUrl = (params) => {
-  let requestUrl = "";
+  let requestUrl = "?";
   Object.keys(params).map((param) => {
     if (params[param]) requestUrl += `${param}=${params[param]}&`;
     return requestUrl;
@@ -17,7 +17,7 @@ const getOrders = (parameters) => {
     try {
       const response = await instance({
         method: "GET",
-        url: `/api/db/order?${parameters ? getUrl(parameters) : ""}`,
+        url: `/api/db/order${parameters ? getUrl(parameters) : ""}`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
