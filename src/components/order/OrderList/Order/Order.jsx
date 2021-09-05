@@ -33,7 +33,11 @@ const Order = ({ orders, storeOrders }) => {
           </div>
           <Additional order={order} />
           <div className="price">
-            <h1>{order.price} ₽</h1>
+            {order.price ? (
+              <h1>{order.price} ₽</h1>
+            ) : (
+              <span>Цена не указана</span>
+            )}
           </div>
           <Buttons order={order} />
         </section>
