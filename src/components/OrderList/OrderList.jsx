@@ -6,7 +6,7 @@ import getOrders from "../../actions/order";
 import Order from "./Order/Order";
 import getCities from "../../actions/city";
 import getCarModels from "../../actions/car";
-import { getDropdown } from "../../actions/app";
+import { getDropdownOrder } from "../../actions/app";
 import EntitiesLayout from "../layouts/EntitiesLayout/EntitiesLayout";
 
 const OrderList = ({ page }) => {
@@ -41,7 +41,7 @@ const OrderList = ({ page }) => {
     if (!cities.length && !models.length) {
       dispatch(getCities());
       dispatch(getCarModels());
-    } else setDropdown(getDropdown(models, cities));
+    } else setDropdown(getDropdownOrder(models, cities));
   }, [cities.length, models.length]);
 
   const handleClick = (filters) => {
