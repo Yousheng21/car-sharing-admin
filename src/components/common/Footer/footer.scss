@@ -2,20 +2,22 @@
 .footer{
   display: flex;
   justify-content: space-between;
-  padding: 0 10px 25px;
+  padding: 0 25px 10px;
   grid-area: 3/2/4/3;
   width: 100%;
 
   &-main{
     display: flex;
     gap: 15px;
-    color: $main-color;
-    align-items: flex-end;
+    align-items: center;
+    a{
+      color: #4da1ff;
+    }
   }
 
   span{
     color: $third-color;
-    align-self: flex-end;
+    align-self: center;
   }
 }
 
