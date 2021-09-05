@@ -7,3 +7,15 @@ export const additional = [
   { name: "Детское кресло", key: "isNeedChildChair" },
   { name: "Правый руль", key: "isRightWheel" },
 ];
+
+export const arrOrderStatus = [
+  { name: "В процессе", id: orderNewId },
+  { name: "Завершенные", id: orderCompleteId },
+  { name: "Отмененные", id: orderCloseId },
+];
+
+export const arrCarColors = [
+  { name: "голубой", id: "голубой" },
+  { name: "красный", id: "красный" },
+  { name: "черный", id: "черный" },
+];
