@@ -18,6 +18,12 @@ const Authorization = () => {
   const password = useInput("", {
     isEmpty: { value: true, text: "Пустое поле" },
   });
+
+  const handleSubmit = (event, emailValue, passwordValue) => {
+    dispatch(login(emailValue, passwordValue));
+    event.preventDefault();
+  };
+
   return (
     <div className="auth">
       <div className="auth-header">
@@ -28,8 +34,7 @@ const Authorization = () => {
         <h2>Вход</h2>
         <form
           onSubmit={(event) => {
-            dispatch(login(email.value, password.value));
-            event.preventDefault();
+            handleSubmit(event, email.value, password.value);
           }}
         >
           <Input
