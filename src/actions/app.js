@@ -1,10 +1,6 @@
-import {
-  orderCloseId,
-  orderCompleteId,
-  orderNewId,
-} from "../reducers/data/api/server";
+import { arrCarColors, arrOrderStatus } from "../reducers/data/dataOrder";
 
-export const getDropdown = (storeModels, storeCities) => {
+export const getDropdownOrder = (storeModels, storeCities) => {
   const models = storeModels.map((model) => {
     return { name: model.name, id: model.id };
   });
@@ -25,6 +21,7 @@ export const getDropdown = (storeModels, storeCities) => {
   return [
     {
       name: "createdAt[$gt]",
+      type: "select",
       options: [
         { name: "За все время", id: "" },
         { name: "За месяц", id: month.getTime() },
@@ -32,19 +29,65 @@ export const getDropdown = (storeModels, storeCities) => {
         { name: "За день", id: day.getTime() },
       ],
     },
-    { name: "carId", options: [{ name: "Все модели", id: "" }, ...models] },
+    {
+      name: "carId",
+      type: "select",
+      options: [{ name: "Все модели", id: "" }, ...models],
+    },
     {
       name: "cityId",
+      type: "select",
       options: [{ name: "Все города", id: "" }, ...cities],
     },
     {
       name: "orderStatusId",
-      options: [
-        { name: "Все", id: "" },
-        { name: "В процессе", id: orderNewId },
-        { name: "Завершенные", id: orderCompleteId },
-        { name: "Отмененные", id: orderCloseId },
-      ],
+      type: "select",
+      options: [{ name: "Все", id: "" }, ...arrOrderStatus],
     },
   ];
+};
+
+export const getDropdownCar = (storeModels, storeCategories) => {
+  const models = storeModels.map((model) => {
+    return { name: model.name, id: model.id };
+  });
+
+  const categories = storeCategories.map((category) => {
+    return { name: category.name, id: category.id };
+  });
+
+  return [
+    {
+      name: "id",
+      type: "select",
+      options: [{ name: "Все модели", id: "" }, ...models],
+    },
+    {
+      name: "categoryId",
+      type: "select",
+      options: [{ name: "Все категории", id: "" }, ...categories],
+    },
+    {
+      name: "priceMax[$lt]",
+      type: "number",
+    },
+    {
+      name: "priceMin[$gt]",
+      type: "number",
+    },
+    {
+      name: "colors",
+      type: "select",
+      options: [{ name: "Любой цвет", id: "" }, ...arrCarColors],
+    },
+  ];
+};
+
+export const getUrl = (params) => {
+  let requestUrl = "";
+  Object.keys(params).map((param) => {
+    if (params[param]) requestUrl += `${param}=${params[param]}&`;
+    return requestUrl;
+  });
+  return requestUrl.substring(0, requestUrl.length - 1);
 };
