@@ -2,8 +2,6 @@ import { instance } from "../reducers/data/api/server";
 import { setNewOrders, setOrders } from "../reducers/appReducer";
 import { store } from "../reducers";
 
-const LIMIT = 55;
-
 const getUrl = (params) => {
   let requestUrl = "";
   Object.keys(params).map((param) => {
@@ -22,9 +20,6 @@ const getOrders = (parameters) => {
         url: `/api/db/order?${parameters ? getUrl(parameters) : ""}`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
-        },
-        params: {
-          limit: LIMIT,
         },
       });
       dispatch(
