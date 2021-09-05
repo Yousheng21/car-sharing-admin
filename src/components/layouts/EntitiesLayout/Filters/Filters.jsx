@@ -1,5 +1,6 @@
 import React from "react";
 import "./filters.scss";
+import Filter from "./Filter";
 
 const Filters = ({
   paginate,
@@ -13,15 +14,7 @@ const Filters = ({
       <div className="dropdown">
         {dropdown.map((item) => (
           <div key={item.name} className="select">
-            <select name={item.name} onChange={handleChange} id={item.name}>
-              {item.options.map((el, index) => (
-                // Некоторые модели имеют одинаковый id
-                // eslint-disable-next-line react/no-array-index-key
-                <option key={index} value={el.id}>
-                  {el.name}
-                </option>
-              ))}
-            </select>
+            <Filter item={item} handleChange={handleChange} />
           </div>
         ))}
       </div>
