@@ -9,7 +9,8 @@ const DateInterval = ({ from, to }) => {
   return `${dateFrom} - ${dateTo}`;
 };
 
-const Order = ({ orders }) => {
+const Order = ({ orders, storeOrders }) => {
+  if (!storeOrders.length) return "Загрузка заказов...";
   if (!orders.length) return "Заказов не найдено";
   return (
     <section className="orders">

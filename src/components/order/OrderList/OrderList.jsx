@@ -43,7 +43,7 @@ const OrderList = ({ page }) => {
     <OrderLayout title="Заказы" page={page}>
       <main className="order-list">
         <Filters paginate={paginate} />
-        <Order orders={currentOrders} />
+        <Order storeOrders={orders} orders={currentOrders} />
         <Pagination
           page={currentPage}
           orders={newOrders}
