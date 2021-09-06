@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./carList.scss";
 import { useDispatch, useSelector } from "react-redux";
 import AppLayout from "../layouts/AppLayout/AppLayout";
-import Order from "../OrderList/Order/Order";
 import EntitiesLayout from "../layouts/EntitiesLayout/EntitiesLayout";
 import getCarModels, { getCategories } from "../../actions/car";
 import { getDropdownCar } from "../../actions/app";
+import Car from "./Car/Car";
 
 const CarList = ({ page }) => {
   const dispatch = useDispatch();
@@ -15,12 +15,12 @@ const CarList = ({ page }) => {
   const [dataForm, setDataForm] = useState({
     id: "",
     categoryId: "",
-    "priceMax[$lt]": "",
     "priceMin[$gt]": "",
+    "priceMax[$lt]": "",
     colors: "",
   });
   const models = useSelector((state) => state.app.models);
-  const newModels = useSelector((state) => state.app.models);
+  const newModels = useSelector((state) => state.app.newModels);
   const categories = useSelector((state) => state.app.categories);
 
   const [currentModels, setCurrentModels] = useState(
@@ -53,7 +53,7 @@ const CarList = ({ page }) => {
         setDataForm={setDataForm}
         orderPerPage={modelsPerPage}
       >
-        <Order storeModels={models} models={currentModels} />
+        <Car storeModels={models} models={currentModels} />
       </EntitiesLayout>
     </AppLayout>
   );
