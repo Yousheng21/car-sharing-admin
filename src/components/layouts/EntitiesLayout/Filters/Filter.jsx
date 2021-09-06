@@ -6,21 +6,22 @@ const Filter = ({ item, handleChange }) => {
   switch (item.type) {
     case "select":
       return (
-        <select name={item.name} onChange={handleChange} id={item.name}>
-          {item.options.map((el, index) => (
-            // Некоторые модели имеют одинаковый id
-            // eslint-disable-next-line react/no-array-index-key
-            <option key={index} value={el.id}>
-              {el.name}
-            </option>
-          ))}
-        </select>
+        <div className="select">
+          <select name={item.name} onChange={handleChange} id={item.name}>
+            {item.options.map((el) => (
+              <option key={el.id} value={el.id}>
+                {el.name}
+              </option>
+            ))}
+          </select>
+        </div>
       );
     default:
       break;
     case "number":
       return (
         <input
+          className="number"
           type="number"
           onChange={(event) => {
             handleChange(event);
@@ -29,6 +30,7 @@ const Filter = ({ item, handleChange }) => {
           value={input}
           name={item.name}
           id={item.name}
+          placeholder={item.text}
         />
       );
   }

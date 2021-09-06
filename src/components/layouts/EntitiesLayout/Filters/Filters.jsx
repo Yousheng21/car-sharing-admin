@@ -13,7 +13,7 @@ const Filters = ({
     <section className="parameters">
       <div className="dropdown">
         {dropdown.map((item) => (
-          <div key={item.name} className="select">
+          <div key={item.name} className="filter">
             <Filter item={item} handleChange={handleChange} />
           </div>
         ))}
