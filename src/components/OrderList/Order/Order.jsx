@@ -10,8 +10,8 @@ const DateInterval = ({ from, to }) => {
 };
 
 const Order = ({ orders, storeOrders }) => {
+  if (!storeOrders.length) return "Загрузка заказов";
   if (!orders.length && storeOrders.length) return "Заказов не найдено";
-  if (!storeOrders.length) return "...";
   return (
     <section className="orders">
       {orders.map((order) => (
@@ -33,7 +33,11 @@ const Order = ({ orders, storeOrders }) => {
           </div>
           <Additional order={order} />
           <div className="price">
-            <h1>{order.price} ₽</h1>
+            {order.price ? (
+              <h1>{order.price} ₽</h1>
+            ) : (
+              <span>Цена не указана</span>
+            )}
           </div>
           <Buttons order={order} />
         </section>
