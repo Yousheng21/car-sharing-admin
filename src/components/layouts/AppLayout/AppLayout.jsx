@@ -1,10 +1,10 @@
 import React from "react";
-import "./orderLayout.scss";
+import "./appLayout.scss";
 import NavBar from "../../common/NavBar/NavBar";
 import Header from "../../common/Header/Header";
 import Footer from "../../common/Footer/Footer";
 
-const OrderLayout = ({ children, title, page }) => {
+const AppLayout = ({ children, title, page }) => {
   return (
     <div className="order-layout">
       <NavBar page={page} />
@@ -18,4 +18,4 @@ const OrderLayout = ({ children, title, page }) => {
   );
 };
 
-export default OrderLayout;
+export default AppLayout;

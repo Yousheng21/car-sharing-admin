@@ -1,6 +1,6 @@
 @import "src/index";
-$color-option:#868E96;
 $color-check-mark:#0EC261;
+
 %style-select-row{
   content: "";
   display: block;
@@ -130,10 +130,15 @@ $color-check-mark:#0EC261;
       }
       .price{
         justify-self: center;
+        align-self: center;
+        h1{
+          font-size: 32px;
+        }
       }
       .buttons{
         display: flex;
         align-items: flex-start;
+        align-self: center;
         button{
           display: flex;
           gap: 5px;
@@ -169,9 +174,6 @@ $color-check-mark:#0EC261;
           justify-content: center;
           align-items: flex-end;
         }
-        .price{
-          align-self: flex-end;
-        }
         .additional label{
           font-size: 14px;
         }
@@ -185,21 +187,12 @@ $color-check-mark:#0EC261;
     .orders .order .img img{
       max-height: 60%;
     }
-    .parameters{
-      margin-bottom: 30px;
-      button{
-        height: 40%;
-      }
-    }
   }
 }
 
 @media screen and (max-width: 425px){
   .order-list{
     height: 100%;
-    .parameters button{
-      height: 20%;
-    }
     .orders{
       .order{
         grid-template-rows: repeat(3,1fr) 0.5fr 0.5fr;

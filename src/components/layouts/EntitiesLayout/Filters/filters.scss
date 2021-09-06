@@ -1,0 +1,78 @@
+@import "src/index";
+
+$color-option:#868E96;
+
+%style-select-row{
+  content: "";
+  display: block;
+  border-style: solid;
+  border-width: 4px 3px 0 3px;
+  border-color: black transparent transparent transparent;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.parameters{
+  display: grid;
+  grid-template-columns: 1fr 0.1fr;
+  grid-gap: 10px;
+  padding-bottom: 15px;
+  border-bottom: 1px $color-border solid;
+  .dropdown{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    .filter{
+      .select{
+        position: relative;
+        &:after{
+          @extend %style-select-row;
+          top: 50%;
+          right: 5px;
+        }
+        &:before{
+          @extend %style-select-row;
+          top: 30%;
+          right: 5px;
+          transform: scale(1, -1);
+        }
+
+        select{
+          appearance: none;
+          outline: none;
+          border: $color-select 1px solid;
+          width: 150px;
+          height: 100%;
+          border-radius: 5px;
+          padding: 5px 10px;
+          color: $color-option;
+        }
+      }
+    }
+  }
+  button{
+    background-color: $main-color;
+    color: white;
+    &:hover{
+      color: white;
+    }
+  }
+}
+
+@media screen and (max-width: 1078px){
+  .parameters{
+    margin-bottom: 30px;
+    button{
+      height: 40%;
+    }
+  }
+}
+
+@media screen and (max-width: 425px){
+  .parameters button{
+    height: 20%;
+  }
+}
+

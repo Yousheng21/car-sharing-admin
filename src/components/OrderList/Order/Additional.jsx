@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { additional } from "../../../../reducers/data/dataOrder";
+import { additional } from "../../../reducers/data/dataOrder";
 
 const Additional = ({ order }) => {
   return (
