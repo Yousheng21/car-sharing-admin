@@ -19,3 +19,19 @@ export const arrCarColors = [
   { name: "красный", id: "красный" },
   { name: "черный", id: "черный" },
 ];
+
+export const objColors = {
+  Синий: "blue",
+  Красный: "red",
+  красный: "red",
+  Чёрный: "black",
+  черный: "black",
+  Белый: "white",
+  белый: "white",
+  Фиолетовый: "pink",
+  Зеленый: "green",
+  Серый: "gray",
+  Бордовый: "brown",
+  Оранжевый: "orange",
+  Желтый: "yellow",
+};
