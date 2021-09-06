@@ -24,36 +24,40 @@ $color-option:#868E96;
     flex-wrap: wrap;
     gap: 15px;
     align-items: center;
+    .filter{
+      .select{
+        position: relative;
+        &:after{
+          @extend %style-select-row;
+          top: 50%;
+          right: 5px;
+        }
+        &:before{
+          @extend %style-select-row;
+          top: 30%;
+          right: 5px;
+          transform: scale(1, -1);
+        }
 
-    .select{
-      position: relative;
-      &:after{
-        @extend %style-select-row;
-        top: 50%;
-        right: 5px;
-      }
-      &:before{
-        @extend %style-select-row;
-        top: 30%;
-        right: 5px;
-        transform: scale(1, -1);
-      }
-
-      select{
-        appearance: none;
-        outline: none;
-        border: $color-select 1px solid;
-        width: 150px;
-        height: 100%;
-        border-radius: 5px;
-        padding: 5px 10px;
-        color: $color-option;
+        select{
+          appearance: none;
+          outline: none;
+          border: $color-select 1px solid;
+          width: 150px;
+          height: 100%;
+          border-radius: 5px;
+          padding: 5px 10px;
+          color: $color-option;
+        }
       }
     }
   }
   button{
     background-color: $main-color;
     color: white;
+    &:hover{
+      color: white;
+    }
   }
 }
 
