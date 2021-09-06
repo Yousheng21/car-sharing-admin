@@ -68,12 +68,14 @@ export const getDropdownCar = (storeModels, storeCategories) => {
       options: [{ name: "Все категории", id: "" }, ...categories],
     },
     {
-      name: "priceMax[$lt]",
-      type: "number",
-    },
-    {
       name: "priceMin[$gt]",
       type: "number",
+      text: "Цена от",
+    },
+    {
+      name: "priceMax[$lt]",
+      type: "number",
+      text: "Цена до",
     },
     {
       name: "colors",
