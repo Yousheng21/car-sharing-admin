@@ -38,10 +38,10 @@ const OrderList = ({ page }) => {
   }, [orders.length]);
 
   useEffect(() => {
-    if (!cities.length && !models.length) {
-      dispatch(getCities());
-      dispatch(getCarModels());
-    } else setDropdown(getDropdownOrder(models, cities));
+    if (!cities.length) dispatch(getCities());
+    if (!models.length) dispatch(getCarModels());
+    else if (cities.length && models.length)
+      setDropdown(getDropdownOrder(models, cities));
   }, [cities.length, models.length]);
 
   const handleClick = (filters) => {
