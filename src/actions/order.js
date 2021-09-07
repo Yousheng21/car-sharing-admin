@@ -13,9 +13,6 @@ const getOrders = (parameters) => {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-        params: {
-          limit: LIMIT,
-        },
       });
       await dispatch(
         parameters
