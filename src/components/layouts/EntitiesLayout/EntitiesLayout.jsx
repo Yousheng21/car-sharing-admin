@@ -53,7 +53,7 @@ const EntitiesLayout = ({
     );
     reset();
   };
-
+  if (!storeEntities.length) return <Preloader title={titleLoader} />;
   return (
     <main className={className}>
       <Filters
@@ -64,7 +64,7 @@ const EntitiesLayout = ({
         dropdown={dropdown}
         paginate={paginate}
       />
-      {!storeEntities.length ? <Preloader title={titleLoader} /> : children}
+      {children}
       <Pagination
         page={currentPage}
         orders={entities}
