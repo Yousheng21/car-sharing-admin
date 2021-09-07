@@ -1,5 +1,10 @@
 import { instance } from "../reducers/data/api/server";
-import { setCategories, setModels, setNewModels } from "../reducers/appReducer";
+import {
+  setCategories,
+  setIsUpdated,
+  setModels,
+  setNewModels,
+} from "../reducers/appReducer";
 import { getUrl } from "./app";
 
 const getCarModels = (parameters) => {
@@ -7,16 +12,14 @@ const getCarModels = (parameters) => {
     try {
       const response = await instance({
         method: "GET",
-        url: `/api/db/car?${parameters ? getUrl(parameters) : ""}`,
-        params: {
-          limit: 10,
-        },
+        url: `/api/db/car${parameters ? getUrl(parameters) : ""}`,
       });
-      dispatch(
+      await dispatch(
         parameters
           ? setNewModels(response.data.data)
           : setModels(response.data.data)
       );
+      dispatch(setIsUpdated(false));
     } catch (e) {
       console.error(e.response);
     }

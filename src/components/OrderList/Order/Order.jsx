@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Image from "../../common/Image";
 import Additional from "./Additional";
 import Buttons from "./Buttons";
+import Preloader from "../../common/Preloader/Preloader";
 
 const DateInterval = ({ from, to }) => {
   const dateFrom = new Date(from).toLocaleString();
@@ -9,9 +11,11 @@ const DateInterval = ({ from, to }) => {
   return `${dateFrom} - ${dateTo}`;
 };
 
-const Order = ({ orders, storeOrders }) => {
-  if (!storeOrders.length) return "Загрузка заказов...";
-  if (!orders.length) return "Заказов не найдено";
+const Order = ({ orders }) => {
+  const isUpdated = useSelector((state) => state.app.isUpdated);
+  if (!orders.length)
+    return <h1 className="title-empty">Заказов не найдено</h1>;
+  if (isUpdated) return <Preloader title="Обновление..." />;
   return (
     <section className="orders">
       {orders.map((order) => (
@@ -39,7 +43,7 @@ const Order = ({ orders, storeOrders }) => {
               <span>Цена не указана</span>
             )}
           </div>
-          <Buttons order={order} />
+          <Buttons />
         </section>
       ))}
     </section>

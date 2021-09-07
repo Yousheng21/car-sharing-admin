@@ -1,5 +1,5 @@
 import { instance } from "../reducers/data/api/server";
-import { setNewOrders, setOrders } from "../reducers/appReducer";
+import { setIsUpdated, setNewOrders, setOrders } from "../reducers/appReducer";
 import { store } from "../reducers";
 import { getUrl } from "./app";
 
@@ -13,12 +13,16 @@ const getOrders = (parameters) => {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
+        params: {
+          limit: LIMIT,
+        },
       });
-      dispatch(
+      await dispatch(
         parameters
           ? setNewOrders(response.data.data)
           : setOrders(response.data.data)
       );
+      dispatch(setIsUpdated(false));
     } catch (e) {
       console.error(e.response);
     }

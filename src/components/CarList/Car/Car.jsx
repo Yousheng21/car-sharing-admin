@@ -1,21 +1,23 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Image from "../../common/Image";
 import Color from "./Color";
+import Preloader from "../../common/Preloader/Preloader";
 
-const Car = ({ storeModels, models }) => {
-  if (!storeModels.length) return "Загрузка моделей";
-  if (!models.length) return "Моделей не найдено";
+const Car = ({ models }) => {
+  const isUpdated = useSelector((state) => state.app.isUpdated);
+  if (isUpdated) return <Preloader title="Обновление..." />;
+  if (!models.length)
+    return <h1 className="title-empty">Моделей не найдено</h1>;
   return (
     <section className="models">
       {models.map((model) => (
         <section key={model.id} className="model">
-          <div className="title">
-            <h1>{model.name}</h1>
-          </div>
           <div className="img">
             <Image car={model} />
           </div>
           <div className="info">
+            <h1>{model.name}</h1>
             <p>{model.description ?? "Описание отсутсвует"}</p>
             {model.tank ? (
               <span>
@@ -42,7 +44,7 @@ const Car = ({ storeModels, models }) => {
             <span>
               {model.categoryId
                 ? model.categoryId.name
-                : "Категория отсутствует"}
+                : " Категория отсутствует"}
             </span>
           </div>
           <div className="colors">
