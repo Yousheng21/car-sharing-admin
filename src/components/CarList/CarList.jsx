@@ -17,7 +17,6 @@ const CarList = ({ page }) => {
     categoryId: "",
     "priceMin[$gt]": "",
     "priceMax[$lt]": "",
-    colors: "",
   });
   const models = useSelector((state) => state.app.models);
   const newModels = useSelector((state) => state.app.newModels);
@@ -41,6 +40,11 @@ const CarList = ({ page }) => {
   const handleClick = (filters) => {
     dispatch(getCarModels(filters));
   };
+
+  const reset = () => {
+    dispatch(getCarModels());
+  };
+
   return (
     <AppLayout title="Список авто" page={page}>
       <EntitiesLayout
@@ -48,12 +52,15 @@ const CarList = ({ page }) => {
         dropdown={dropdown}
         dataForm={dataForm}
         entities={newModels}
+        storeEntities={models}
         setEntities={setCurrentModels}
         handleClick={handleClick}
         setDataForm={setDataForm}
-        orderPerPage={modelsPerPage}
+        perPage={modelsPerPage}
+        reset={reset}
+        titleLoader="Загрузка автомобилей..."
       >
-        <Car storeModels={models} models={currentModels} />
+        <Car models={currentModels} />
       </EntitiesLayout>
     </AppLayout>
   );

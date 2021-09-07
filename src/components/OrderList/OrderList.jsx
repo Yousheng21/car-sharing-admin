@@ -47,6 +47,11 @@ const OrderList = ({ page }) => {
   const handleClick = (filters) => {
     dispatch(getOrders(filters));
   };
+
+  const reset = () => {
+    dispatch(getOrders());
+  };
+
   return (
     <AppLayout title="Заказы" page={page}>
       <EntitiesLayout
@@ -54,12 +59,15 @@ const OrderList = ({ page }) => {
         dropdown={dropdown}
         dataForm={dataForm}
         entities={newOrders}
+        storeEntities={orders}
         setEntities={setCurrentOrders}
         handleClick={handleClick}
         setDataForm={setDataForm}
-        orderPerPage={orderPerPage}
+        perPage={orderPerPage}
+        reset={reset}
+        titleLoader="Загрузка заказов..."
       >
-        <Order storeOrders={orders} orders={currentOrders} />
+        <Order orders={currentOrders} />
       </EntitiesLayout>
     </AppLayout>
   );
