@@ -1,4 +1,4 @@
-import { arrCarColors, arrOrderStatus } from "../reducers/data/dataOrder";
+import { arrOrderStatus } from "../reducers/data/dataOrder";
 
 export const getDropdownOrder = (storeModels, storeCities) => {
   const models = storeModels.map((model) => {
@@ -77,16 +77,11 @@ export const getDropdownCar = (storeModels, storeCategories) => {
       type: "number",
       text: "Цена до",
     },
-    {
-      name: "colors",
-      type: "select",
-      options: [{ name: "Любой цвет", id: "" }, ...arrCarColors],
-    },
   ];
 };
 
 export const getUrl = (params) => {
-  let requestUrl = "";
+  let requestUrl = "?";
   Object.keys(params).map((param) => {
     if (params[param]) requestUrl += `${param}=${params[param]}&`;
     return requestUrl;
