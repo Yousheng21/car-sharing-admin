@@ -1,10 +1,11 @@
 import React from "react";
-import { objColors } from "../../../reducers/data/dataOrder";
+import { objColors } from "../../../reducers/data/dataColors";
 
 const Color = ({ color }) => {
   return (
     <div className="color">
       <span
+        // Прописывание класса для каждого цвета заменяется одной строчкой
         style={{ backgroundColor: objColors[color] ?? "" }}
         className="circle"
       />
