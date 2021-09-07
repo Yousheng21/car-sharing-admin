@@ -13,9 +13,9 @@ const DateInterval = ({ from, to }) => {
 
 const Order = ({ orders }) => {
   const isUpdated = useSelector((state) => state.app.isUpdated);
+  if (isUpdated) return <Preloader title="Обновление..." />;
   if (!orders.length)
     return <h1 className="title-empty">Заказов не найдено</h1>;
-  if (isUpdated) return <Preloader title="Обновление..." />;
   return (
     <section className="orders">
       {orders.map((order) => (
