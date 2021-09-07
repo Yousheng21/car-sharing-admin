@@ -13,49 +13,6 @@ $color-check-mark:#0EC261;
 }
 
 .order-list{
-  .parameters{
-    display: grid;
-    grid-template-columns: 1fr 0.1fr;
-    grid-gap: 10px;
-    padding-bottom: 15px;
-    border-bottom: 1px $color-border solid;
-    .dropdown{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      align-items: center;
-
-      .select{
-        position: relative;
-        &:after{
-          @extend %style-select-row;
-          top: 50%;
-          right: 5px;
-        }
-        &:before{
-          @extend %style-select-row;
-          top: 30%;
-          right: 5px;
-          transform: scale(1, -1);
-        }
-
-        select{
-          appearance: none;
-          outline: none;
-          border: $color-select 1px solid;
-          width: 150px;
-          height: 100%;
-          border-radius: 5px;
-          padding: 5px 10px;
-          color: $color-option;
-        }
-      }
-    }
-    button{
-      background-color: $main-color;
-      color: white;
-    }
-  }
   .orders{
     display: flex;
     flex-direction: column;

@@ -50,13 +50,39 @@ $color-option:#868E96;
           color: $color-option;
         }
       }
+      input{
+        width: 150px;
+        outline: none;
+        border: $color-select 1px solid;
+        border-radius: 5px;
+        padding: 5px 10px;
+      }
     }
   }
-  button{
-    background-color: $main-color;
-    color: white;
-    &:hover{
+  &-buttons{
+    display: flex;
+    gap: 10px;
+    button{
+      height: 36px;
+      background-color: $main-color;
       color: white;
+      &:hover{
+        color: white;
+      }
+      &.reset{
+        background-color: $color-error;
+        border:1px $main-color solid;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 768px){
+  .parameters{
+    &-buttons{
+      flex-direction: column;
+      justify-content: space-around;
     }
   }
 }
@@ -64,15 +90,6 @@ $color-option:#868E96;
 @media screen and (max-width: 1078px){
   .parameters{
     margin-bottom: 30px;
-    button{
-      height: 40%;
-    }
-  }
-}
-
-@media screen and (max-width: 425px){
-  .parameters button{
-    height: 20%;
   }
 }
 
