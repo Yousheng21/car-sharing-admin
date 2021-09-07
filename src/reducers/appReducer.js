@@ -4,6 +4,7 @@ const SET_MODELS = "SET_MODELS";
 const SET_NEW_MODELS = "SET_NEW_MODELS";
 const SET_CATEGORIES = "SET_CATEGORIES";
 const SET_CITIES = "SET_CITIES";
+const SET_IS_UPDATED = "SET_IS_UPDATED";
 
 const defaultState = {
   orders: [],
@@ -12,6 +13,7 @@ const defaultState = {
   newModels: [],
   categories: [],
   cities: [],
+  isUpdated: false,
 };
 
 export default function appReducer(state = defaultState, action) {
@@ -31,6 +33,7 @@ export default function appReducer(state = defaultState, action) {
       return {
         ...state,
         models: action.models,
+        newModels: action.models,
       };
     case SET_NEW_MODELS:
       return {
@@ -46,6 +49,11 @@ export default function appReducer(state = defaultState, action) {
       return {
         ...state,
         categories: action.categories,
+      };
+    case SET_IS_UPDATED:
+      return {
+        ...state,
+        isUpdated: action.flag,
       };
     default:
       return state;
@@ -80,4 +88,9 @@ export const setCities = (cities) => ({
 export const setCategories = (categories) => ({
   type: SET_CATEGORIES,
   categories,
+});
+
+export const setIsUpdated = (flag) => ({
+  type: SET_IS_UPDATED,
+  flag,
 });
