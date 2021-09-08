@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import classNames from "classnames";
 import Image from "../../common/Image";
 import Color from "./Color";
 import Preloader from "../../common/Preloader/Preloader";
@@ -9,6 +10,13 @@ const Car = ({ models }) => {
   if (isUpdated) return <Preloader title="Обновление..." />;
   if (!models.length)
     return <h1 className="title-empty">Моделей не найдено</h1>;
+
+  const emptyClass = (parameter) => {
+    return classNames({
+      empty: parameter,
+    });
+  };
+
   return (
     <section className="models">
       {models.map((model) => (
@@ -18,7 +26,9 @@ const Car = ({ models }) => {
           </div>
           <div className="info">
             <h1>{model.name}</h1>
-            <p>{model.description ?? "Описание отсутсвует"}</p>
+            <p className={emptyClass(!model.description)}>
+              {model.description ?? "Описание отсутсвует"}
+            </p>
             {model.tank ? (
               <span>
                 Топливо: <span className="info-title">{model.tank}%</span>
@@ -41,13 +51,18 @@ const Car = ({ models }) => {
             </h1>
           </div>
           <div className="category">
-            <span>
+            <span className={emptyClass(!model.categoryId)}>
               {model.categoryId
                 ? model.categoryId.name
                 : " Категория отсутствует"}
             </span>
           </div>
-          <div className="colors">
+          <div
+            className={classNames({
+              colors: true,
+              empty: !model.colors.length,
+            })}
+          >
             {model.colors.length
               ? model.colors.map((color) => <Color key={color} color={color} />)
               : "Нет цветов"}

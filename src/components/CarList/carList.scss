@@ -1,15 +1,15 @@
 @import "src/index";
 .car-list{
   .models{
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    padding: 35px 0;
+    @extend %style-entities;
     .model{
       display: grid;
       grid-template: 1fr/0.7fr 1fr 0.7fr 0.7fr 0.5fr;
       grid-column-gap: 20px;
       align-items: center;
+      .empty{
+        color: $second-color;
+      }
       .img{
         display: flex;
         justify-content: center;
