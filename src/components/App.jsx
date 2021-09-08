@@ -6,6 +6,7 @@ import OrderList from "./OrderList/OrderList";
 import CardCar from "./CardCar/CardCar";
 import CarList from "./CarList/CarList";
 import { auth } from "../actions/login";
+import PointList from "./PointList/PointList";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,10 @@ const App = () => {
         <Route
           path="/car-sharing-admin/orderList"
           render={() => <OrderList page={2} />}
+        />
+        <Route
+          path="/car-sharing-admin/pointList"
+          render={() => <PointList page={3} />}
         />
       </Switch>
     </BrowserRouter>
