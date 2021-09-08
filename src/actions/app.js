@@ -80,6 +80,29 @@ export const getDropdownCar = (storeModels, storeCategories) => {
   ];
 };
 
+export const getDropdownPoint = (storePoints, storeCities) => {
+  const points = storePoints.map((point) => {
+    return { name: point.address, id: point.id };
+  });
+
+  const cities = storeCities.map((city) => {
+    return { name: city.name, id: city.id };
+  });
+
+  return [
+    {
+      name: "id",
+      type: "select",
+      options: [{ name: "Все пункты", id: "" }, ...points],
+    },
+    {
+      name: "cityId",
+      type: "select",
+      options: [{ name: "Все города", id: "" }, ...cities],
+    },
+  ];
+};
+
 export const getUrl = (params) => {
   let requestUrl = "?";
   Object.keys(params).map((param) => {
