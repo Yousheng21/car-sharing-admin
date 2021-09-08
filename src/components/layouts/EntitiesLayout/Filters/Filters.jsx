@@ -13,6 +13,12 @@ const Filters = ({
   dataForm,
 }) => {
   const dispatch = useDispatch();
+
+  const handleFiltersClick = () => {
+    dispatch(setIsUpdated(true));
+    paginate(1);
+  };
+
   return (
     <section className="parameters">
       <div className="dropdown">
@@ -30,7 +36,7 @@ const Filters = ({
         <button
           type="button"
           onClick={() => {
-            dispatch(setIsUpdated(true));
+            handleFiltersClick();
             resetFilters();
           }}
           className="btn reset"
@@ -39,9 +45,8 @@ const Filters = ({
         </button>
         <button
           onClick={() => {
-            dispatch(setIsUpdated(true));
+            handleFiltersClick();
             handleClick(dataForm);
-            paginate(1);
           }}
           type="button"
           className="btn apply"

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Filters from "./Filters/Filters";
 import Pagination from "./Pagination/Pagination";
 import Preloader from "../../common/Preloader/Preloader";
+import { setFilters } from "../../../reducers/appReducer";
 
 const EntitiesLayout = ({
   children,
-  dataForm,
-  setDataForm,
+  stateFilters,
   entities,
   storeEntities,
   setEntities,
@@ -17,7 +18,10 @@ const EntitiesLayout = ({
   reset,
   titleLoader,
 }) => {
+  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
+
+  const dataForm = useSelector((state) => state.app[stateFilters]);
 
   useEffect(() => {
     const indexOfLastOrder = currentPage * perPage;
@@ -41,15 +45,20 @@ const EntitiesLayout = ({
 
   const handleChange = (event) => {
     const { value, name } = event.currentTarget;
-    setDataForm({
-      ...dataForm,
-      [name]: value,
-    });
+    dispatch(
+      setFilters(stateFilters, {
+        ...dataForm,
+        [name]: value,
+      })
+    );
   };
 
   const resetFilters = () => {
-    setDataForm(
-      Object.fromEntries(Object.entries(dataForm).map(([key]) => [key, ""]))
+    dispatch(
+      setFilters(
+        stateFilters,
+        Object.fromEntries(Object.entries(dataForm).map(([key]) => [key, ""]))
+      )
     );
     reset();
   };

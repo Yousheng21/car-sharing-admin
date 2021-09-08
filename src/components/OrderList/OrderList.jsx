@@ -14,12 +14,6 @@ const OrderList = ({ page }) => {
 
   const [orderPerPage] = useState(5);
   const [dropdown, setDropdown] = useState([]);
-  const [dataForm, setDataForm] = useState({
-    "createdAt[$gt]": "",
-    carId: "",
-    cityId: "",
-    orderStatusId: "",
-  });
 
   const cities = useSelector((state) => state.app.cities);
   const models = useSelector((state) => state.app.models);
@@ -34,7 +28,8 @@ const OrderList = ({ page }) => {
   useEffect(() => {
     if (!orders.length) {
       dispatch(getOrders());
-    } else setCurrentOrders(orders.slice(0, orderPerPage));
+      setCurrentOrders(orders.slice(0, orderPerPage));
+    }
   }, [orders.length]);
 
   useEffect(() => {
@@ -57,12 +52,11 @@ const OrderList = ({ page }) => {
       <EntitiesLayout
         className="order-list"
         dropdown={dropdown}
-        dataForm={dataForm}
         entities={newOrders}
         storeEntities={orders}
         setEntities={setCurrentOrders}
         handleClick={handleClick}
-        setDataForm={setDataForm}
+        stateFilters="filtersOrder"
         perPage={orderPerPage}
         reset={reset}
         titleLoader="Загрузка заказов..."

@@ -12,24 +12,18 @@ const CarList = ({ page }) => {
 
   const [modelsPerPage] = useState(5);
   const [dropdown, setDropdown] = useState([]);
-  const [dataForm, setDataForm] = useState({
-    id: "",
-    categoryId: "",
-    "priceMin[$gt]": "",
-    "priceMax[$lt]": "",
-  });
+
   const models = useSelector((state) => state.app.models);
   const newModels = useSelector((state) => state.app.newModels);
   const categories = useSelector((state) => state.app.categories);
 
-  const [currentModels, setCurrentModels] = useState(
-    models.slice(0, modelsPerPage)
-  );
+  const [currentModels, setCurrentModels] = useState([]);
 
   useEffect(() => {
     if (!models.length) {
       dispatch(getCarModels());
-    } else setCurrentModels(models.slice(0, modelsPerPage));
+      setCurrentModels(models.slice(0, modelsPerPage));
+    }
   }, [models.length]);
 
   useEffect(() => {
@@ -50,12 +44,11 @@ const CarList = ({ page }) => {
       <EntitiesLayout
         className="car-list"
         dropdown={dropdown}
-        dataForm={dataForm}
         entities={newModels}
         storeEntities={models}
         setEntities={setCurrentModels}
         handleClick={handleClick}
-        setDataForm={setDataForm}
+        stateFilters="filtersCar"
         perPage={modelsPerPage}
         reset={reset}
         titleLoader="Загрузка автомобилей..."
