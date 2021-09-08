@@ -41,3 +41,10 @@ h1,h2{
 a{
   text-decoration: none;
 }
+
+%style-entities{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 35px 0;
+}

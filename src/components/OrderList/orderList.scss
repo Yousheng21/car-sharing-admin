@@ -14,10 +14,7 @@ $color-check-mark:#0EC261;
 
 .order-list{
   .orders{
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    padding: 35px 0;
+    @extend %style-entities;
     .order{
       display: grid;
       grid-template-columns: 1fr 3fr 1fr 1.5fr 1.5fr;
