@@ -1,6 +1,7 @@
 import React from "react";
-import { domain } from "../../reducers/data/api/server";
-import Photo from "../../images/no-image.png";
+import { domain } from "../../../reducers/data/api/server";
+import Photo from "../../../images/no-image.png";
+import "./image.scss";
 
 const Image = ({ car }) => {
   const getSrc = () => {
@@ -13,6 +14,7 @@ const Image = ({ car }) => {
     <img
       crossOrigin="anonymous"
       referrerPolicy="origin"
+      className="car-img"
       src={car ? getSrc() : Photo}
       alt={car ? car.name : "photo"}
     />
