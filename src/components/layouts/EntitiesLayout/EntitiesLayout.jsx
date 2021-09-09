@@ -4,6 +4,7 @@ import Filters from "./Filters/Filters";
 import Pagination from "./Pagination/Pagination";
 import Preloader from "../../common/Preloader/Preloader";
 import { setFilters } from "../../../reducers/appReducer";
+import Entity from "./Entity/Entity";
 
 const EntitiesLayout = ({
   children,
@@ -73,7 +74,7 @@ const EntitiesLayout = ({
         dropdown={dropdown}
         paginate={paginate}
       />
-      {children}
+      <Entity entities={entities}>{children}</Entity>
       <Pagination
         page={currentPage}
         orders={entities}
