@@ -6,6 +6,7 @@ export const objColors = {
   Blue: "blue",
   Бирюзовый: "#30d5c8",
   голубой: "#42aaff",
+  Голубой: "#42aaff",
   Красный: "red",
   красный: "red",
   Розовый: "pink",
