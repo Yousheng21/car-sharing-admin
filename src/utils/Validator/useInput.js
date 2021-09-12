@@ -7,7 +7,11 @@ export const useInput = (initialState, validations) => {
   const valid = useValidation(value, validations);
 
   const onChange = (e) => {
-    setValue(e.target.value);
+    setValue(e.currentTarget.value);
+  };
+
+  const setChange = (valueInput) => {
+    setValue(valueInput);
   };
 
   const onBlur = () => {
@@ -33,6 +37,7 @@ export const useInput = (initialState, validations) => {
   return {
     value,
     onChange,
+    setChange,
     onBlur,
     onFocus,
     isDirty,
