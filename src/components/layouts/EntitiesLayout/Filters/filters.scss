@@ -1,18 +1,5 @@
 @import "src/index";
 
-$color-option:#868E96;
-
-%style-select-row{
-  content: "";
-  display: block;
-  border-style: solid;
-  border-width: 4px 3px 0 3px;
-  border-color: black transparent transparent transparent;
-  pointer-events: none;
-  position: absolute;
-  z-index: 1;
-}
-
 .parameters{
   display: grid;
   grid-template-columns: 1fr 0.1fr;
@@ -26,29 +13,7 @@ $color-option:#868E96;
     align-items: center;
     .filter{
       .select{
-        position: relative;
-        &:after{
-          @extend %style-select-row;
-          top: 50%;
-          right: 5px;
-        }
-        &:before{
-          @extend %style-select-row;
-          top: 30%;
-          right: 5px;
-          transform: scale(1, -1);
-        }
-
-        select{
-          appearance: none;
-          outline: none;
-          border: $color-select 1px solid;
-          width: 150px;
-          height: 100%;
-          border-radius: 5px;
-          padding: 5px 10px;
-          color: $color-option;
-        }
+        @extend %style-select;
       }
       input{
         width: 150px;
