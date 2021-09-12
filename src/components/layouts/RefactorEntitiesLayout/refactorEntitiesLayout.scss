@@ -1,0 +1,35 @@
+@import "src/index";
+.refactor-entities{
+  display: grid;
+  grid-template-rows: 3fr 0.2fr;
+  grid-row-gap: 30px;
+
+  &__buttons{
+    display: grid;
+    grid-template: 1fr/2.5fr 2.5fr 0.5fr;
+    grid-column-gap: 5px;
+    align-self: flex-end;
+    button{
+      height: 40px;
+      width: 130px;
+      border-radius: 5px;
+      font-size: 16px;
+      border: none;
+      color: white;
+      &.edit{
+        justify-self: flex-end;
+        background-color: $main-color;
+        &:disabled{
+          opacity: 0.4;
+        }
+      }
+      &.back{
+        color: black;
+      }
+      &.delete{
+        background-color: #CB3656;
+      }
+
+    }
+  }
+}
