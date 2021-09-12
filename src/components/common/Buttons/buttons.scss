@@ -7,8 +7,12 @@
     display: flex;
     gap: 5px;
     padding: 5px 10px;
-    border: 1px $color-select solid;
+    outline: none;
+    border: none;
     color: $color-btn;
+    &:hover{
+      transform: scale(1.5);
+    }
     &:first-child{
       border-bottom-left-radius: 5px;
       border-top-left-radius: 5px;
@@ -20,5 +24,11 @@
     svg{
       align-self: center;
     }
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 426px){
+  .buttons{
+    justify-self: center;
   }
 }
