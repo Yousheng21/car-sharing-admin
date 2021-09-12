@@ -1,27 +1,67 @@
 import { useEffect, useState } from "react";
 
-import { regExpEmail } from "../../reducers/data/regExp";
+import { regExpColor, regExpModelName } from "../../reducers/data/regExp";
 
 export const useValidation = (value, validations) => {
   const [isEmpty, setEmpty] = useState({ value: true, text: "" });
-  const [emailError, setEmailError] = useState({ value: false, text: "" });
+  const [isModelName, setModelName] = useState({
+    value: false,
+    text: "",
+  });
+  const [isColor, setColorError] = useState({
+    value: false,
+    text: "",
+  });
+  const [minError, setMinError] = useState({
+    value: false,
+    text: "",
+  });
+  const [maxError, setMaxError] = useState({
+    value: false,
+    text: "",
+  });
   const [inputValid, setInputValid] = useState(false);
+
+  const valueValidation = {
+    isEmpty,
+    isModelName,
+    isColor,
+    maxError,
+    minError,
+  };
+
+  const setValidation = (setValue, validationName) => {
+    return setValue({
+      value: !!validationName,
+      text: validationName ? validations[validationName].text : "",
+    });
+  };
 
   useEffect(() => {
     Object.keys(validations).forEach((validation) => {
       switch (validation) {
         case "isEmpty":
-          if (value) setEmpty({ value: false, text: "" });
-          else setEmpty({ value: true, text: validations[validation].text });
+          if (value) setValidation(setEmpty);
+          else setValidation(setEmpty, validation);
           break;
-        case "isEmail":
-          if (regExpEmail.test(String(value).toLowerCase()))
-            setEmailError({ value: false, text: "" });
-          else
-            setEmailError({
-              value: true,
-              text: validations[validation].text,
-            });
+        case "isModelName":
+          if (regExpModelName.test(String(value))) setValidation(setModelName);
+          else setValidation(setModelName, validation);
+          break;
+        case "isColor":
+          if (regExpColor.test(String(value)) || !value)
+            setValidation(setColorError);
+          else setValidation(setColorError, validation);
+          break;
+        case "minError":
+          if (Number(value) > validations[validation].min)
+            setValidation(setMinError);
+          else setValidation(setMinError, validation);
+          break;
+        case "maxError":
+          if (Number(value) >= validations[validation].max)
+            setValidation(setMaxError, validation);
+          else setValidation(setMaxError);
           break;
         default: {
           break;
@@ -31,12 +71,32 @@ export const useValidation = (value, validations) => {
   }, [value]);
 
   useEffect(() => {
-    if (isEmpty.value || emailError.value) {
+    if (
+      Object.keys(validations).some((item) => {
+        return valueValidation[item].value;
+      })
+    )
       setInputValid(false);
-    } else {
+    else {
       setInputValid(true);
     }
-  }, [isEmpty.value, emailError.value]);
+  }, [
+    isEmpty.value,
+    isModelName.value,
+    isColor.value,
+    maxError.value,
+    minError.value,
+  ]);
 
-  return { isEmpty, emailError, inputValid };
+  return {
+    isEmpty,
+    isModelName,
+    isColor,
+    maxError,
+    setMaxError,
+    minError,
+    setMinError,
+    inputValid,
+    setInputValid,
+  };
 };
