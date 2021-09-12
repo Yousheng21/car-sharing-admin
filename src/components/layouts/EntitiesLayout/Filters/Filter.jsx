@@ -1,5 +1,4 @@
 import React from "react";
-import { objColors } from "../../../../reducers/data/dataColors";
 
 const Filter = ({ item, handleChange, dataForm }) => {
   switch (item.type) {
@@ -13,11 +12,7 @@ const Filter = ({ item, handleChange, dataForm }) => {
             id={item.name}
           >
             {item.options.map((el) => (
-              <option
-                style={{ backgroundColor: objColors[el.name] ?? "" }}
-                key={el.id}
-                value={el.id}
-              >
+              <option key={el.id} value={el.id}>
                 {el.name}
               </option>
             ))}
