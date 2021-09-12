@@ -41,3 +41,43 @@ h1,h2{
 a{
   text-decoration: none;
 }
+
+%style-select-row{
+  content: "";
+  display: block;
+  border-style: solid;
+  border-width: 4px 3px 0 3px;
+  border-color: black transparent transparent transparent;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+%style-input{
+  appearance: none;
+  outline: none;
+  border: $color-select 1px solid;
+  width: 150px;
+  height: 100%;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: $color-option;
+}
+
+%style-select{
+  position: relative;
+  &:after{
+    @extend %style-select-row;
+    top: 50%;
+    right: 5px;
+  }
+  &:before{
+    @extend %style-select-row;
+    top: 30%;
+    right: 5px;
+    transform: scale(1, -1);
+  }
+  select{
+    @extend %style-input;
+  }
+}
