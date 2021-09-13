@@ -1,45 +1,69 @@
 import React, { useState } from "react";
-import { regExpLocalImage } from "../../reducers/data/regExp";
 import Upload from "../../images/Upload img.svg";
+import Modal from "../common/Modal/Modal";
 
 const Title = ({ title, valid = true, className }) => {
   if (title && valid) return <h1 className={className}>{title}</h1>;
   return "";
 };
 
-const Card = ({ tank, description, category, modelName }) => {
-  const [imageSrc, setImageSrc] = useState(null);
-  const [imageTitle, setImageTitle] = useState("Выберите файл...");
-
+const Card = ({ dataForm, handleDataForm, categories }) => {
+  const [activeModal, setActiveModal] = useState(false);
   const onImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      setImageSrc(URL.createObjectURL(event.target.files[0]));
-      setImageTitle(event.target.value.replace(regExpLocalImage, ""));
-    }
+    const { files, name } = event.target;
+    if (files && files[0] && files[0].type.split("/")[0] === "image") {
+      setActiveModal(false);
+      const value = {
+        name: files[0].name,
+        path: URL.createObjectURL(files[0]),
+      };
+      handleDataForm(name, value, value.path);
+    } else setActiveModal(true);
   };
+  const getCategory = (id) => {
+    const nameCategory = categories.filter((item) => {
+      return item.id === id;
+    });
+    return nameCategory[0] ? nameCategory[0].name : "";
+  };
+
   return (
     <section className="card-car__card">
       <div className="card-car__card-main">
-        {imageSrc ? (
-          <img src={imageSrc} alt="carPhoto" />
+        {dataForm.thumbnail.value.path ? (
+          <img src={dataForm.thumbnail.value.path} alt="carPhoto" />
         ) : (
           <div className="upload-img">
             <h3>Загрузите изображение</h3>
             <Upload />
           </div>
         )}
-        <Title title={modelName.value} valid={modelName.inputValid} />
-        <Title className="category-title" title={category.name} />
+        <Modal active={activeModal}>
+          <h2>Выберите изображение с расширением jpeg, jpg, png, svg</h2>
+          <button
+            onClick={() => setActiveModal(false)}
+            className="success"
+            type="button"
+          >
+            Понятно
+          </button>
+        </Modal>
+        <Title title={dataForm.name.value} valid={dataForm.name.inputValid} />
+        <Title
+          className="category-title"
+          title={getCategory(dataForm.categoryId.id)}
+        />
         <div className="card-file">
           <input
             type="file"
             onChange={onImageChange}
             id="file"
             className="input"
+            name="thumbnail"
           />
           <label htmlFor="file">
             <span id="file-name" className="file-box">
-              {imageTitle}
+              {dataForm.thumbnail.value.name}
             </span>
             <div className="file-button">
               <span>Обзор</span>
@@ -50,12 +74,12 @@ const Card = ({ tank, description, category, modelName }) => {
       <div className="card-progress">
         <div className="card-progress__info">
           <span>Заполнено</span>
-          <span>{tank.value}%</span>
+          <span>{dataForm.tank.value}%</span>
         </div>
         <input
-          onChange={tank.onChange}
+          onChange={dataForm.tank.onChange}
           type="range"
-          value={tank.value}
+          value={dataForm.tank.value}
           name="tank"
           id=""
         />
@@ -63,9 +87,10 @@ const Card = ({ tank, description, category, modelName }) => {
       <div className="card-description">
         <h5>Описание</h5>
         <textarea
-          value={description.value}
+          placeholder="Введите описание"
+          value={dataForm.description.value}
           name="description"
-          onChange={description.onChange}
+          onChange={dataForm.description.onChange}
         />
       </div>
     </section>

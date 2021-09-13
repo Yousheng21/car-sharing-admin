@@ -3,9 +3,15 @@ import classNames from "classnames";
 import Plus from "../../../../images/Plus.svg";
 import Reject from "../../../../images/Delete.svg";
 import { regExpTab } from "../../../../reducers/data/regExp";
+import { useInput } from "../../../../utils/Validator/useInput";
 
-const Colors = ({ colors, currColor, setColors }) => {
+const Colors = ({ colors, handleDataForm }) => {
   const [activeColor, setActiveColor] = useState(null);
+
+  const currColor = useInput("", {
+    isColor: { value: false, text: "только кириллица от 3-х символов" },
+  });
+
   const handleClick = () => {
     if (
       colors.some(
@@ -15,7 +21,7 @@ const Colors = ({ colors, currColor, setColors }) => {
       !currColor.value
     )
       return false;
-    setColors([...colors, currColor.value]);
+    handleDataForm("colors", [...colors, currColor.value], colors.length + 1);
     currColor.setChange("");
   };
 
@@ -25,12 +31,15 @@ const Colors = ({ colors, currColor, setColors }) => {
   };
 
   const handleDelete = (color) => {
-    setColors(
+    handleDataForm(
+      "colors",
       colors.filter((item) => {
         return item !== color;
-      })
+      }),
+      colors.length - 1
     );
   };
+
   return (
     <div className="div-colors">
       <span title="обязательное поле">Доступные цвета *</span>

@@ -3,36 +3,27 @@ import "./settings.scss";
 import InputSetting from "./Inputs/InputSetting";
 import Colors from "./Inputs/Colors";
 
-const Settings = ({
-  currColor,
-  colors,
-  setColors,
-  priceMin,
-  priceMax,
-  category,
-  setCategory,
-  categories,
-  modelName,
-}) => {
+const Settings = ({ dataForm, handleDataForm, categories }) => {
   const handleCategory = (event) => {
-    const { value } = event.currentTarget;
-    const name = categories.filter((item) => {
-      return item.id === value;
-    });
-    setCategory({ id: value, name: name[0] ? name[0].name : "" });
+    const { value, name } = event.currentTarget;
+    // const resultValue = {
+    //   id: value,
+    //   name: nameCategory[0] ? nameCategory[0].name : "",
+    // };
+    dataForm[name].setChange(value);
   };
 
   useEffect(() => {
     if (
-      Number(priceMin.value) > 0 &&
-      Number(priceMin.value) < Number(priceMax.value)
+      Number(dataForm.priceMin.value) > 0 &&
+      Number(dataForm.priceMin.value) < Number(dataForm.priceMax.value)
     ) {
-      priceMin.setInputValid(true);
-      priceMin.setMaxError({ value: false, text: "" });
-      priceMax.setInputValid(true);
-      priceMax.setMinError({ value: false, text: "" });
+      dataForm.priceMin.setInputValid(true);
+      dataForm.priceMin.setMaxError({ value: false, text: "" });
+      dataForm.priceMax.setInputValid(true);
+      dataForm.priceMax.setMinError({ value: false, text: "" });
     }
-  }, [priceMin.value, priceMax.value]);
+  }, [dataForm.priceMin.value, dataForm.priceMax.value]);
 
   return (
     <section className="settings">
@@ -43,7 +34,7 @@ const Settings = ({
           id="name"
           type="text"
           arrValid={["isEmpty", "isModelName"]}
-          objInput={modelName}
+          objInput={dataForm.name}
           className="div-model"
           necessarily
         />
@@ -52,12 +43,13 @@ const Settings = ({
             <span title="обязательное поле">Тип автомобиля *</span>
             <div className="select">
               <select
-                value={category.id}
+                value={dataForm.categoryId.id}
                 onChange={handleCategory}
                 name="categoryId"
                 id="category"
               >
                 <option value="">Выберите категорию</option>
+                <option value="1">1</option>
                 {categories.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.name}
@@ -67,14 +59,17 @@ const Settings = ({
             </div>
           </label>
         </div>
-        <Colors colors={colors} currColor={currColor} setColors={setColors} />
+        <Colors
+          handleDataForm={handleDataForm}
+          colors={dataForm.colors.value}
+        />
         <div className="div-price">
           <InputSetting
             title="Цена от"
             id="priceMin"
             type="number"
             arrValid={["minError", "maxError"]}
-            objInput={priceMin}
+            objInput={dataForm.priceMin}
             className="div-price-min"
             necessarily
           />
@@ -83,7 +78,7 @@ const Settings = ({
             id="priceMax"
             type="number"
             arrValid={["isEmpty", "minError"]}
-            objInput={priceMax}
+            objInput={dataForm.priceMax}
             className="div-price-max"
             necessarily
           />
