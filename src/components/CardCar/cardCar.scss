@@ -3,7 +3,7 @@
 .card-car{
   display: grid;
   grid-template: 1fr/0.7fr 1fr;
-  grid-column-gap: 30px;
+  grid-gap: 30px;
   &__card{
     display: grid;
     grid-template-rows: 2fr 0.5fr 1.5fr;
@@ -128,6 +128,12 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px){
+  .card-car{
+    grid-template: 1fr 1fr/1fr;
   }
 }
 

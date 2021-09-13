@@ -139,3 +139,14 @@
     }
   }
 }
+
+@media screen and (max-width: 425px){
+  .card-car{
+    .settings{
+      &-main{
+        grid-template: repeat(4,0.3fr)/1fr;
+      }
+    }
+
+  }
+}
