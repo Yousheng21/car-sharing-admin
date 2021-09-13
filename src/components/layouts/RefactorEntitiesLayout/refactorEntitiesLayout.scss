@@ -3,6 +3,7 @@
   display: grid;
   grid-template-rows: 3fr 0.2fr;
   grid-row-gap: 30px;
+  padding: 10px;
 
   &__buttons{
     display: grid;
@@ -27,9 +28,28 @@
         color: black;
       }
       &.delete{
-        background-color: #CB3656;
+        background-color: $color-btn-error;
       }
+    }
+  }
+}
 
+@media screen and (max-width: 425px){
+  .refactor-entities{
+    &__buttons{
+      grid-template: 0.2fr 0.2fr/2.5fr 0.5fr;
+      button{
+        &.back{
+          grid-area: 2/1/3/2;
+        }
+        &.edit{
+          justify-self: flex-start;
+        }
+        &.delete{
+          grid-area: 1/2/3/3;
+          align-self: center;
+        }
+      }
     }
   }
 }
