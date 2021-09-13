@@ -8,6 +8,7 @@ const SET_CATEGORIES = "SET_CATEGORIES";
 const SET_CITIES = "SET_CITIES";
 const SET_IS_UPDATED = "SET_IS_UPDATED";
 const SET_FILTERS = "SET_FILTERS";
+const SET_DATA_FORM_CAR = "SET_DATA_FORM_CAR";
 
 const defaultState = {
   orders: [],
@@ -34,6 +35,22 @@ const defaultState = {
     categoryId: "",
     "priceMin[$gt]": "",
     "priceMax[$lt]": "",
+  },
+  dataFormCar: {
+    priceMax: 0,
+    priceMin: 0,
+    name: "",
+    thumbnail: {
+      name: "Выберите файл...",
+      path: "",
+    },
+    description: "",
+    tank: 0,
+    categoryId: {
+      name: "",
+      id: "",
+    },
+    colors: [],
   },
 };
 
@@ -92,6 +109,11 @@ export default function appReducer(state = defaultState, action) {
         ...state,
         [action.state]: action.dataForm,
       };
+    case SET_DATA_FORM_CAR:
+      return {
+        ...state,
+        dataFormCar: action.dataForm,
+      };
     default:
       return state;
   }
@@ -145,5 +167,10 @@ export const setIsUpdated = (flag) => ({
 export const setFilters = (state, dataForm) => ({
   type: SET_FILTERS,
   state,
+  dataForm,
+});
+
+export const setDataFormCar = (dataForm) => ({
+  type: SET_DATA_FORM_CAR,
   dataForm,
 });
