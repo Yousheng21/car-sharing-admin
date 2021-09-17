@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Filters from "./Filters/Filters";
 import Pagination from "./Pagination/Pagination";
 import Preloader from "../../common/Preloader/Preloader";
-import { setFilters } from "../../../reducers/appReducer";
+import { setCurrentPage, setFilters } from "../../../reducers/appReducer";
 import Entity from "./Entity/Entity";
 
 const EntitiesLayout = ({
@@ -20,8 +20,10 @@ const EntitiesLayout = ({
   titleLoader,
 }) => {
   const dispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(1);
 
+  const currentPage = useSelector(
+    (state) => state.app.currentPage[stateFilters]
+  );
   const dataForm = useSelector((state) => state.app[stateFilters]);
 
   useEffect(() => {
@@ -31,17 +33,17 @@ const EntitiesLayout = ({
   }, [entities, currentPage]);
 
   const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    dispatch(setCurrentPage(stateFilters, pageNumber));
   };
 
   const next = (pageNumber) => {
-    if (currentPage < entities.length / perPage) setCurrentPage(pageNumber + 1);
-    else setCurrentPage(1);
+    if (currentPage < entities.length / perPage) paginate(pageNumber + 1);
+    else paginate(1);
   };
 
   const prev = (pageNumber) => {
-    if (currentPage > 1) setCurrentPage(pageNumber - 1);
-    else setCurrentPage(Math.ceil(entities.length / perPage));
+    if (currentPage > 1) paginate(pageNumber - 1);
+    else paginate(Math.ceil(entities.length / perPage));
   };
 
   const handleChange = (event) => {
