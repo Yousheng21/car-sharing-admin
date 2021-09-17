@@ -1,37 +1,46 @@
 import React, { useState } from "react";
 import Upload from "../../images/Upload img.svg";
 import Modal from "../common/Modal/Modal";
+import { getBase64 } from "../../actions/app";
+import Image from "../common/Image/Image";
 
 const Title = ({ title, valid = true, className }) => {
   if (title && valid) return <h1 className={className}>{title}</h1>;
   return "";
 };
 
-const Card = ({ dataForm, handleDataForm, categories }) => {
+const ImgCard = ({ thumbnail }) => {
+  if (thumbnail.localPath)
+    return <img src={thumbnail.localPath} alt="carPhoto" />;
+  return <Image thumbnail={thumbnail} />;
+};
+
+const Card = ({ dataForm, handleDataForm }) => {
   const [activeModal, setActiveModal] = useState(false);
-  const onImageChange = (event) => {
+
+  const onImageChange = async (event) => {
     const { files, name } = event.target;
     if (files && files[0] && files[0].type.split("/")[0] === "image") {
       setActiveModal(false);
+
+      const urlImage = await getBase64(files[0]);
+
       const value = {
-        name: files[0].name,
-        path: URL.createObjectURL(files[0]),
+        originalname: files[0].name,
+        mimetype: files[0].type,
+        size: files[0].size,
+        path: urlImage,
+        localPath: URL.createObjectURL(files[0]),
       };
       handleDataForm(name, value, value.path);
     } else setActiveModal(true);
-  };
-  const getCategory = (id) => {
-    const nameCategory = categories.filter((item) => {
-      return item.id === id;
-    });
-    return nameCategory[0] ? nameCategory[0].name : "";
   };
 
   return (
     <section className="card-car__card">
       <div className="card-car__card-main">
         {dataForm.thumbnail.value.path ? (
-          <img src={dataForm.thumbnail.value.path} alt="carPhoto" />
+          <ImgCard thumbnail={dataForm.thumbnail.value} />
         ) : (
           <div className="upload-img">
             <h3>Загрузите изображение</h3>
@@ -51,7 +60,9 @@ const Card = ({ dataForm, handleDataForm, categories }) => {
         <Title title={dataForm.name.value} valid={dataForm.name.inputValid} />
         <Title
           className="category-title"
-          title={getCategory(dataForm.categoryId.id)}
+          title={
+            dataForm.categoryId.value ? dataForm.categoryId.value.name : ""
+          }
         />
         <div className="card-file">
           <input
@@ -63,7 +74,7 @@ const Card = ({ dataForm, handleDataForm, categories }) => {
           />
           <label htmlFor="file">
             <span id="file-name" className="file-box">
-              {dataForm.thumbnail.value.name}
+              {dataForm.thumbnail.value.originalname}
             </span>
             <div className="file-button">
               <span>Обзор</span>
