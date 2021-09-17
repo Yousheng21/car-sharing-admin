@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Authorization from "./Authorization/Authorization";
@@ -23,13 +23,12 @@ const App = () => {
       {!isAuth ? (
         <Redirect to="/car-sharing-admin/admin" />
       ) : (
-        <Redirect to="/car-sharing-admin" />
+        <Redirect to="/car-sharing-admin/cardCar" />
       )}
       <Switch>
         <Route
-          exact
-          path="/car-sharing-admin"
-          render={() => <CardCar page={0} />}
+          path="/car-sharing-admin/cardCar/:id?"
+          render={(props) => <CardCar page={0} match={props.match} />}
         />
         <Route path="/car-sharing-admin/admin" component={Authorization} />
         <Route
