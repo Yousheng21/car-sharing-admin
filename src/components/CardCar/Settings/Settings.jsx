@@ -6,22 +6,23 @@ import Colors from "./Inputs/Colors";
 const Settings = ({ dataForm, handleDataForm, categories }) => {
   const handleCategory = (event) => {
     const { value, name } = event.currentTarget;
-    // const resultValue = {
-    //   id: value,
-    //   name: nameCategory[0] ? nameCategory[0].name : "",
-    // };
-    dataForm[name].setChange(value);
+    const nameCategory = categories.filter((item) => {
+      return item.id === value;
+    });
+    const resultValue = {
+      id: value,
+      name: nameCategory[0] ? nameCategory[0].name : "",
+    };
+    handleDataForm(name, resultValue, value);
   };
 
   useEffect(() => {
-    if (
-      Number(dataForm.priceMin.value) > 0 &&
-      Number(dataForm.priceMin.value) < Number(dataForm.priceMax.value)
-    ) {
-      dataForm.priceMin.setInputValid(true);
-      dataForm.priceMin.setMaxError({ value: false, text: "" });
-      dataForm.priceMax.setInputValid(true);
-      dataForm.priceMax.setMinError({ value: false, text: "" });
+    const { priceMin, priceMax } = dataForm;
+    if (priceMin.value > 0 && priceMin.value < priceMax.value) {
+      priceMin.setInputValid(true);
+      priceMin.setMaxError({ value: false, text: "" });
+      priceMax.setInputValid(true);
+      priceMax.setMinError({ value: false, text: "" });
     }
   }, [dataForm.priceMin.value, dataForm.priceMax.value]);
 
@@ -43,13 +44,14 @@ const Settings = ({ dataForm, handleDataForm, categories }) => {
             <span title="обязательное поле">Тип автомобиля *</span>
             <div className="select">
               <select
-                value={dataForm.categoryId.id}
+                value={
+                  dataForm.categoryId.value ? dataForm.categoryId.value.id : ""
+                }
                 onChange={handleCategory}
                 name="categoryId"
-                id="category"
+                id="categoryId"
               >
                 <option value="">Выберите категорию</option>
-                <option value="1">1</option>
                 {categories.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.name}
