@@ -1,5 +1,6 @@
 @import "src/index";
 .refactor-entities{
+  pointer-events: all;
   display: grid;
   grid-template-rows: 3fr 0.2fr;
   grid-row-gap: 30px;
@@ -34,6 +35,17 @@
   }
 }
 
+@media screen and (max-width: 768px){
+  .refactor-entities{
+    &__buttons{
+      &.add{
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 425px){
   .refactor-entities{
     &__buttons{
@@ -51,5 +63,9 @@
         }
       }
     }
+    .tooltip{
+      left: 0;
+    }
   }
 }
+
