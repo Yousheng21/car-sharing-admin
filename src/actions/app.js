@@ -103,6 +103,16 @@ export const getDropdownPoint = (storePoints, storeCities) => {
   ];
 };
 
+export const getBase64 = (file) => {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      resolve(reader.result);
+    };
+    return reader.readAsDataURL(file);
+  });
+};
+
 export const getUrl = (params) => {
   let requestUrl = "?";
   Object.keys(params).map((param) => {
