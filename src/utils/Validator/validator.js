@@ -54,12 +54,11 @@ export const useValidation = (value, validations) => {
           else setValidation(setColorError, validation);
           break;
         case "minError":
-          if (Number(value) > validations[validation].min)
-            setValidation(setMinError);
+          if (value > validations[validation].min) setValidation(setMinError);
           else setValidation(setMinError, validation);
           break;
         case "maxError":
-          if (Number(value) >= validations[validation].max)
+          if (value >= validations[validation].max)
             setValidation(setMaxError, validation);
           else setValidation(setMaxError);
           break;
