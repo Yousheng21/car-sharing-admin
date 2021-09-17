@@ -3,21 +3,20 @@ import "./cardCar.scss";
 import { useDispatch, useSelector } from "react-redux";
 import AppLayout from "../layouts/AppLayout/AppLayout";
 import Settings from "./Settings/Settings";
-import getCarModels, { getCategories } from "../../actions/car";
+import getCarModels, { getCarModelObj, getCategories } from "../../actions/car";
 import Card from "./Card";
-// import Preloader from "../common/Preloader/Preloader";
 import RefactorEntitiesLayout from "../layouts/RefactorEntitiesLayout/RefactorEntitiesLayout";
 import { useInput } from "../../utils/Validator/useInput";
+import { dataFormCar } from "../../reducers/data/dataCar";
 
-const CardCar = ({ page }) => {
+const CardCar = ({ page, match }) => {
+  const { id } = match.params;
   const dispatch = useDispatch();
 
-  const dataFormCar = useSelector((state) => state.app.dataFormCar);
-
-  const car = useSelector((state) => state.app.models[0]);
   const categories = useSelector((state) => state.app.categories);
+  const models = useSelector((state) => state.app.models);
 
-  const [stateMax, setStateMax] = useState(1);
+  const [stateMax, setStateMax] = useState(100000);
   const [stateMin, setStateMin] = useState(0);
 
   const [colors, setColors] = useState({
@@ -25,11 +24,12 @@ const CardCar = ({ page }) => {
     inputValid: dataFormCar.colors.length,
   });
   const [thumbnail, setThumbnail] = useState({
-    value: {
-      name: dataFormCar.thumbnail.name,
-      path: dataFormCar.thumbnail.path,
-    },
-    inputValid: dataFormCar.thumbnail.path,
+    value: dataFormCar.thumbnail,
+    inputValid: dataFormCar.thumbnail.localPath,
+  });
+  const [category, setCategory] = useState({
+    value: dataFormCar.categoryId,
+    inputValid: dataFormCar.categoryId.id,
   });
 
   const dataForm = {
@@ -37,7 +37,7 @@ const CardCar = ({ page }) => {
       isEmpty: { value: false, text: "Пустое поле" },
       isModelName: {
         value: false,
-        text: "Введите от 4-х символов латиницы или цифр",
+        text: "Введите от 4-х букв латиницы, цифр или знаков -+(),.",
       },
     }),
     priceMin: useInput(dataFormCar.priceMin, {
@@ -66,9 +66,11 @@ const CardCar = ({ page }) => {
     },
     description: useInput(dataFormCar.description, {}),
     tank: useInput(dataFormCar.tank, {}),
-    categoryId: useInput(dataFormCar.categoryId.id, {
-      isEmpty: { value: false, text: "" },
-    }),
+    categoryId: {
+      value: category.value,
+      setValue: setCategory,
+      inputValid: category.inputValid,
+    },
     colors: {
       value: colors.value,
       setValue: setColors,
@@ -84,32 +86,57 @@ const CardCar = ({ page }) => {
     });
   };
 
-  const handleSave = () => {
-    console.log(dataForm);
+  const handleReset = () => {
+    Object.keys(dataForm).forEach((key) => {
+      if (dataForm[key].setValue) handleDataForm(key, dataFormCar[key], false);
+      else dataForm[key].setChange(dataFormCar[key]);
+    });
+  };
+
+  const handleRequest = (method, modelId) => {
+    return getCarModelObj(method, dataForm, modelId);
   };
 
   useEffect(() => {
-    setStateMax(dataForm.priceMax.value);
+    if (id && models.length) {
+      const model = models.filter((item) => item.id === id)[0];
+      Object.keys(model).forEach((key) => {
+        if (dataForm[key]) {
+          if (dataForm[key].setValue) {
+            handleDataForm(key, model[key], !!model[key]);
+          } else dataForm[key].setChange(model[key]);
+        }
+      });
+    }
+  }, [id]);
+
+  useEffect(() => {
+    const priceMax = dataForm.priceMax.value;
+    if (priceMax) setStateMax(priceMax);
   }, [dataForm.priceMax.value]);
 
   useEffect(() => {
-    setStateMin(dataForm.priceMin.value);
+    const priceMin = dataForm.priceMin.value;
+    if (priceMin) setStateMin(priceMin);
   }, [dataForm.priceMin.value]);
 
   useEffect(() => {
-    if (!car) dispatch(getCarModels());
     if (!categories.length) dispatch(getCategories());
-  }, [car, categories.length]);
-  // if (!car || !categories.length) return <Preloader title="Загрузка..." />;
+    if (!models.length) dispatch(getCarModels());
+  }, [categories.length, models.length]);
+
   return (
-    <AppLayout title="Карточка автомобиля" page={page}>
-      <RefactorEntitiesLayout dataForm={dataForm} handleSave={handleSave}>
+    <AppLayout id={id} entity="Машина" title="Карточка автомобиля" page={page}>
+      <RefactorEntitiesLayout
+        load={!categories.length}
+        dataForm={dataForm}
+        handleRequest={handleRequest}
+        handleReset={handleReset}
+        link="cardList"
+        id={id}
+      >
         <section className="card-car">
-          <Card
-            categories={categories}
-            dataForm={dataForm}
-            handleDataForm={handleDataForm}
-          />
+          <Card dataForm={dataForm} handleDataForm={handleDataForm} />
           <Settings
             dataForm={dataForm}
             handleDataForm={handleDataForm}
