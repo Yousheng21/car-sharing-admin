@@ -13,7 +13,7 @@
 
     &-main {
       display: grid;
-      grid-template: 0.1fr 0.1fr 1fr/1fr 1fr;
+      grid-template: 0.1fr 0.1fr/1fr 1fr;
       align-items: flex-start;
       grid-gap: 20px;
 
@@ -140,7 +140,7 @@
   }
 }
 
-@media screen and (max-width: 425px){
+@media screen and (max-width: 768px){
   .card-car{
     .settings{
       &-main{
