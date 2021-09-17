@@ -14,12 +14,12 @@ const Car = ({ models }) => {
   return models.map((model) => (
     <section key={model.id} className="model">
       <div className="img">
-        <Image car={model} />
+        <Image thumbnail={model ? model.thumbnail : null} />
       </div>
       <div className="info">
         <h1>{model.name}</h1>
         <p className={emptyClass(!model.description)}>
-          {model.description ?? "Описание отсутсвует"}
+          {model.description.length ? model.description : "Описание отсутсвует"}
         </p>
         <span className={emptyClass(!model.categoryId)}>
           {model.categoryId ? (
@@ -63,7 +63,7 @@ const Car = ({ models }) => {
           ? model.colors.map((color) => <Color key={color} color={color} />)
           : "Нет цветов"}
       </div>
-      <Buttons />
+      <Buttons link={`cardCar/${model.id}`} />
     </section>
   ));
 };
