@@ -8,7 +8,9 @@ const SET_CATEGORIES = "SET_CATEGORIES";
 const SET_CITIES = "SET_CITIES";
 const SET_IS_UPDATED = "SET_IS_UPDATED";
 const SET_FILTERS = "SET_FILTERS";
-const SET_DATA_FORM_CAR = "SET_DATA_FORM_CAR";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_TOOLTIP = "SET_TOOLTIP";
+const SET_CAR_MODEL_ID = "SET_CAR_MODEL_ID";
 
 const defaultState = {
   orders: [],
@@ -36,21 +38,15 @@ const defaultState = {
     "priceMin[$gt]": "",
     "priceMax[$lt]": "",
   },
-  dataFormCar: {
-    priceMax: 0,
-    priceMin: 0,
-    name: "",
-    thumbnail: {
-      name: "Выберите файл...",
-      path: "",
-    },
-    description: "",
-    tank: 0,
-    categoryId: {
-      name: "",
-      id: "",
-    },
-    colors: [],
+  currentPage: {
+    filtersCar: 1,
+    filtersPoint: 1,
+    filtersOrder: 1,
+  },
+  curModelId: "",
+  tooltip: {
+    type: "",
+    method: "",
   },
 };
 
@@ -109,10 +105,30 @@ export default function appReducer(state = defaultState, action) {
         ...state,
         [action.state]: action.dataForm,
       };
-    case SET_DATA_FORM_CAR:
+    case SET_CURRENT_PAGE:
       return {
         ...state,
-        dataFormCar: action.dataForm,
+        currentPage: {
+          ...state.currentPage,
+          [action.state]: action.page,
+        },
+      };
+    case SET_TOOLTIP:
+      return {
+        ...state,
+        tooltip: {
+          type: action.tooltip,
+          method: action.method,
+        },
+      };
+    case SET_CAR_MODEL_ID:
+      return {
+        ...state,
+        curModelId: action.id,
+        tooltip: {
+          type: "success",
+          method: "POST",
+        },
       };
     default:
       return state;
@@ -170,7 +186,19 @@ export const setFilters = (state, dataForm) => ({
   dataForm,
 });
 
-export const setDataFormCar = (dataForm) => ({
-  type: SET_DATA_FORM_CAR,
-  dataForm,
+export const setCurrentPage = (state, page) => ({
+  type: SET_CURRENT_PAGE,
+  state,
+  page,
+});
+
+export const setTooltip = (tooltip, method) => ({
+  type: SET_TOOLTIP,
+  tooltip,
+  method,
+});
+
+export const setCarModelId = (id) => ({
+  type: SET_CAR_MODEL_ID,
+  id,
 });
