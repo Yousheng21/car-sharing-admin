@@ -32,3 +32,9 @@
     justify-self: center;
   }
 }
+
+@media screen and (max-width: 425px){
+  .buttons{
+   justify-self: center;
+  }
+}

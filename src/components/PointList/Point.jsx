@@ -1,32 +1,30 @@
 import React from "react";
 import classNames from "classnames";
 import LocationIcon from "../../images/Location.svg";
-import Buttons from "../common/Buttons/Buttons";
 
-const Point = ({ points }) => {
-  return points.map((point) => (
-    <section key={point.id} className="point">
+const Point = ({ entity }) => {
+  return (
+    <section key={entity.id} className="point">
       <div className="point-img">
         <LocationIcon />
       </div>
       <div className="point-name">
-        <h1>{point.name}</h1>
+        <h1>{entity.name}</h1>
       </div>
       <div className="point-address">
-        <h1>{point.address}</h1>
+        <h1>{entity.address}</h1>
       </div>
       <div className="point-city">
         <h1
           className={classNames({
-            empty: !point.cityId,
+            empty: !entity.cityId,
           })}
         >
-          {point.cityId ? point.cityId.name : "Город отсутсвует"}
+          {entity.cityId ? entity.cityId.name : "Город отсутсвует"}
         </h1>
       </div>
-      <Buttons />
     </section>
-  ));
+  );
 };
 
 export default Point;

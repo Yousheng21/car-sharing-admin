@@ -2,47 +2,48 @@ import React from "react";
 import classNames from "classnames";
 import Image from "../../common/Image/Image";
 import Color from "./Color";
-import Buttons from "../../common/Buttons/Buttons";
 
-const Car = ({ models }) => {
+const Car = ({ entity }) => {
   const emptyClass = (parameter) => {
     return classNames({
       empty: parameter,
     });
   };
 
-  return models.map((model) => (
-    <section key={model.id} className="model">
+  return (
+    <section key={entity.id} className="model">
       <div className="img">
-        <Image thumbnail={model ? model.thumbnail : null} />
+        <Image thumbnail={entity ? entity.thumbnail : null} />
       </div>
       <div className="info">
-        <h1>{model.name}</h1>
-        <p className={emptyClass(!model.description)}>
-          {model.description.length ? model.description : "Описание отсутсвует"}
+        <h1>{entity.name}</h1>
+        <p className={emptyClass(!entity.description)}>
+          {entity.description.length
+            ? entity.description
+            : "Описание отсутсвует"}
         </p>
-        <span className={emptyClass(!model.categoryId)}>
-          {model.categoryId ? (
+        <span className={emptyClass(!entity.categoryId)}>
+          {entity.categoryId ? (
             <span>
               Категория:{" "}
-              <span className="info-title">{model.categoryId.name}</span>
+              <span className="info-title">{entity.categoryId.name}</span>
             </span>
           ) : (
             " Категория отсутствует"
           )}
           <br />
         </span>
-        {model.tank ? (
+        {entity.tank ? (
           <span>
-            Топливо: <span className="info-title">{model.tank}%</span>
+            Топливо: <span className="info-title">{entity.tank}%</span>
             <br />
           </span>
         ) : (
           ""
         )}
-        {model.number ? (
+        {entity.number ? (
           <span>
-            Номер: <span className="info-title">{model.number}</span>
+            Номер: <span className="info-title">{entity.number}</span>
           </span>
         ) : (
           ""
@@ -50,22 +51,21 @@ const Car = ({ models }) => {
       </div>
       <div className="price">
         <h1>
-          {model.priceMin} - {model.priceMax} ₽
+          {entity.priceMin} - {entity.priceMax} ₽
         </h1>
       </div>
       <div
         className={classNames({
           colors: true,
-          empty: !model.colors.length,
+          empty: !entity.colors.length,
         })}
       >
-        {model.colors.length
-          ? model.colors.map((color) => <Color key={color} color={color} />)
+        {entity.colors.length
+          ? entity.colors.map((color) => <Color key={color} color={color} />)
           : "Нет цветов"}
       </div>
-      <Buttons link={`cardCar/${model.id}`} />
     </section>
-  ));
+  );
 };
 
 export default Car;

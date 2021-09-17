@@ -60,6 +60,7 @@ const OrderList = ({ page }) => {
         perPage={orderPerPage}
         reset={reset}
         titleLoader="Загрузка заказов..."
+        viewEntities={currentOrders}
       >
         <Order orders={currentOrders} />
       </EntitiesLayout>

@@ -54,6 +54,7 @@ const PointList = ({ page }) => {
         perPage={pointPerPage}
         reset={reset}
         titleLoader="Загрузка пунктов..."
+        viewEntities={currentPoints}
       >
         <Point points={currentPoints} />
       </EntitiesLayout>

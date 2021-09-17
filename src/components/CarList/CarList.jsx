@@ -46,6 +46,7 @@ const CarList = ({ page }) => {
         dropdown={dropdown}
         entities={newModels}
         storeEntities={models}
+        viewEntities={currentModels}
         setEntities={setCurrentModels}
         handleClick={handleClick}
         stateFilters="filtersCar"
@@ -53,7 +54,7 @@ const CarList = ({ page }) => {
         reset={reset}
         titleLoader="Загрузка автомобилей..."
       >
-        <Car models={currentModels} />
+        <Car />
       </EntitiesLayout>
     </AppLayout>
   );

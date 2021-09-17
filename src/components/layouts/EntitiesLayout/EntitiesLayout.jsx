@@ -18,6 +18,7 @@ const EntitiesLayout = ({
   handleClick,
   reset,
   titleLoader,
+  viewEntities,
 }) => {
   const dispatch = useDispatch();
 
@@ -76,7 +77,9 @@ const EntitiesLayout = ({
         dropdown={dropdown}
         paginate={paginate}
       />
-      <Entity entities={entities}>{children}</Entity>
+      <Entity viewEntities={viewEntities} entities={entities}>
+        {children}
+      </Entity>
       <Pagination
         page={currentPage}
         orders={entities}

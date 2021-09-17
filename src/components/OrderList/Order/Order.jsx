@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "../../common/Image/Image";
 import Additional from "./Additional";
-import Buttons from "../../common/Buttons/Buttons";
 
 const DateInterval = ({ from, to }) => {
   const dateFrom = new Date(from).toLocaleString();
@@ -9,31 +8,34 @@ const DateInterval = ({ from, to }) => {
   return `${dateFrom} - ${dateTo}`;
 };
 
-const Order = ({ orders }) => {
-  return orders.map((order) => (
-    <section key={order.id} className="order">
+const Order = ({ entity }) => {
+  return (
+    <section key={entity.id} className="order">
       <div className="img">
-        <Image thumbnail={order.carId ? order.carId.thumbnail : null} />
+        <Image thumbnail={entity.carId ? entity.carId.thumbnail : null} />
       </div>
       <div className="info">
-        <span>{order.carId ? order.carId.name : ""}</span> в{" "}
-        <span>{order.cityId ? order.cityId.name : ""}</span>,{" "}
-        {order.pointId ? order.pointId.address : ""}
+        <span>{entity.carId ? entity.carId.name : ""}</span> в{" "}
+        <span>{entity.cityId ? entity.cityId.name : ""}</span>,{" "}
+        {entity.pointId ? entity.pointId.address : ""}
         <br />
-        <DateInterval from={order.dateFrom} to={order.dateTo} />
+        <DateInterval from={entity.dateFrom} to={entity.dateTo} />
         <br />
         <p>
-          Цвет: <span>{order.color}</span>. <br /> Статус:{" "}
-          <span>{order.orderStatusId ? order.orderStatusId.name : ""}</span>
+          Цвет: <span>{entity.color}</span>. <br /> Статус:{" "}
+          <span>{entity.orderStatusId ? entity.orderStatusId.name : ""}</span>
         </p>
       </div>
-      <Additional order={order} />
+      <Additional order={entity} />
       <div className="price">
-        {order.price ? <h1>{order.price} ₽</h1> : <span>Цена не указана</span>}
+        {entity.price ? (
+          <h1>{entity.price} ₽</h1>
+        ) : (
+          <span>Цена не указана</span>
+        )}
       </div>
-      <Buttons />
     </section>
-  ));
+  );
 };
 
 export default Order;
