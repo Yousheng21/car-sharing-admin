@@ -13,7 +13,7 @@ const Order = ({ orders }) => {
   return orders.map((order) => (
     <section key={order.id} className="order">
       <div className="img">
-        <Image car={order.carId} />
+        <Image thumbnail={order.carId ? order.carId.thumbnail : null} />
       </div>
       <div className="info">
         <span>{order.carId ? order.carId.name : ""}</span> в{" "}
