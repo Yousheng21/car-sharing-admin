@@ -3,11 +3,9 @@ import { domain } from "../../../reducers/data/api/server";
 import Photo from "../../../images/no-image.png";
 import "./image.scss";
 
-const Image = ({ car }) => {
+const Image = ({ thumbnail }) => {
   const getSrc = () => {
-    return car.thumbnail.path[0] === "/"
-      ? domain + car.thumbnail.path
-      : car.thumbnail.path;
+    return thumbnail.path[0] === "/" ? domain + thumbnail.path : thumbnail.path;
   };
 
   return (
@@ -15,8 +13,8 @@ const Image = ({ car }) => {
       crossOrigin="anonymous"
       referrerPolicy="origin"
       className="car-img"
-      src={car ? getSrc() : Photo}
-      alt={car ? car.name : "photo"}
+      src={thumbnail ? getSrc() : Photo}
+      alt={thumbnail ? thumbnail.originalname : "photo"}
     />
   );
 };
