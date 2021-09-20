@@ -7,6 +7,7 @@ import OrderIcon from "../../images/OrderIcon.svg";
 export const tabs = [
   { text: "Карточка автомобиля", icon: <BlogIcon />, path: "/cardCar" },
   { text: "Список авто", icon: <CarIcon />, path: "/cardList" },
+  { text: "Карточка заказа", icon: <OrderIcon />, path: "/orderCard" },
   { text: "Заказы", icon: <OrderIcon />, path: "/orderList" },
   { text: "Пункты", icon: <PointIcon />, path: "/pointList" },
 ];
