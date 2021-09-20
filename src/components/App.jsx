@@ -7,6 +7,7 @@ import CardCar from "./CardCar/CardCar";
 import CarList from "./CarList/CarList";
 import { auth } from "../actions/login";
 import PointList from "./PointList/PointList";
+import OrderCard from "./OrderCard/OrderCard";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,11 +38,15 @@ const App = () => {
         />
         <Route
           path="/car-sharing-admin/orderList"
-          render={() => <OrderList page={2} />}
+          render={() => <OrderList page={3} />}
         />
         <Route
           path="/car-sharing-admin/pointList"
-          render={() => <PointList page={3} />}
+          render={() => <PointList page={4} />}
+        />
+        <Route
+          path="/car-sharing-admin/orderCard"
+          render={(props) => <OrderCard match={props.match} page={2} />}
         />
       </Switch>
     </BrowserRouter>
