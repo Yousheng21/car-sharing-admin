@@ -55,7 +55,7 @@ export const requestCarModel = (method, req, id) => {
         },
         data: req,
       });
-      if (!id) dispatch(setCarModelId(response.data.data.id));
+      dispatch(setCarModelId(response.data.data.id ?? id));
       dispatch(setIsUpdated(true));
       dispatch(getCarModels());
       dispatch(setTooltip("success", method));
