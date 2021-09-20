@@ -19,6 +19,7 @@ const EntitiesLayout = ({
   reset,
   titleLoader,
   viewEntities,
+  handleDelete,
 }) => {
   const dispatch = useDispatch();
 
@@ -77,7 +78,11 @@ const EntitiesLayout = ({
         dropdown={dropdown}
         paginate={paginate}
       />
-      <Entity viewEntities={viewEntities} entities={entities}>
+      <Entity
+        handleDelete={handleDelete}
+        viewEntities={viewEntities}
+        entities={entities}
+      >
         {children}
       </Entity>
       <Pagination

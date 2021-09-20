@@ -1,14 +1,11 @@
 import React from "react";
-// import { useSelector } from "react-redux";
-// import Preloader from "../../../common/Preloader/Preloader";
 import "./entity.scss";
 import { useSelector } from "react-redux";
 import Preloader from "../../../common/Preloader/Preloader";
 import EntityList from "./EntityList";
 
-const Entity = ({ viewEntities, entities, children }) => {
+const Entity = ({ viewEntities, entities, children, handleDelete }) => {
   const isUpdated = useSelector((state) => state.app.isUpdated);
-  // const [modalIsActive, setModalIsActive] = useState(false);
 
   if (isUpdated) return <Preloader title="Обновление..." />;
   if (!entities.length)
@@ -16,7 +13,9 @@ const Entity = ({ viewEntities, entities, children }) => {
   return (
     <section className="list">
       {viewEntities.map((entity) => (
-        <EntityList entity={entity}>{children}</EntityList>
+        <EntityList handleDelete={handleDelete} key={entity.id} entity={entity}>
+          {children}
+        </EntityList>
       ))}
     </section>
   );
