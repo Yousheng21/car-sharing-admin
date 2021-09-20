@@ -1,11 +1,7 @@
 import { instance } from "../reducers/data/api/server";
-import {
-  setCategories,
-  setIsUpdated,
-  setModels,
-  setNewModels,
-} from "../reducers/appReducer";
 import { getUrl } from "./app";
+import { setCategories, setModels, setNewModels } from "../reducers/carReducer";
+import { setIsUpdated } from "../reducers/appReducer";
 
 const getCarModels = (parameters) => {
   return async (dispatch) => {
@@ -21,7 +17,7 @@ const getCarModels = (parameters) => {
       );
       dispatch(setIsUpdated(false));
     } catch (e) {
-      console.error(e.response);
+      return e.response;
     }
   };
 };
@@ -35,7 +31,7 @@ export const getCategories = () => {
       });
       dispatch(setCategories(response.data.data));
     } catch (e) {
-      console.error(e.response);
+      return e.response;
     }
   };
 };

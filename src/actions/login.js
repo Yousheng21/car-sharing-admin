@@ -16,7 +16,7 @@ export const login = (username, password) => {
       localStorage.setItem("token", response.data.refresh_token);
     } catch (e) {
       dispatch(setErrorForm());
-      console.error(e.response);
+      return e.response;
     }
   };
 };
@@ -33,7 +33,7 @@ export const auth = () => {
       dispatch(setUser(response.data));
     } catch (e) {
       dispatch(setErrorForm());
-      console.error(e.response);
+      return e.response;
     }
   };
 };
@@ -51,7 +51,7 @@ export const logout = () => {
       dispatch(logoutUser());
       localStorage.removeItem("token");
     } catch (e) {
-      console.error(e.response);
+      return e.response;
     }
   };
 };

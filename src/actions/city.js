@@ -1,5 +1,5 @@
 import { instance } from "../reducers/data/api/server";
-import { setCities } from "../reducers/appReducer";
+import { setCities } from "../reducers/pointReducer";
 
 const getCities = () => {
   return async (dispatch) => {
@@ -13,7 +13,7 @@ const getCities = () => {
       });
       dispatch(setCities(response.data.data));
     } catch (e) {
-      console.error(e.response);
+      return e.response;
     }
   };
 };

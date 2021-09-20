@@ -1,5 +1,6 @@
 import { instance } from "../reducers/data/api/server";
-import { setIsUpdated, setNewOrders, setOrders } from "../reducers/appReducer";
+import { setIsUpdated } from "../reducers/appReducer";
+import { setNewOrders, setOrders } from "../reducers/orderReducer";
 import { store } from "../reducers";
 import { getUrl } from "./app";
 
@@ -21,7 +22,7 @@ const getOrders = (parameters) => {
       );
       dispatch(setIsUpdated(false));
     } catch (e) {
-      console.error(e.response);
+      return e.response;
     }
   };
 };

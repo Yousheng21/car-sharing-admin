@@ -1,6 +1,7 @@
 import { instance } from "../reducers/data/api/server";
 import { getUrl } from "./app";
-import { setIsUpdated, setNewPoints, setPoints } from "../reducers/appReducer";
+import { setIsUpdated } from "../reducers/appReducer";
+import { setNewPoints, setPoints } from "../reducers/pointReducer";
 
 const getPoints = (parameters) => {
   return async (dispatch) => {
@@ -16,7 +17,7 @@ const getPoints = (parameters) => {
       );
       dispatch(setIsUpdated(false));
     } catch (e) {
-      console.error(e.response);
+      return e.response;
     }
   };
 };
