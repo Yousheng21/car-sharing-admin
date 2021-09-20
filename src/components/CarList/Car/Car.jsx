@@ -18,9 +18,7 @@ const Car = ({ entity }) => {
       <div className="info">
         <h1>{entity.name}</h1>
         <p className={emptyClass(!entity.description)}>
-          {entity.description.length
-            ? entity.description
-            : "Описание отсутсвует"}
+          {entity.description ? entity.description : "Описание отсутсвует"}
         </p>
         <span className={emptyClass(!entity.categoryId)}>
           {entity.categoryId ? (
