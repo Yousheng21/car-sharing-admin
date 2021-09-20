@@ -1,0 +1,43 @@
+$main-color:#007BFF;
+$second-color:#CACEDB;
+$third-color: #818EA3;
+$color-shadow: rgba(20, 17, 19, 0.11);
+$color-error: #C4183C;
+$color-title: #3D5170;
+$color-select: #BECAD6;
+$color-btn: #5A6169;
+$color-border: rgba(202, 206, 219, 0.5);
+$color-option: #868E96;
+
+@font-face {
+  font-family: 'Roboto-Light';
+  src: local('Light'), url(fonts/Roboto-Light.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Roboto-Black';
+  src: local('Black'), url(fonts/Roboto-Black.ttf);
+}
+
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: local('Bold'), url(fonts/Roboto-Bold.ttf);
+}
+
+body{
+  margin: 0;
+  overflow-x: hidden;
+}
+
+*{
+  font-weight: bold;
+  font-family: Roboto-Light, serif;
+}
+h1,h2{
+  font-weight: bold;
+  color: $color-title;
+}
+a{
+  text-decoration: none;
+}

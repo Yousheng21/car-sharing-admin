@@ -1,0 +1,13 @@
+@import "src/index";;
+.input{
+  display: flex;
+  flex-direction: column;
+  input{
+    color: $color-title;
+    font-weight: bold;
+  }
+
+  .error{
+    color: $color-error;
+  }
+}

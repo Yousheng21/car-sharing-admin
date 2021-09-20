@@ -1,0 +1,27 @@
+@import "../../../../index";
+.pagination{
+  justify-content: center;
+  align-self: center;
+  color: $main-color;
+  padding-top: 30px;
+  border-top: 1px $color-border solid;
+  button{
+    outline: none;
+    border: none;
+    background: none;
+    color: $main-color;
+    align-self: center;
+    &:hover{
+      transform: scale(1.2);
+    }
+
+    &.active{
+      color: white;
+      border-radius: 50%;
+      height: 22px;
+      background-color: $main-color;
+      padding: 0 5px;
+      margin: 0 5px;
+    }
+  }
+}

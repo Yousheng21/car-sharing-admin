@@ -1,0 +1,61 @@
+@import "src/index";
+.auth{
+  width: 30vw;
+  margin: 20vh auto 0;
+
+  &-header{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    gap: 5px;
+    h1{
+      margin: 0;
+      align-self: center;
+    }
+  }
+  &-content{
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    padding: 20px;
+    form{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    h2{
+     align-self: center;
+    }
+    span.error{
+      color: $color-error;
+    }
+  }
+  &-footer{
+    display: flex;
+    justify-content: space-between;
+
+    button{
+      width: 25%;
+      background-color: $main-color;
+      font-weight: bold;
+    }
+  }
+}
+@media screen and (max-width: 768px){
+  .auth{
+    width: 60vw;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .auth{
+    width: 90vw;
+
+    &-header{
+      h1{
+        font-size: 24px;
+      }
+    }
+  }
+}

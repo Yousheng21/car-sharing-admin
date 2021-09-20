@@ -1,0 +1,24 @@
+@import "src/index";
+.buttons{
+  display: flex;
+  align-items: flex-start;
+  align-self: center;
+  button{
+    display: flex;
+    gap: 5px;
+    padding: 5px 10px;
+    border: 1px $color-select solid;
+    color: $color-btn;
+    &:first-child{
+      border-bottom-left-radius: 5px;
+      border-top-left-radius: 5px;
+    }
+    &:last-child{
+      border-bottom-right-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+    svg{
+      align-self: center;
+    }
+  }
+}

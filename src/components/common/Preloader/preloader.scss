@@ -1,0 +1,31 @@
+@import "src/index";
+.preloader {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  &-circle{
+    width: 100px;
+    height: 100px;
+    align-self: center;
+    justify-self: center;
+    border-radius: 100%;
+    border: 2px dashed $main-color;
+    animation-name: search-preloader;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+  }
+  &-title{
+    font-size: 24px;
+    justify-self: center;
+  }
+}
+
+@keyframes search-preloader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) scale(1.3);
+  }
+}
