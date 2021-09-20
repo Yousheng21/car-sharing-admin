@@ -6,8 +6,8 @@ export const useInput = (initialState, validations) => {
   const [isDirty, setDirty] = useState(false);
   const valid = useValidation(value, validations);
 
-  const onChange = (e) => {
-    setValue(e.target.value);
+  const onChange = (event) => {
+    setValue(event.target.value);
   };
 
   const onBlur = () => {
@@ -18,16 +18,10 @@ export const useInput = (initialState, validations) => {
   };
 
   const printError = (validators) => {
-    let flag = false;
-    return validators.map((item) => {
-      if (!flag) {
-        if (valid[item].value) {
-          flag = true;
-          return valid[item].text;
-        }
-      }
-      return true;
+    const element = validators.find((item) => {
+      return valid[item].value;
     });
+    if (element) return valid[element].text;
   };
 
   return {
