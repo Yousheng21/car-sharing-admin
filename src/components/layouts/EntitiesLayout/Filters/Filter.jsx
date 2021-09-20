@@ -24,8 +24,6 @@ const Filter = ({ item, handleChange, dataForm }) => {
           </select>
         </div>
       );
-    default:
-      break;
     case "number":
       return (
         <input
@@ -38,6 +36,8 @@ const Filter = ({ item, handleChange, dataForm }) => {
           placeholder={item.text}
         />
       );
+    default:
+      break;
   }
 };
 
