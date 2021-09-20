@@ -32,20 +32,16 @@ const Car = ({ models }) => {
           )}
           <br />
         </span>
-        {model.tank ? (
+        {!!model.tank && (
           <span>
             Топливо: <span className="info-title">{model.tank}%</span>
             <br />
           </span>
-        ) : (
-          ""
         )}
-        {model.number ? (
+        {!!model.number && (
           <span>
             Номер: <span className="info-title">{model.number}</span>
           </span>
-        ) : (
-          ""
         )}
       </div>
       <div className="price">

@@ -16,9 +16,9 @@ const Order = ({ orders }) => {
         <Image car={order.carId} />
       </div>
       <div className="info">
-        <span>{order.carId ? order.carId.name : ""}</span> в{" "}
-        <span>{order.cityId ? order.cityId.name : ""}</span>,{" "}
-        {order.pointId ? order.pointId.address : ""}
+        <span>{!!order.carId && order.carId.name}</span> в{" "}
+        <span>{!!order.cityId && order.cityId.name}</span>,{" "}
+        {!!order.pointId && order.pointId.address}
         <br />
         <DateInterval from={order.dateFrom} to={order.dateTo} />
         <br />
