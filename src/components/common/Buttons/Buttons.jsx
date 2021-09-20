@@ -1,6 +1,7 @@
 import React from "react";
 import Reject from "../../../images/Reject Icon.svg";
 import Edit from "../../../images/Edit Icon.svg";
+import "./buttons.scss";
 
 const Buttons = () => {
   return (
