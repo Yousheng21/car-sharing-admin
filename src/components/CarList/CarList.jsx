@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./carList.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import AppLayout from "../layouts/AppLayout/AppLayout";
 import EntitiesLayout from "../layouts/EntitiesLayout/EntitiesLayout";
 import getCarModels, { getCategories } from "../../actions/car";
 import { getDropdownCar } from "../../actions/app";
 import Car from "./Car/Car";
+import ListSelector from "../../utils/listSelectors";
+
+const modelsPerPage = 5;
 
 const CarList = ({ page }) => {
   const dispatch = useDispatch();
 
-  const [modelsPerPage] = useState(5);
   const [dropdown, setDropdown] = useState([]);
-
-  const models = useSelector((state) => state.app.models);
-  const newModels = useSelector((state) => state.app.newModels);
-  const categories = useSelector((state) => state.app.categories);
-
   const [currentModels, setCurrentModels] = useState([]);
+
+  const { models, categories, newModels } = ListSelector();
 
   useEffect(() => {
     if (!models.length) {
@@ -35,10 +34,9 @@ const CarList = ({ page }) => {
     dispatch(getCarModels(filters));
   };
 
-  const reset = () => {
+  const handleReset = () => {
     dispatch(getCarModels());
   };
-
   return (
     <AppLayout title="Список авто" page={page}>
       <EntitiesLayout
@@ -50,7 +48,7 @@ const CarList = ({ page }) => {
         handleClick={handleClick}
         stateFilters="filtersCar"
         perPage={modelsPerPage}
-        reset={reset}
+        reset={handleReset}
         titleLoader="Загрузка автомобилей..."
       >
         <Car models={currentModels} />

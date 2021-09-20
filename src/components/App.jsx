@@ -1,16 +1,17 @@
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Authorization from "./Authorization/Authorization";
 import OrderList from "./OrderList/OrderList";
 import CardCar from "./CardCar/CardCar";
 import CarList from "./CarList/CarList";
 import { auth } from "../actions/login";
 import PointList from "./PointList/PointList";
+import ListSelector from "../utils/listSelectors";
 
 const App = () => {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.user.isAuth);
+  const { isAuth } = ListSelector();
   const [token, setToken] = useState("");
 
   useEffect(() => {

@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "./pointList.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import getCities from "../../actions/city";
 import { getDropdownPoint } from "../../actions/app";
 import AppLayout from "../layouts/AppLayout/AppLayout";
 import EntitiesLayout from "../layouts/EntitiesLayout/EntitiesLayout";
 import getPoints from "../../actions/point";
 import Point from "./Point";
+import ListSelector from "../../utils/listSelectors";
 
 const PointList = ({ page }) => {
   const dispatch = useDispatch();
 
-  const [pointPerPage] = useState(5);
+  const pointPerPage = 5;
   const [dropdown, setDropdown] = useState([]);
 
-  const cities = useSelector((state) => state.app.cities);
-
-  const points = useSelector((state) => state.app.points);
-  const newPoints = useSelector((state) => state.app.newPoints);
-
   const [currentPoints, setCurrentPoints] = useState([]);
+
+  const { cities, points, newPoints } = ListSelector();
 
   useEffect(() => {
     if (!points.length) {
@@ -37,7 +35,7 @@ const PointList = ({ page }) => {
     dispatch(getPoints(filters));
   };
 
-  const reset = () => {
+  const handleReset = () => {
     dispatch(getPoints());
   };
 
@@ -52,7 +50,7 @@ const PointList = ({ page }) => {
         handleClick={handleClick}
         stateFilters="filtersPoint"
         perPage={pointPerPage}
-        reset={reset}
+        reset={handleReset}
         titleLoader="Загрузка пунктов..."
       >
         <Point points={currentPoints} />
