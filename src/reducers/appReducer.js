@@ -6,11 +6,14 @@ const SET_POINTS = "SET_POINTS";
 const SET_NEW_POINTS = "SET_NEW_POINTS";
 const SET_CATEGORIES = "SET_CATEGORIES";
 const SET_CITIES = "SET_CITIES";
+const SET_ORDER_STATUS = "SET_ORDER_STATUS";
+const SET_TARIFFS = "SET_TARIFFS";
 const SET_IS_UPDATED = "SET_IS_UPDATED";
 const SET_FILTERS = "SET_FILTERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOOLTIP = "SET_TOOLTIP";
 const SET_CAR_MODEL_ID = "SET_CAR_MODEL_ID";
+const SET_ORDER_ID = "SET_ORDER_ID";
 
 const defaultState = {
   orders: [],
@@ -21,6 +24,8 @@ const defaultState = {
   newPoints: [],
   categories: [],
   cities: [],
+  orderStatuses: [],
+  tariffs: [],
   isUpdated: false,
   filtersPoint: {
     id: "",
@@ -44,6 +49,7 @@ const defaultState = {
     filtersOrder: 1,
   },
   curModelId: "",
+  orderId: "",
   tooltip: {
     type: "",
     method: "",
@@ -90,6 +96,16 @@ export default function appReducer(state = defaultState, action) {
         ...state,
         cities: action.cities,
       };
+    case SET_ORDER_STATUS:
+      return {
+        ...state,
+        orderStatuses: action.arrayStatus,
+      };
+    case SET_TARIFFS:
+      return {
+        ...state,
+        tariffs: action.tariffs,
+      };
     case SET_CATEGORIES:
       return {
         ...state,
@@ -125,10 +141,11 @@ export default function appReducer(state = defaultState, action) {
       return {
         ...state,
         curModelId: action.id,
-        tooltip: {
-          type: "success",
-          method: "POST",
-        },
+      };
+    case SET_ORDER_ID:
+      return {
+        ...state,
+        orderId: action.id,
       };
     default:
       return state;
@@ -170,6 +187,16 @@ export const setCities = (cities) => ({
   cities,
 });
 
+export const setOrderStatus = (arrayStatus) => ({
+  type: SET_ORDER_STATUS,
+  arrayStatus,
+});
+
+export const setTariffs = (tariffs) => ({
+  type: SET_TARIFFS,
+  tariffs,
+});
+
 export const setCategories = (categories) => ({
   type: SET_CATEGORIES,
   categories,
@@ -200,5 +227,10 @@ export const setTooltip = (tooltip, method) => ({
 
 export const setCarModelId = (id) => ({
   type: SET_CAR_MODEL_ID,
+  id,
+});
+
+export const setOrderId = (id) => ({
+  type: SET_ORDER_ID,
   id,
 });
