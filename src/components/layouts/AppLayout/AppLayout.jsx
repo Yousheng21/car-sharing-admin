@@ -16,7 +16,6 @@ const AppLayout = ({ children, title, page, entity, kind, id }) => {
   const [viewTooltip, setViewTooltip] = useState(!!id);
 
   const tooltip = useSelector((state) => state.app.tooltip);
-  const currModelId = useSelector((state) => state.app.curModelId);
 
   useEffect(() => {
     if (tooltip.type) {
@@ -50,7 +49,7 @@ const AppLayout = ({ children, title, page, entity, kind, id }) => {
               entity={entity}
               kind={kind}
               tooltip={tooltip}
-              id={id ?? currModelId}
+              id={id}
             />
           </span>
           <button type="button" onClick={() => dispatch(setTooltip("", ""))}>
