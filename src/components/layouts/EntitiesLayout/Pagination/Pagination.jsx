@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classNames from "classnames";
 import "./pagination.scss";
-import { getPaginateNumber } from "../../../../actions/pagination";
 
-const Pagination = ({ paginate, orders, page, prev, next, perPage }) => {
-  const [text, setText] = useState([]);
-  useEffect(() => {
-    setText(getPaginateNumber(page, Math.ceil(orders.length / perPage)));
-  }, [orders.length, page]);
-
-  if (!text.length) return null;
-
+const Pagination = ({ paginate, text, page, prev, next }) => {
   return (
     <div className="pagination">
       <button type="button" onClick={() => prev(page)}>

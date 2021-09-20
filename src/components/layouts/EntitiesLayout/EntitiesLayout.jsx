@@ -5,6 +5,7 @@ import Pagination from "./Pagination/Pagination";
 import Preloader from "../../common/Preloader/Preloader";
 import { setFilters } from "../../../reducers/appReducer";
 import Entity from "./Entity/Entity";
+import { getPaginateNumber } from "../../../actions/pagination";
 
 const EntitiesLayout = ({
   children,
@@ -21,6 +22,7 @@ const EntitiesLayout = ({
 }) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
+  const [text, setText] = useState([]);
 
   const dataForm = useSelector((state) => state.app[stateFilters]);
 
@@ -29,6 +31,12 @@ const EntitiesLayout = ({
     const indexOfFirstOrder = indexOfLastOrder - perPage;
     setEntities(entities.slice(indexOfFirstOrder, indexOfLastOrder));
   }, [entities, currentPage]);
+
+  useEffect(() => {
+    setText(
+      getPaginateNumber(currentPage, Math.ceil(entities.length / perPage))
+    );
+  }, [entities.length, currentPage]);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -75,14 +83,15 @@ const EntitiesLayout = ({
         paginate={paginate}
       />
       <Entity entities={entities}>{children}</Entity>
-      <Pagination
-        page={currentPage}
-        orders={entities}
-        perPage={perPage}
-        next={next}
-        prev={prev}
-        paginate={paginate}
-      />
+      {!!text.length && (
+        <Pagination
+          page={currentPage}
+          next={next}
+          prev={prev}
+          text={text}
+          paginate={paginate}
+        />
+      )}
     </main>
   );
 };
