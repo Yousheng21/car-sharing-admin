@@ -3,7 +3,10 @@ import "./carList.scss";
 import { useDispatch, useSelector } from "react-redux";
 import AppLayout from "../layouts/AppLayout/AppLayout";
 import EntitiesLayout from "../layouts/EntitiesLayout/EntitiesLayout";
-import getCarModels, { getCategories } from "../../actions/car";
+import getCarModels, {
+  getCategories,
+  requestCarModel,
+} from "../../actions/car";
 import { getDropdownCar } from "../../actions/app";
 import Car from "./Car/Car";
 
@@ -35,12 +38,16 @@ const CarList = ({ page }) => {
     dispatch(getCarModels(filters));
   };
 
-  const reset = () => {
+  const handleDelete = (id) => {
+    dispatch(requestCarModel("DELETE", {}, id));
+  };
+
+  const handleReset = () => {
     dispatch(getCarModels());
   };
 
   return (
-    <AppLayout title="Список авто" page={page}>
+    <AppLayout entity="Машина" title="Список авто" page={page}>
       <EntitiesLayout
         className="car-list"
         dropdown={dropdown}
@@ -51,8 +58,9 @@ const CarList = ({ page }) => {
         handleClick={handleClick}
         stateFilters="filtersCar"
         perPage={modelsPerPage}
-        reset={reset}
+        reset={handleReset}
         titleLoader="Загрузка автомобилей..."
+        handleDelete={handleDelete}
       >
         <Car />
       </EntitiesLayout>
