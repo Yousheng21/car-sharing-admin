@@ -1,3 +1,4 @@
+@import "src/index";
 .list{
   display: flex;
   flex-direction: column;
@@ -8,6 +9,15 @@
     display: grid;
     grid-template: 1fr/1fr 0.1fr;
     grid-gap: 20px;
+    .modal-content{
+      button{
+        color: black;
+      }
+      button.delete{
+        color: white;
+        background-color: $color-btn-error;
+      }
+    }
   }
 
   .empty{
