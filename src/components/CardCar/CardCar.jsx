@@ -15,6 +15,7 @@ const CardCar = ({ page, match }) => {
 
   const categories = useSelector((state) => state.app.categories);
   const models = useSelector((state) => state.app.models);
+  const currModelId = useSelector((state) => state.app.curModelId);
 
   const [stateMax, setStateMax] = useState(100000);
   const [stateMin, setStateMin] = useState(0);
@@ -126,7 +127,12 @@ const CardCar = ({ page, match }) => {
   }, [categories.length, models.length]);
 
   return (
-    <AppLayout id={id} entity="Машина" title="Карточка автомобиля" page={page}>
+    <AppLayout
+      id={currModelId}
+      entity="Машина"
+      title="Карточка автомобиля"
+      page={page}
+    >
       <RefactorEntitiesLayout
         load={!categories.length}
         dataForm={dataForm}
