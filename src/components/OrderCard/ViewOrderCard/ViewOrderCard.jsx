@@ -2,42 +2,50 @@ import React from "react";
 import Image from "../../common/Image/Image";
 import OrderCardInput from "./Inputs/OrderCardInput";
 
-const ViewOrderCard = ({ dataForm, points, handleSelect, models }) => {
+const ViewOrderCard = ({
+  dataForm,
+  points,
+  handleSelect,
+  handleDataForm,
+  models,
+}) => {
+  const viewPoint = (item) => {
+    return `${!!item.cityId && item.cityId.name}, ${item.address}`;
+  };
   return (
     <section className="card">
-      {dataForm.carId.thumbnail ? (
-        <div>
-          <Image thumbnail={dataForm.carId.thumbnail} />
-        </div>
-      ) : (
-        ""
-      )}
+      <div className="image">
+        {!!dataForm.carId.value.thumbnail && (
+          <Image thumbnail={dataForm.carId.value.thumbnail} />
+        )}
+      </div>
       <OrderCardInput
         dataForm={dataForm}
-        type="select"
-        id
-        name="carId"
+        typeInput="select"
+        isId
+        id="carId"
         text="Модель"
         handleChange={handleSelect}
         array={models}
       />
       <OrderCardInput
         dataForm={dataForm}
-        type="select"
-        id
-        name="pointId"
+        typeInput="select"
+        isId
+        id="pointId"
         text="Пункт"
+        view={viewPoint}
         handleChange={handleSelect}
         array={points}
       />
-      {dataForm.carId && dataForm.carId.colors.length ? (
+      {dataForm.carId.value.id && dataForm.carId.value.colors.length ? (
         <OrderCardInput
           dataForm={dataForm}
-          type="select"
-          name="color"
+          typeInput="select"
+          id="color"
           text="Цвет машины"
-          handleChange={handleSelect}
-          array={points}
+          handleChange={handleDataForm}
+          array={dataForm.carId.value.colors}
         />
       ) : (
         ""

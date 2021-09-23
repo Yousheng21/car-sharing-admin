@@ -1,44 +1,81 @@
 import React from "react";
+import classNames from "classnames";
 
 const OrderCardInput = ({
   array,
   handleChange,
   dataForm,
+  isId,
+  property,
+  typeInput,
   id,
-  type,
-  name,
   text,
+  view,
+  onBlur,
+  viewError,
+  blur,
 }) => {
-  switch (type) {
+  const viewText = (item) => {
+    if (isId) {
+      if (item.name) return item.name;
+      return item[property].name;
+    }
+    return item;
+  };
+  const handleInputChange = (event) => {
+    const { name, value } = event.currentTarget;
+    if (isId) handleChange(event, array);
+    else handleChange(name, value, value);
+  };
+
+  switch (typeInput) {
     case "select":
       return (
         <div className="select">
           <h5>{text}</h5>
-          <select
-            value={id ? dataForm[name].id : dataForm[name]}
-            name={name}
-            onChange={(event) => handleChange(event, array)}
-            id={name}
-          >
-            <option value="">Выберите {text}</option>
-            {array.map((el) => (
-              <option key={id ? el.id : el} value={id ? el.id : el}>
-                {id ? el.name : el}
-              </option>
-            ))}
-          </select>
+          <div>
+            <select
+              value={isId ? dataForm[id].value.id : dataForm[id].value}
+              name={id}
+              onChange={handleInputChange}
+              id={id}
+              className={classNames({
+                error: isId ? !dataForm[id].value.id : !dataForm[id].value,
+              })}
+            >
+              <option value="">Выберите {text}</option>
+              {array.map((item) => (
+                <option
+                  key={isId ? item.id : item}
+                  value={isId ? item.id : item}
+                >
+                  {view ? view(item) : viewText(item)}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       );
     case "number":
       return (
-        <input
-          className="number"
-          type="number"
-          onChange={handleChange}
-          value={dataForm[name]}
-          name={name}
-          id={name}
-        />
+        <label className="number" htmlFor={id}>
+          <h5>{text}</h5>
+          <input
+            className={classNames({
+              number: true,
+              error: !dataForm[id].inputValid,
+            })}
+            type="number"
+            onChange={handleInputChange}
+            value={dataForm[id].value}
+            name={id}
+            id={id}
+            onBlur={() => onBlur(true)}
+          />
+          {blur && !dataForm[id].inputValid && (
+            <span className="error">{viewError}</span>
+          )}
+        </label>
       );
     default:
       break;

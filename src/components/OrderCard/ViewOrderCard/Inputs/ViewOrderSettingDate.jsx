@@ -5,52 +5,57 @@ const ViewOrderSettingDate = ({ dataForm, handleDataForm }) => {
   const { dateFrom, dateTo } = dataForm;
 
   function handleDateFrom(date) {
-    handleDataForm("dateFrom", date.getTime());
+    handleDataForm("dateFrom", date.getTime(), true);
   }
 
   useEffect(() => {
-    const nextDate = new Date(dateFrom);
-    nextDate.setMinutes(nextDate.getMinutes() + 30);
-    if (dateTo <= dateFrom) {
-      handleDataForm("dateTo", nextDate.getTime());
+    if (dateFrom.value) {
+      const nextDate = new Date(dateFrom.value);
+      nextDate.setMinutes(nextDate.getMinutes() + 30);
+      if (dateTo.value < dateFrom.value) {
+        handleDataForm("dateTo", nextDate.getTime(), true);
+      }
     }
-  }, [dateFrom]);
+  }, [dateFrom.value]);
 
   function handleDateTo(date) {
-    handleDataForm("dateTo", date.getTime());
+    handleDataForm("dateTo", date.getTime(), true);
   }
 
   const filterPassedTimeTo = (time) => {
     const selectedDate = new Date(time);
-    return selectedDate.getTime() > dateFrom.getTime();
+    return selectedDate.getTime() > new Date(dateFrom.value).getTime();
   };
   return (
-    <div>
-      <h1>Дата аренды</h1>
-      <div className="extra-date">
+    <div className="date-range">
+      <div>
         <section className="city-content">
-          <span>С</span>
+          <h5>С</h5>
           <InputDate
             onChange={handleDateFrom}
             onClose={() => handleDataForm("dateFrom", 0)}
-            selected={dateFrom}
-            popperPlacement="top-start"
+            selected={dateFrom.value}
+            popperPlacement="bottom-start"
           />
         </section>
         <section className="city-content">
-          <span>По</span>
+          <h5>По</h5>
           <InputDate
             onChange={handleDateTo}
             onClose={() => handleDataForm("dateTo", 0)}
-            minDate={dateFrom}
-            selected={dateTo}
+            minDate={dateFrom.value}
+            selected={dateTo.value}
             filterTime={filterPassedTimeTo}
-            popperPlacement="top-start"
-            disabled={!dateFrom}
+            popperPlacement="bottom-start"
+            disabled={!dateFrom.value}
           />
         </section>
       </div>
-      {/* {!dateIsValid ? "Выберите правильную продолжительность аренды" : ""} */}
+      <span className="error">
+        {!!dateFrom.value &&
+          !dateFrom.inputValid &&
+          "Выберите правильную продолжительность аренды"}
+      </span>
     </div>
   );
 };
