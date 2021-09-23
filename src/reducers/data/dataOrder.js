@@ -1,9 +1,9 @@
 import { orderCloseId, orderCompleteId, orderNewId } from "./api/server";
 
 export const additional = [
-  { name: "Полный бак", key: "isFullTank" },
-  { name: "Детское кресло", key: "isNeedChildChair" },
-  { name: "Правый руль", key: "isRightWheel" },
+  { name: "Полный бак", price: 500, key: "isFullTank" },
+  { name: "Детское кресло", price: 200, key: "isNeedChildChair" },
+  { name: "Правый руль", price: 1600, key: "isRightWheel" },
 ];
 
 export const arrOrderStatus = [
@@ -14,32 +14,30 @@ export const arrOrderStatus = [
 
 export const dataFormOrder = {
   orderStatusId: {
-    id: "",
-    name: "",
+    value: { id: "", name: "" },
+    inputValid: false,
   },
   cityId: {
-    name: "",
-    id: "",
+    value: { name: "", id: "" },
+    inputValid: false,
   },
   pointId: {
-    name: "",
-    id: "",
+    value: { name: "", id: "" },
+    inputValid: false,
   },
   carId: {
-    thumbnail: null,
-    name: "",
-    id: "",
-    colors: "",
+    value: { thumbnail: null, name: "", id: "", colors: "" },
+    inputValid: false,
   },
-  color: "",
-  dateFrom: 0,
-  dateTo: 0,
+  color: { value: "", inputValid: true },
+  dateFrom: { value: 0, inputValid: false },
+  dateTo: { value: 0, inputValid: false },
   rateId: {
-    price: 0,
-    id: "",
+    value: { price: 0, id: "" },
+    inputValid: false,
   },
-  price: 0,
-  isFullTank: false,
-  isNeedChildChair: false,
-  isRightWheel: false,
+  price: { value: 0, inputValid: false },
+  isFullTank: { value: false, inputValid: true },
+  isNeedChildChair: { value: false, inputValid: true },
+  isRightWheel: { value: false, inputValid: true },
 };
