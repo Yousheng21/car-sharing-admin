@@ -20,6 +20,7 @@ const EntitiesLayout = ({
   titleLoader,
   viewEntities,
   handleDelete,
+  linkRefactor,
 }) => {
   const dispatch = useDispatch();
 
@@ -79,6 +80,7 @@ const EntitiesLayout = ({
         paginate={paginate}
       />
       <Entity
+        linkRefactor={linkRefactor}
         handleDelete={handleDelete}
         viewEntities={viewEntities}
         entities={entities}
