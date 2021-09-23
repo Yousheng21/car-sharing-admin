@@ -1,7 +1,9 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 import ru from "date-fns/locale/ru";
+import "./inputDate.scss";
 import "react-datepicker/dist/react-datepicker.css";
+import Delete from "../../../../images/Delete.svg";
 
 const InputDate = ({
   minDate,
@@ -29,8 +31,8 @@ const InputDate = ({
         locale={ru}
         disabled={disabled}
       />
-      <button type="button" onClick={onClose} className="btn-close open">
-        {}
+      <button type="button" onClick={onClose}>
+        <Delete />
       </button>
     </div>
   );

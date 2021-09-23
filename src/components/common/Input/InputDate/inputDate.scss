@@ -1,0 +1,17 @@
+.extra-date-range{
+  .react-datepicker-popper{
+    width: 400px;
+  }
+  input:disabled{
+    border: 1px red solid;
+    cursor: not-allowed;
+  }
+  button{
+    border: none;
+    background: none;
+    padding: 0;
+    svg path{
+      fill: black;
+    }
+  }
+}
