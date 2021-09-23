@@ -4,7 +4,13 @@ import { useSelector } from "react-redux";
 import Preloader from "../../../common/Preloader/Preloader";
 import EntityList from "./EntityList";
 
-const Entity = ({ viewEntities, entities, children, handleDelete }) => {
+const Entity = ({
+  viewEntities,
+  entities,
+  children,
+  handleDelete,
+  linkRefactor,
+}) => {
   const isUpdated = useSelector((state) => state.app.isUpdated);
 
   if (isUpdated) return <Preloader title="Обновление..." />;
@@ -13,7 +19,12 @@ const Entity = ({ viewEntities, entities, children, handleDelete }) => {
   return (
     <section className="list">
       {viewEntities.map((entity) => (
-        <EntityList handleDelete={handleDelete} key={entity.id} entity={entity}>
+        <EntityList
+          linkRefactor={linkRefactor}
+          handleDelete={handleDelete}
+          key={entity.id}
+          entity={entity}
+        >
           {children}
         </EntityList>
       ))}
