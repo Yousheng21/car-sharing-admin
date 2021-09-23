@@ -45,7 +45,7 @@ const App = () => {
           render={() => <PointList page={4} />}
         />
         <Route
-          path="/car-sharing-admin/orderCard"
+          path="/car-sharing-admin/orderCard/:id?"
           render={(props) => <OrderCard match={props.match} page={2} />}
         />
       </Switch>
