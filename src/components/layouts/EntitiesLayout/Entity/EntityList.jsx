@@ -3,7 +3,7 @@ import "./entity.scss";
 import Buttons from "../../../common/Buttons/Buttons";
 import Modal from "../../../common/Modal/Modal";
 
-const EntityList = ({ entity, children, handleDelete }) => {
+const EntityList = ({ entity, children, handleDelete, linkRefactor }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
   const childrenWithExtraProp = React.Children.map(children, (child) => {
     return React.cloneElement(child, { entity });
@@ -11,7 +11,10 @@ const EntityList = ({ entity, children, handleDelete }) => {
   return (
     <section className="list-entity">
       {childrenWithExtraProp}
-      <Buttons setModal={setModalIsActive} link={`cardCar/${entity.id}`} />
+      <Buttons
+        setModal={setModalIsActive}
+        link={`${linkRefactor}/${entity.id}`}
+      />
       <Modal active={modalIsActive}>
         <h1>Подтвердите удаление</h1>
         <div>
