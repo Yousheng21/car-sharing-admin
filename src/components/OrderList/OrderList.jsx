@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./orderList.scss";
 import { useDispatch, useSelector } from "react-redux";
 import AppLayout from "../layouts/AppLayout/AppLayout";
-import getOrders from "../../actions/order";
+import getOrders, { setOrderTable } from "../../actions/order";
 import Order from "./Order/Order";
 import getCities from "../../actions/city";
 import getCarModels from "../../actions/car";
@@ -17,7 +17,7 @@ const OrderList = ({ page }) => {
 
   const cities = useSelector((state) => state.app.cities);
   const models = useSelector((state) => state.app.models);
-
+  const orderId = useSelector((state) => state.app.orderId);
   const orders = useSelector((state) => state.app.orders);
   const newOrders = useSelector((state) => state.app.newOrders);
 
@@ -42,13 +42,22 @@ const OrderList = ({ page }) => {
   const handleClick = (filters) => {
     dispatch(getOrders(filters));
   };
+  const handleDelete = (id) => {
+    dispatch(setOrderTable("DELETE", {}, id));
+  };
 
   const reset = () => {
     dispatch(getOrders());
   };
 
   return (
-    <AppLayout title="Заказы" page={page}>
+    <AppLayout
+      entity="Заказ"
+      kind
+      entityId={orderId}
+      title="Заказы"
+      page={page}
+    >
       <EntitiesLayout
         className="order-list"
         dropdown={dropdown}
@@ -61,6 +70,8 @@ const OrderList = ({ page }) => {
         reset={reset}
         titleLoader="Загрузка заказов..."
         viewEntities={currentOrders}
+        linkRefactor="orderCard"
+        handleDelete={handleDelete}
       >
         <Order orders={currentOrders} />
       </EntitiesLayout>
