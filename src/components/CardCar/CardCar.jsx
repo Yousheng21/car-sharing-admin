@@ -3,11 +3,15 @@ import "./cardCar.scss";
 import { useDispatch, useSelector } from "react-redux";
 import AppLayout from "../layouts/AppLayout/AppLayout";
 import Settings from "./Settings/Settings";
-import getCarModels, { getCarModelObj, getCategories } from "../../actions/car";
+import getCarModels, {
+  getCategories,
+  requestCarModel,
+} from "../../actions/car";
 import Card from "./Card";
 import RefactorEntitiesLayout from "../layouts/RefactorEntitiesLayout/RefactorEntitiesLayout";
 import { useInput } from "../../utils/Validator/useInput";
 import { dataFormCar } from "../../reducers/data/dataCar";
+import { getRequestObj } from "../../actions/app";
 
 const CardCar = ({ page, match }) => {
   const { id } = match.params;
@@ -95,7 +99,7 @@ const CardCar = ({ page, match }) => {
   };
 
   const handleRequest = (method, modelId) => {
-    return getCarModelObj(method, dataForm, modelId);
+    return dispatch(requestCarModel(method, getRequestObj(dataForm), modelId));
   };
 
   useEffect(() => {
@@ -128,7 +132,8 @@ const CardCar = ({ page, match }) => {
 
   return (
     <AppLayout
-      id={currModelId}
+      id={id}
+      entityId={currModelId}
       entity="Машина"
       title="Карточка автомобиля"
       page={page}
