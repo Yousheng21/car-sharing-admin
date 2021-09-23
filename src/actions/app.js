@@ -113,6 +113,20 @@ export const getBase64 = (file) => {
   });
 };
 
+export const getRequestObj = (obj) => {
+  let result = { ...obj };
+  const handleObjCar = (key) => {
+    result = {
+      ...result,
+      [key]: obj[key].value,
+    };
+  };
+  Object.keys(obj).forEach((item) => {
+    return handleObjCar(item);
+  });
+  return result;
+};
+
 export const getUrl = (params) => {
   let requestUrl = "?";
   Object.keys(params).map((param) => {
