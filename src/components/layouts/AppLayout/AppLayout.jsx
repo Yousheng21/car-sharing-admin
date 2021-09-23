@@ -10,7 +10,7 @@ import Check from "../../../images/Check Icon.svg";
 import TooltipText from "./TooltipText";
 import Delete from "../../../images/Delete.svg";
 
-const AppLayout = ({ children, title, page, entity, kind, id }) => {
+const AppLayout = ({ children, title, page, entity, kind, id, entityId }) => {
   const dispatch = useDispatch();
 
   const [viewTooltip, setViewTooltip] = useState(!!id);
@@ -49,7 +49,7 @@ const AppLayout = ({ children, title, page, entity, kind, id }) => {
               entity={entity}
               kind={kind}
               tooltip={tooltip}
-              id={id}
+              id={id ?? entityId}
             />
           </span>
           <button type="button" onClick={() => dispatch(setTooltip("", ""))}>
