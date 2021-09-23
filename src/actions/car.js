@@ -66,18 +66,4 @@ export const requestCarModel = (method, req, id) => {
   };
 };
 
-export const getCarModelObj = (method, obj, id) => {
-  let result = { ...obj };
-  const handleObjCar = (key) => {
-    result = {
-      ...result,
-      [key]: obj[key].value,
-    };
-  };
-  Object.keys(obj).forEach((item) => {
-    return handleObjCar(item);
-  });
-  store.dispatch(requestCarModel(method, result, id));
-};
-
 export default getCarModels;

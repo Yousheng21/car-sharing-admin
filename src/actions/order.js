@@ -40,7 +40,7 @@ export const setOrderTable = (method, req, id) => {
   return async (dispatch) => {
     try {
       const response = await instance({
-        method: "POST",
+        method,
         url: `/api/db/order/${id || ""}`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -49,6 +49,7 @@ export const setOrderTable = (method, req, id) => {
       });
       dispatch(setOrderId(response.data.data.id ?? id));
       dispatch(setIsUpdated(true));
+      dispatch(getOrders());
       dispatch(setTooltip("success", method));
     } catch (e) {
       dispatch(setTooltip("error", ""));
