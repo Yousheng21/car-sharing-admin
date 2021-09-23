@@ -19,6 +19,7 @@ const CarList = ({ page }) => {
   const models = useSelector((state) => state.app.models);
   const newModels = useSelector((state) => state.app.newModels);
   const categories = useSelector((state) => state.app.categories);
+  const currModelId = useSelector((state) => state.app.curModelId);
 
   const [currentModels, setCurrentModels] = useState([]);
 
@@ -47,7 +48,12 @@ const CarList = ({ page }) => {
   };
 
   return (
-    <AppLayout entity="Машина" title="Список авто" page={page}>
+    <AppLayout
+      entity="Машина"
+      entityId={currModelId}
+      title="Список авто"
+      page={page}
+    >
       <EntitiesLayout
         className="car-list"
         dropdown={dropdown}
@@ -61,6 +67,7 @@ const CarList = ({ page }) => {
         reset={handleReset}
         titleLoader="Загрузка автомобилей..."
         handleDelete={handleDelete}
+        linkRefactor="cardCar"
       >
         <Car />
       </EntitiesLayout>
