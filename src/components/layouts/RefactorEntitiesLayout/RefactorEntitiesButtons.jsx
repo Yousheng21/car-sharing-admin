@@ -41,7 +41,7 @@ const RefactorEntitiesButtons = ({
       <button
         disabled={handleDisable()}
         onClick={() => handleRequest("POST")}
-        className="edit"
+        className="edit add"
         type="button"
       >
         Добавить

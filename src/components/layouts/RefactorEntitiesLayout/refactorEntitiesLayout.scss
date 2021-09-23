@@ -24,6 +24,9 @@
         &:disabled{
           opacity: 0.4;
         }
+        &.add {
+          background-color: $color-btn-add;
+        }
       }
       &.back{
         color: black;
