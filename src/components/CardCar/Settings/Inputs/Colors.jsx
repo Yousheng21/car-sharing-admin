@@ -101,9 +101,7 @@ const Colors = ({ colors, handleDataForm }) => {
           </label>
         ))}
         <span className="error">
-          {currColor.isDirty && !colors.length
-            ? "Введите хотя бы один цвет"
-            : ""}
+          {currColor.isDirty && !colors.length && "Введите хотя бы один цвет"}
         </span>
       </div>
     </div>

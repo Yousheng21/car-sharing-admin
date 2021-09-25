@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./cardCar.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import AppLayout from "../layouts/AppLayout/AppLayout";
 import Settings from "./Settings/Settings";
 import getCarModels, {
@@ -12,14 +12,13 @@ import RefactorEntitiesLayout from "../layouts/RefactorEntitiesLayout/RefactorEn
 import { useInput } from "../../utils/Validator/useInput";
 import { dataFormCar } from "../../reducers/data/dataCar";
 import { getRequestObj } from "../../actions/app";
+import ListSelector from "../../utils/listSelector";
 
 const CardCar = ({ page, match }) => {
   const { id } = match.params;
   const dispatch = useDispatch();
 
-  const categories = useSelector((state) => state.app.categories);
-  const models = useSelector((state) => state.app.models);
-  const currModelId = useSelector((state) => state.app.curModelId);
+  const { categories, models, currModelId } = ListSelector();
 
   const [stateMax, setStateMax] = useState(100000);
   const [stateMin, setStateMin] = useState(0);
@@ -91,17 +90,6 @@ const CardCar = ({ page, match }) => {
     });
   };
 
-  const handleReset = () => {
-    Object.keys(dataForm).forEach((key) => {
-      if (dataForm[key].setValue) handleDataForm(key, dataFormCar[key], false);
-      else dataForm[key].setChange(dataFormCar[key]);
-    });
-  };
-
-  const handleRequest = (method, modelId) => {
-    return dispatch(requestCarModel(method, getRequestObj(dataForm), modelId));
-  };
-
   useEffect(() => {
     if (id && models.length) {
       const model = models.filter((item) => item.id === id)[0];
@@ -129,6 +117,17 @@ const CardCar = ({ page, match }) => {
     if (!categories.length) dispatch(getCategories());
     if (!models.length) dispatch(getCarModels());
   }, [categories.length, models.length]);
+
+  const handleReset = () => {
+    Object.keys(dataForm).forEach((key) => {
+      if (dataForm[key].setValue) handleDataForm(key, dataFormCar[key], false);
+      else dataForm[key].setChange(dataFormCar[key]);
+    });
+  };
+
+  const handleRequest = (method, modelId) => {
+    return dispatch(requestCarModel(method, getRequestObj(dataForm), modelId));
+  };
 
   return (
     <AppLayout

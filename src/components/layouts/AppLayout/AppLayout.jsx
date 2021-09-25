@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./appLayout.scss";
 import classNames from "classnames";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import NavBar from "../../common/NavBar/NavBar";
 import Header from "../../common/Header/Header";
 import Footer from "../../common/Footer/Footer";
@@ -9,13 +9,14 @@ import { setTooltip } from "../../../reducers/appReducer";
 import Check from "../../../images/Check Icon.svg";
 import TooltipText from "./TooltipText";
 import Delete from "../../../images/Delete.svg";
+import ListSelector from "../../../utils/listSelector";
 
 const AppLayout = ({ children, title, page, entity, kind, id, entityId }) => {
   const dispatch = useDispatch();
 
   const [viewTooltip, setViewTooltip] = useState(!!id);
 
-  const tooltip = useSelector((state) => state.app.tooltip);
+  const { tooltip } = ListSelector();
 
   useEffect(() => {
     if (tooltip.type) {

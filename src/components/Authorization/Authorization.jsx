@@ -1,16 +1,17 @@
 import React from "react";
 import "./authorization.scss";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Logo from "../../images/Logo Icon.svg";
 import Input from "../common/Input/Input";
 import { useInput } from "../../utils/Validator/useInput";
 import { login } from "../../actions/login";
+import ListSelector from "../../utils/listSelector";
 
 const Authorization = () => {
   const dispatch = useDispatch();
 
-  const isErrorForm = useSelector((state) => state.user.isErrorAuth);
+  const { isErrorAuth } = ListSelector();
 
   const email = useInput("", {
     isEmpty: { value: true, text: "Пустое поле" },
@@ -71,7 +72,7 @@ const Authorization = () => {
           </section>
         </form>
         <span className="error">
-          {isErrorForm.value ? isErrorForm.text : ""}
+          {isErrorAuth.value ? isErrorAuth.text : ""}
         </span>
       </main>
     </div>

@@ -1,6 +1,6 @@
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Authorization from "./Authorization/Authorization";
 import OrderList from "./OrderList/OrderList";
 import CardCar from "./CardCar/CardCar";
@@ -8,11 +8,13 @@ import CarList from "./CarList/CarList";
 import { auth } from "../actions/login";
 import PointList from "./PointList/PointList";
 import OrderCard from "./OrderCard/OrderCard";
+import ListSelector from "../utils/listSelector";
 
 const App = () => {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.user.isAuth);
   const [token, setToken] = useState("");
+
+  const { isAuth } = ListSelector();
 
   useEffect(() => {
     if (token) dispatch(auth());

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./orderList.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import AppLayout from "../layouts/AppLayout/AppLayout";
 import getOrders, { setOrderTable } from "../../actions/order";
 import Order from "./Order/Order";
@@ -8,19 +8,16 @@ import getCities from "../../actions/city";
 import getCarModels from "../../actions/car";
 import { getDropdownOrder } from "../../actions/app";
 import EntitiesLayout from "../layouts/EntitiesLayout/EntitiesLayout";
+import ListSelector from "../../utils/listSelector";
+
+const orderPerPage = 5;
 
 const OrderList = ({ page }) => {
   const dispatch = useDispatch();
 
-  const [orderPerPage] = useState(5);
+  const { cities, models, orderId, orders, newOrders } = ListSelector();
+
   const [dropdown, setDropdown] = useState([]);
-
-  const cities = useSelector((state) => state.app.cities);
-  const models = useSelector((state) => state.app.models);
-  const orderId = useSelector((state) => state.app.orderId);
-  const orders = useSelector((state) => state.app.orders);
-  const newOrders = useSelector((state) => state.app.newOrders);
-
   const [currentOrders, setCurrentOrders] = useState(
     orders.slice(0, orderPerPage)
   );
@@ -46,7 +43,7 @@ const OrderList = ({ page }) => {
     dispatch(setOrderTable("DELETE", {}, id));
   };
 
-  const reset = () => {
+  const handleReset = () => {
     dispatch(getOrders());
   };
 
@@ -67,7 +64,7 @@ const OrderList = ({ page }) => {
         handleClick={handleClick}
         stateFilters="filtersOrder"
         perPage={orderPerPage}
-        reset={reset}
+        reset={handleReset}
         titleLoader="Загрузка заказов..."
         viewEntities={currentOrders}
         linkRefactor="orderCard"

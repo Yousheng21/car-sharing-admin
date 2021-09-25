@@ -14,9 +14,11 @@ const Filters = ({
 }) => {
   const dispatch = useDispatch();
 
-  const handleFiltersClick = () => {
+  const handleFiltersClick = (reset) => {
     dispatch(setIsUpdated(true));
     paginate(1);
+    if (reset) resetFilters();
+    else handleClick(dataForm);
   };
 
   return (
@@ -35,19 +37,13 @@ const Filters = ({
       <div className="parameters-buttons">
         <button
           type="button"
-          onClick={() => {
-            handleFiltersClick();
-            resetFilters();
-          }}
+          onClick={() => handleFiltersClick(true)}
           className="btn reset"
         >
           Сбросить
         </button>
         <button
-          onClick={() => {
-            handleFiltersClick();
-            handleClick(dataForm);
-          }}
+          onClick={() => handleFiltersClick()}
           type="button"
           className="btn apply"
         >

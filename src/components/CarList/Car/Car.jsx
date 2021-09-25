@@ -31,20 +31,16 @@ const Car = ({ entity }) => {
           )}
           <br />
         </span>
-        {entity.tank ? (
+        {!!entity.tank && (
           <span>
             Топливо: <span className="info-title">{entity.tank}%</span>
             <br />
           </span>
-        ) : (
-          ""
         )}
-        {entity.number ? (
+        {!!entity.number && (
           <span>
             Номер: <span className="info-title">{entity.number}</span>
           </span>
-        ) : (
-          ""
         )}
       </div>
       <div className="price">

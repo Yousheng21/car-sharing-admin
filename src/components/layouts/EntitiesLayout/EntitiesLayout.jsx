@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Filters from "./Filters/Filters";
 import Pagination from "./Pagination/Pagination";
 import Preloader from "../../common/Preloader/Preloader";
 import { setCurrentPage, setFilters } from "../../../reducers/appReducer";
 import Entity from "./Entity/Entity";
+import { getPaginateNumber } from "../../../actions/pagination";
 
 const EntitiesLayout = ({
   children,
@@ -24,6 +25,8 @@ const EntitiesLayout = ({
 }) => {
   const dispatch = useDispatch();
 
+  const [text, setText] = useState([]);
+
   const currentPage = useSelector(
     (state) => state.app.currentPage[stateFilters]
   );
@@ -34,6 +37,12 @@ const EntitiesLayout = ({
     const indexOfFirstOrder = indexOfLastOrder - perPage;
     setEntities(entities.slice(indexOfFirstOrder, indexOfLastOrder));
   }, [entities, currentPage]);
+
+  useEffect(() => {
+    setText(
+      getPaginateNumber(currentPage, Math.ceil(entities.length / perPage))
+    );
+  }, [entities.length, currentPage]);
 
   const paginate = (pageNumber) => {
     dispatch(setCurrentPage(stateFilters, pageNumber));
@@ -87,14 +96,15 @@ const EntitiesLayout = ({
       >
         {children}
       </Entity>
-      <Pagination
-        page={currentPage}
-        orders={entities}
-        perPage={perPage}
-        next={next}
-        prev={prev}
-        paginate={paginate}
-      />
+      {!!text.length && (
+        <Pagination
+          page={currentPage}
+          next={next}
+          prev={prev}
+          text={text}
+          paginate={paginate}
+        />
+      )}
     </main>
   );
 };

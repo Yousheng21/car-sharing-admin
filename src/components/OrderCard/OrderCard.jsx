@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import RefactorEntitiesLayout from "../layouts/RefactorEntitiesLayout/RefactorEntitiesLayout";
 import AppLayout from "../layouts/AppLayout/AppLayout";
 import { setOrderTable } from "../../actions/order";
@@ -11,17 +11,14 @@ import getCarModels from "../../actions/car";
 import getTariffs from "../../actions/tariff";
 import getPoints from "../../actions/point";
 import { getRequestObj } from "../../actions/app";
+import ListSelector from "../../utils/listSelector";
 
 const OrderCard = ({ page, match }) => {
   const dispatch = useDispatch();
   const { id } = match.params;
   const [dataForm, setDataForm] = useState(dataFormOrder);
 
-  const orderId = useSelector((state) => state.app.orderId);
-  const models = useSelector((state) => state.app.models);
-  const orders = useSelector((state) => state.app.orders);
-  const points = useSelector((state) => state.app.points);
-  const tariffs = useSelector((state) => state.app.tariffs);
+  const { orderId, models, orders, points, tariffs } = ListSelector();
 
   useEffect(() => {
     if (!models.length) dispatch(getCarModels());

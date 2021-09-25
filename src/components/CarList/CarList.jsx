@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./carList.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import AppLayout from "../layouts/AppLayout/AppLayout";
 import EntitiesLayout from "../layouts/EntitiesLayout/EntitiesLayout";
 import getCarModels, {
@@ -9,19 +9,17 @@ import getCarModels, {
 } from "../../actions/car";
 import { getDropdownCar } from "../../actions/app";
 import Car from "./Car/Car";
+import ListSelector from "../../utils/listSelector";
+
+const modelsPerPage = 5;
 
 const CarList = ({ page }) => {
   const dispatch = useDispatch();
 
-  const [modelsPerPage] = useState(5);
   const [dropdown, setDropdown] = useState([]);
-
-  const models = useSelector((state) => state.app.models);
-  const newModels = useSelector((state) => state.app.newModels);
-  const categories = useSelector((state) => state.app.categories);
-  const currModelId = useSelector((state) => state.app.curModelId);
-
   const [currentModels, setCurrentModels] = useState([]);
+
+  const { models, newModels, categories, currModelId } = ListSelector();
 
   useEffect(() => {
     if (!models.length) {

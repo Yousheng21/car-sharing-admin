@@ -1,8 +1,8 @@
 import React from "react";
 import "./entity.scss";
-import { useSelector } from "react-redux";
 import Preloader from "../../../common/Preloader/Preloader";
 import EntityList from "./EntityList";
+import ListSelector from "../../../../utils/listSelector";
 
 const Entity = ({
   viewEntities,
@@ -11,7 +11,7 @@ const Entity = ({
   handleDelete,
   linkRefactor,
 }) => {
-  const isUpdated = useSelector((state) => state.app.isUpdated);
+  const { isUpdated } = ListSelector();
 
   if (isUpdated) return <Preloader title="Обновление..." />;
   if (!entities.length)
