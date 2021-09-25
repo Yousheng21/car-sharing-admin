@@ -1,13 +1,8 @@
 import { instance } from "../reducers/data/api/server";
-import {
-  setIsUpdated,
-  setNewOrders,
-  setOrderId,
-  setOrders,
-  setTooltip,
-} from "../reducers/appReducer";
+import { setIsUpdated, setTooltip } from "../reducers/appReducer";
 import { store } from "../reducers";
 import { getUrl } from "./app";
+import { setNewOrders, setOrderId, setOrders } from "../reducers/orderReducer";
 
 const getOrders = (parameters) => {
   const { accessToken } = store.getState().user.user;

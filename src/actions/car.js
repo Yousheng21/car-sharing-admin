@@ -1,14 +1,13 @@
 import { instance } from "../reducers/data/api/server";
+import { setIsUpdated, setTooltip } from "../reducers/appReducer";
+import { getUrl } from "./app";
+import { store } from "../reducers";
 import {
   setCarModelId,
   setCategories,
-  setIsUpdated,
   setModels,
   setNewModels,
-  setTooltip,
-} from "../reducers/appReducer";
-import { getUrl } from "./app";
-import { store } from "../reducers";
+} from "../reducers/carReducer";
 
 const getCarModels = (parameters) => {
   return async (dispatch) => {

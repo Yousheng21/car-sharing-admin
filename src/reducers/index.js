@@ -4,6 +4,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import userReducer from "./userReducer";
 import appReducer from "./appReducer";
+import pointReducer from "./pointReducer";
+import carReducer from "./carReducer";
+import orderReducer from "./orderReducer";
 
 export default function saveToLocalStorage(name, state) {
   try {
@@ -27,6 +30,9 @@ export function loadFromLocalStorage(name) {
 const rootReducer = combineReducers({
   user: userReducer,
   app: appReducer,
+  car: carReducer,
+  order: orderReducer,
+  point: pointReducer,
 });
 
 export const store = createStore(

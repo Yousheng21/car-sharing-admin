@@ -1,5 +1,5 @@
 import { instance } from "../reducers/data/api/server";
-import { setTariffs } from "../reducers/appReducer";
+import { setTariffs } from "../reducers/orderReducer";
 
 const getTariffs = () => {
   return async (dispatch) => {

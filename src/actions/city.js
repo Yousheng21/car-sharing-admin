@@ -1,5 +1,5 @@
 import { instance } from "../reducers/data/api/server";
-import { setCities } from "../reducers/appReducer";
+import { setCities } from "../reducers/pointReducer";
 
 const getCities = () => {
   return async (dispatch) => {
