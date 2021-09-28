@@ -39,24 +39,20 @@ const Authorization = () => {
           }}
         >
           <Input
+            title="Логин"
             id="username"
-            value={email.value}
-            onBlur={email.onBlur}
-            placeholder="Введите логин..."
             type="text"
-            label="Логин"
-            setValue={email.onChange}
-            error={email.isDirty && email.printError(["isEmpty", "emailError"])}
+            arrValid={["isEmpty"]}
+            objInput={email}
+            necessarily
           />
           <Input
+            title="Пароль"
             id="password"
-            value={password.value}
-            onBlur={password.onBlur}
-            placeholder="Введите пароль..."
             type="password"
-            label="Пароль"
-            setValue={password.onChange}
-            error={password.isDirty && password.printError(["isEmpty"])}
+            arrValid={["isEmpty"]}
+            objInput={password}
+            necessarily
           />
           <section className="auth-footer">
             <a className="link-primary" href="/car-sharing-admin">
