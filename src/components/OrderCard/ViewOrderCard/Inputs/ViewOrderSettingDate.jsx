@@ -5,7 +5,7 @@ const ViewOrderSettingDate = ({ dataForm, handleDataForm }) => {
   const { dateFrom, dateTo } = dataForm;
 
   function handleDateFrom(date) {
-    handleDataForm("dateFrom", date.getTime(), true);
+    dataForm.dateFrom.setChange(date.getTime());
   }
 
   useEffect(() => {
@@ -13,24 +13,25 @@ const ViewOrderSettingDate = ({ dataForm, handleDataForm }) => {
       const nextDate = new Date(dateFrom.value);
       nextDate.setMinutes(nextDate.getMinutes() + 30);
       if (dateTo.value < dateFrom.value) {
-        handleDataForm("dateTo", nextDate.getTime(), true);
+        dataForm.dateTo.setChange(nextDate.getTime());
       }
     }
   }, [dateFrom.value]);
 
   function handleDateTo(date) {
-    handleDataForm("dateTo", date.getTime(), true);
+    dataForm.dateTo.setChange(date.getTime());
   }
 
   const filterPassedTimeTo = (time) => {
     const selectedDate = new Date(time);
     return selectedDate.getTime() > new Date(dateFrom.value).getTime();
   };
+
   return (
     <div className="date-range">
       <div>
         <section className="city-content">
-          <h5>С</h5>
+          <h6 className="necess">С</h6>
           <InputDate
             onChange={handleDateFrom}
             onClose={() => handleDataForm("dateFrom", 0)}
@@ -39,7 +40,7 @@ const ViewOrderSettingDate = ({ dataForm, handleDataForm }) => {
           />
         </section>
         <section className="city-content">
-          <h5>По</h5>
+          <h6 className="necess">По</h6>
           <InputDate
             onChange={handleDateTo}
             onClose={() => handleDataForm("dateTo", 0)}
@@ -52,8 +53,8 @@ const ViewOrderSettingDate = ({ dataForm, handleDataForm }) => {
         </section>
       </div>
       <span className="error">
-        {!!dateFrom.value &&
-          !dateFrom.inputValid &&
+        {!!dateTo.value &&
+          !dateTo.inputValid &&
           "Выберите правильную продолжительность аренды"}
       </span>
     </div>

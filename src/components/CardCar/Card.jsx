@@ -15,11 +15,11 @@ const ImgCard = ({ thumbnail }) => {
   return <Image thumbnail={thumbnail} />;
 };
 
-const Card = ({ dataForm, handleDataForm }) => {
+const Card = ({ dataForm }) => {
   const [activeModal, setActiveModal] = useState(false);
 
   const onImageChange = async (event) => {
-    const { files, name } = event.target;
+    const { files } = event.target;
     if (files && files[0] && files[0].type.split("/")[0] === "image") {
       setActiveModal(false);
 
@@ -32,7 +32,7 @@ const Card = ({ dataForm, handleDataForm }) => {
         path: urlImage,
         localPath: URL.createObjectURL(files[0]),
       };
-      handleDataForm(name, value, value.path);
+      dataForm.thumbnail.setChange(value);
     } else setActiveModal(true);
   };
 
@@ -60,9 +60,7 @@ const Card = ({ dataForm, handleDataForm }) => {
         <Title title={dataForm.name.value} valid={dataForm.name.inputValid} />
         <Title
           className="category-title"
-          title={
-            dataForm.categoryId.value ? dataForm.categoryId.value.name : ""
-          }
+          title={!!dataForm.categoryId.value && dataForm.categoryId.value.name}
         />
         <div className="card-file">
           <input

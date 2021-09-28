@@ -25,14 +25,16 @@ const OrderCardInput = ({
   const handleInputChange = (event) => {
     const { name, value } = event.currentTarget;
     if (isId) handleChange(event, array);
-    else handleChange(name, value, value);
+    else dataForm[name].setChange(value);
   };
 
   switch (typeInput) {
     case "select":
       return (
         <div className="select">
-          <h5>{text}</h5>
+          <h6 className="necess" title="обязательное поле">
+            {text} *
+          </h6>
           <div>
             <select
               value={isId ? dataForm[id].value.id : dataForm[id].value}
@@ -59,14 +61,16 @@ const OrderCardInput = ({
     case "number":
       return (
         <label className="number" htmlFor={id}>
-          <h5>{text}</h5>
+          <h6 className="necess" title="обязательное поле">
+            {text} *
+          </h6>
           <input
             className={classNames({
               number: true,
               error: !dataForm[id].inputValid,
             })}
             type="number"
-            onChange={handleInputChange}
+            onChange={dataForm[id].onChange}
             value={dataForm[id].value}
             name={id}
             id={id}

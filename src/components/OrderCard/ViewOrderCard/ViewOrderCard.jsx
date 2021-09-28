@@ -2,13 +2,7 @@ import React from "react";
 import Image from "../../common/Image/Image";
 import OrderCardInput from "./Inputs/OrderCardInput";
 
-const ViewOrderCard = ({
-  dataForm,
-  points,
-  handleSelect,
-  handleDataForm,
-  models,
-}) => {
+const ViewOrderCard = ({ dataForm, points, handleSelect, models }) => {
   const viewPoint = (item) => {
     return `${!!item.cityId && item.cityId.name}, ${item.address}`;
   };
@@ -44,7 +38,6 @@ const ViewOrderCard = ({
           typeInput="select"
           id="color"
           text="Цвет машины"
-          handleChange={handleDataForm}
           array={dataForm.carId.value.colors}
         />
       ) : (

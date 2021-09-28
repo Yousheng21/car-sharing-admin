@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./settings.scss";
-import InputSetting from "./Inputs/InputSetting";
 import Colors from "./Inputs/Colors";
+import Input from "../../common/Input/Input";
 
-const Settings = ({ dataForm, handleDataForm, categories }) => {
+const Settings = ({ dataForm, categories }) => {
   const handleCategory = (event) => {
-    const { value, name } = event.currentTarget;
+    const { value } = event.currentTarget;
     const nameCategory = categories.filter((item) => {
       return item.id === value;
     });
@@ -13,24 +13,14 @@ const Settings = ({ dataForm, handleDataForm, categories }) => {
       id: value,
       name: nameCategory[0] ? nameCategory[0].name : "",
     };
-    handleDataForm(name, resultValue, value);
+    dataForm.categoryId.setChange(resultValue);
   };
-
-  useEffect(() => {
-    const { priceMin, priceMax } = dataForm;
-    if (priceMin.value > 0 && priceMin.value < priceMax.value) {
-      priceMin.setInputValid(true);
-      priceMin.setMaxError({ value: false, text: "" });
-      priceMax.setInputValid(true);
-      priceMax.setMinError({ value: false, text: "" });
-    }
-  }, [dataForm.priceMin.value, dataForm.priceMax.value]);
 
   return (
     <section className="settings">
       <h1>Настройки автомобиля</h1>
       <section className="settings-main">
-        <InputSetting
+        <Input
           title="Модель автомобиля"
           id="name"
           type="text"
@@ -61,12 +51,9 @@ const Settings = ({ dataForm, handleDataForm, categories }) => {
             </div>
           </label>
         </div>
-        <Colors
-          handleDataForm={handleDataForm}
-          colors={dataForm.colors.value}
-        />
+        <Colors colors={dataForm.colors} />
         <div className="div-price">
-          <InputSetting
+          <Input
             title="Цена от"
             id="priceMin"
             type="number"
@@ -75,7 +62,7 @@ const Settings = ({ dataForm, handleDataForm, categories }) => {
             className="div-price-min"
             necessarily
           />
-          <InputSetting
+          <Input
             title="Цена до"
             id="priceMax"
             type="number"

@@ -5,20 +5,51 @@ import AppLayout from "../layouts/AppLayout/AppLayout";
 import { setOrderTable } from "../../actions/order";
 import "./orderCard.scss";
 import ViewOrderCard from "./ViewOrderCard/ViewOrderCard";
-import { dataFormOrder } from "../../reducers/data/dataOrder";
+import {
+  dataFormOrder,
+  dataFormOrderWithHook,
+} from "../../reducers/data/dataOrder";
 import ViewOrderSetting from "./ViewOrderCard/ViewOrderSetting";
 import getCarModels from "../../actions/car";
 import getTariffs from "../../actions/tariff";
 import getPoints from "../../actions/point";
 import { getRequestObj } from "../../actions/app";
 import ListSelector from "../../utils/listSelector";
+import { useInput } from "../../utils/Validator/useInput";
 
 const OrderCard = ({ page, match }) => {
   const dispatch = useDispatch();
   const { id } = match.params;
-  const [dataForm, setDataForm] = useState(dataFormOrder);
+
+  const [stateDateFrom, setDateFrom] = useState(0);
+  const [stateMin, setStateMin] = useState(0);
+  const [stateMax, setStateMax] = useState(99999);
 
   const { orderId, models, orders, points, tariffs } = ListSelector();
+
+  const dataForm = {
+    ...dataFormOrderWithHook(),
+    dateTo: useInput(
+      0,
+      {
+        minError: { value: false, text: "", min: stateDateFrom },
+      },
+      [stateDateFrom]
+    ),
+    price: useInput(
+      dataFormOrder.price.value,
+      {
+        isEmpty: { value: false, text: "Введите натуральное число" },
+        rangeError: {
+          value: false,
+          text: `Введите число от ${stateMin} до ${stateMax}`,
+          min: stateMin,
+          max: stateMax,
+        },
+      },
+      [stateMin, stateMax]
+    ),
+  };
 
   useEffect(() => {
     if (!models.length) dispatch(getCarModels());
@@ -26,60 +57,37 @@ const OrderCard = ({ page, match }) => {
     if (!points.length) dispatch(getPoints());
   }, [models.length, points.length, tariffs.length]);
 
-  const handleRequest = (method, requestId) => {
-    return dispatch(setOrderTable(method, getRequestObj(dataForm), requestId));
-  };
-
-  const handleChange = (name, value, valid) => {
-    setDataForm({
-      ...dataForm,
-      [name]: {
-        value,
-        inputValid: !!valid,
-      },
-    });
-  };
-
   useEffect(() => {
-    if (dataForm.pointId.value.id)
-      handleChange("cityId", dataForm.pointId.value.cityId, true);
+    if (dataForm.pointId.value.id && dataForm.pointId.value.cityId)
+      dataForm.cityId.setChange(dataForm.pointId.value.cityId);
   }, [dataForm.pointId.value]);
 
   useEffect(() => {
-    if (dataForm.carId.value.id && dataForm.carId.value.colors.length)
-      handleChange("color", "", false);
+    const { carId, color } = dataForm;
+    if (carId.value.id) {
+      if (carId.value.colors.length) {
+        if (!carId.value.colors.some((item) => item === color.value))
+          color.setChange("");
+      } else color.setChange("Любой");
+      setStateMin(carId.value.priceMin);
+      setStateMax(carId.value.priceMax);
+    }
   }, [dataForm.carId.value]);
 
   useEffect(() => {
-    if (dataForm.dateTo.value <= dataForm.dateFrom.value) {
-      handleChange("dateFrom", dataForm.dateFrom.value, false);
-    } else handleChange("dateFrom", dataForm.dateFrom.value, true);
-  }, [dataForm.dateTo.value]);
+    setDateFrom(dataForm.dateFrom.value);
+  }, [dataForm.dateFrom.value]);
 
-  useEffect(() => {
-    if (id && orders.length) {
-      const stateOrder = { ...dataForm };
-      const order = orders.filter((item) => item.id === id)[0];
-      Object.keys(order).forEach((key) => {
-        stateOrder[key] = {
-          value: order[key] ?? dataFormOrder[key].value,
-          inputValid: order[key] === false ? true : !!order[key],
-        };
-      });
-      setDataForm(stateOrder);
-    }
-  }, [id]);
+  const handleRequest = (method, requestId) => {
+    return dispatch(setOrderTable(method, getRequestObj(dataForm), requestId));
+  };
 
   const handleSelect = (event, array) => {
     const { value, name } = event.currentTarget;
     const element = array.find((item) => {
       return item.id === value;
     });
-    handleChange(name, element ?? dataFormOrder[name], value);
-  };
-
-  const handleReset = () => {
-    setDataForm(dataFormOrder);
+    dataForm[name].setChange(element ?? dataFormOrder[name]);
   };
 
   return (
@@ -95,7 +103,8 @@ const OrderCard = ({ page, match }) => {
         load={!models.length || !points.length || !tariffs.length}
         dataForm={dataForm}
         handleRequest={handleRequest}
-        handleReset={handleReset}
+        stateDataForm={dataFormOrder}
+        entity={orders}
         link="orderList"
         id={id}
       >
@@ -105,10 +114,8 @@ const OrderCard = ({ page, match }) => {
             points={points}
             dataForm={dataForm}
             handleSelect={handleSelect}
-            handleDataForm={handleChange}
           />
           <ViewOrderSetting
-            handleDataForm={handleChange}
             dataForm={dataForm}
             tariffs={tariffs}
             handleSelect={handleSelect}

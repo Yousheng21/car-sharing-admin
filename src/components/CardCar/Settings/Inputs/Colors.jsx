@@ -5,7 +5,7 @@ import Reject from "../../../../images/Delete.svg";
 import { regExpTab } from "../../../../reducers/data/regExp";
 import { useInput } from "../../../../utils/Validator/useInput";
 
-const Colors = ({ colors, handleDataForm }) => {
+const Colors = ({ colors }) => {
   const [activeColor, setActiveColor] = useState(null);
 
   const currColor = useInput("", {
@@ -14,14 +14,14 @@ const Colors = ({ colors, handleDataForm }) => {
 
   const handleClick = () => {
     if (
-      colors.some(
+      colors.value.some(
         (item) =>
           item.replace(regExpTab, "") === currColor.value.replace(regExpTab, "")
       ) ||
       !currColor.value
     )
       return false;
-    handleDataForm("colors", [...colors, currColor.value], colors.length + 1);
+    colors.setChange([...colors.value, currColor.value]);
     currColor.setChange("");
   };
 
@@ -31,12 +31,10 @@ const Colors = ({ colors, handleDataForm }) => {
   };
 
   const handleDelete = (color) => {
-    handleDataForm(
-      "colors",
-      colors.filter((item) => {
+    colors.setChange(
+      colors.value.filter((item) => {
         return item !== color;
-      }),
-      colors.length - 1
+      })
     );
   };
 
@@ -69,7 +67,7 @@ const Colors = ({ colors, handleDataForm }) => {
         {currColor.isDirty && currColor.printError(["isColor"])}
       </span>
       <div className="view-colors">
-        {colors.map((color, index) => (
+        {colors.value.map((color, index) => (
           <label
             key={color}
             onFocus={() => setActiveColor(index)}
@@ -100,9 +98,7 @@ const Colors = ({ colors, handleDataForm }) => {
             </button>
           </label>
         ))}
-        <span className="error">
-          {currColor.isDirty && !colors.length && "Введите хотя бы один цвет"}
-        </span>
+        <span className="error">{colors.printError(["isEmptyArray"])}</span>
       </div>
     </div>
   );

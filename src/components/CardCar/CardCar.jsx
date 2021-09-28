@@ -23,19 +23,6 @@ const CardCar = ({ page, match }) => {
   const [stateMax, setStateMax] = useState(100000);
   const [stateMin, setStateMin] = useState(0);
 
-  const [colors, setColors] = useState({
-    value: dataFormCar.colors,
-    inputValid: dataFormCar.colors.length,
-  });
-  const [thumbnail, setThumbnail] = useState({
-    value: dataFormCar.thumbnail,
-    inputValid: dataFormCar.thumbnail.localPath,
-  });
-  const [category, setCategory] = useState({
-    value: dataFormCar.categoryId,
-    inputValid: dataFormCar.categoryId.id,
-  });
-
   const dataForm = {
     name: useInput(dataFormCar.name, {
       isEmpty: { value: false, text: "Пустое поле" },
@@ -44,64 +31,49 @@ const CardCar = ({ page, match }) => {
         text: "Введите от 4-х букв латиницы, цифр или знаков -+(),.",
       },
     }),
-    priceMin: useInput(dataFormCar.priceMin, {
-      minError: { value: false, text: "Введите натуральное число", min: 0 },
-      maxError: {
-        value: false,
-        text: "Введие число меньше макс цены",
-        max: stateMax,
+    priceMin: useInput(
+      dataFormCar.priceMin,
+      {
+        minError: { value: false, text: "Введите натуральное число", min: 0 },
+        maxError: {
+          value: false,
+          text: "Введие число меньше макс цены",
+          max: stateMax,
+        },
       },
+      [stateMax]
+    ),
+    priceMax: useInput(
+      dataFormCar.priceMax,
+      {
+        isEmpty: {
+          value: false,
+          text: "Пустое поле",
+        },
+        minError: {
+          value: false,
+          text: "Введите число больше мин цены",
+          min: stateMin,
+        },
+      },
+      [stateMin]
+    ),
+    thumbnail: useInput(dataFormCar.thumbnail, {
+      isEmptyImage: { value: false, text: "" },
     }),
-    priceMax: useInput(dataFormCar.priceMax, {
-      isEmpty: {
-        value: false,
-        text: "Пустое поле",
-      },
-      minError: {
-        value: false,
-        text: "Введие число больше мин цены",
-        min: stateMin,
-      },
-    }),
-    thumbnail: {
-      value: thumbnail.value,
-      setValue: setThumbnail,
-      inputValid: thumbnail.inputValid,
-    },
     description: useInput(dataFormCar.description, {}),
     tank: useInput(dataFormCar.tank, {}),
-    categoryId: {
-      value: category.value,
-      setValue: setCategory,
-      inputValid: category.inputValid,
-    },
-    colors: {
-      value: colors.value,
-      setValue: setColors,
-      inputValid: colors.inputValid,
-    },
+    categoryId: useInput(dataFormCar.categoryId, {
+      isEmptySelect: { value: false, text: "" },
+    }),
+    colors: useInput(dataFormCar.colors, {
+      isEmptyArray: { value: false, text: "Введите хотя бы один цвет" },
+    }),
   };
-
-  const handleDataForm = (name, value, valid) => {
-    dataForm[name].setValue({
-      ...dataForm[name],
-      value,
-      inputValid: !!valid,
-    });
-  };
-
   useEffect(() => {
-    if (id && models.length) {
-      const model = models.filter((item) => item.id === id)[0];
-      Object.keys(model).forEach((key) => {
-        if (dataForm[key]) {
-          if (dataForm[key].setValue) {
-            handleDataForm(key, model[key], !!model[key]);
-          } else dataForm[key].setChange(model[key]);
-        }
-      });
-    }
-  }, [id]);
+    if (!categories.length) dispatch(getCategories());
+    if (!models.length) dispatch(getCarModels());
+  }, [categories.length, models.length]);
 
   useEffect(() => {
     const priceMax = dataForm.priceMax.value;
@@ -112,18 +84,6 @@ const CardCar = ({ page, match }) => {
     const priceMin = dataForm.priceMin.value;
     if (priceMin) setStateMin(priceMin);
   }, [dataForm.priceMin.value]);
-
-  useEffect(() => {
-    if (!categories.length) dispatch(getCategories());
-    if (!models.length) dispatch(getCarModels());
-  }, [categories.length, models.length]);
-
-  const handleReset = () => {
-    Object.keys(dataForm).forEach((key) => {
-      if (dataForm[key].setValue) handleDataForm(key, dataFormCar[key], false);
-      else dataForm[key].setChange(dataFormCar[key]);
-    });
-  };
 
   const handleRequest = (method, modelId) => {
     return dispatch(requestCarModel(method, getRequestObj(dataForm), modelId));
@@ -141,17 +101,14 @@ const CardCar = ({ page, match }) => {
         load={!categories.length}
         dataForm={dataForm}
         handleRequest={handleRequest}
-        handleReset={handleReset}
+        stateDataForm={dataFormCar}
+        entity={models}
         link="cardList"
         id={id}
       >
         <section className="card-car">
-          <Card dataForm={dataForm} handleDataForm={handleDataForm} />
-          <Settings
-            dataForm={dataForm}
-            handleDataForm={handleDataForm}
-            categories={categories}
-          />
+          <Card dataForm={dataForm} />
+          <Settings dataForm={dataForm} categories={categories} />
         </section>
       </RefactorEntitiesLayout>
     </AppLayout>
