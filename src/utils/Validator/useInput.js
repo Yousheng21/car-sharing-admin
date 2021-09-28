@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useValidation } from "./validator";
 
-export const useInput = (initialState, validations) => {
+export const useInput = (initialState, validations, arrayChange) => {
   const [value, setValue] = useState(initialState);
   const [isDirty, setDirty] = useState(false);
-  const valid = useValidation(value, validations);
+  const valid = useValidation(value, validations, arrayChange);
 
   const onChange = (event) => {
     const { type } = event.currentTarget;

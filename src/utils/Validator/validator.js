@@ -1,14 +1,25 @@
 import { useEffect, useState } from "react";
 
-import { regExpColor, regExpModelName } from "../../reducers/data/regExp";
+import {
+  regExpColor,
+  regExpModelName,
+  regExpAddress,
+} from "../../reducers/data/regExp";
 
-export const useValidation = (value, validations) => {
+export const useValidation = (value, validations, arrayChange = []) => {
   const [isEmpty, setEmpty] = useState({ value: true, text: "" });
+  const [isEmptySelect, setEmptySelect] = useState({ value: true, text: "" });
+  const [isEmptyImage, setEmptyImage] = useState({ value: true, text: "" });
+  const [isEmptyArray, setEmptyArray] = useState({ value: true, text: "" });
   const [isModelName, setModelName] = useState({
     value: false,
     text: "",
   });
   const [isColor, setColorError] = useState({
+    value: false,
+    text: "",
+  });
+  const [isAddress, setAddressError] = useState({
     value: false,
     text: "",
   });
@@ -20,14 +31,23 @@ export const useValidation = (value, validations) => {
     value: false,
     text: "",
   });
+  const [rangeError, setRangeError] = useState({
+    value: false,
+    text: "",
+  });
   const [inputValid, setInputValid] = useState(false);
 
   const valueValidation = {
     isEmpty,
+    isEmptySelect,
+    isEmptyImage,
+    isEmptyArray,
     isModelName,
     isColor,
+    isAddress,
     maxError,
     minError,
+    rangeError,
   };
 
   const setValidation = (setValue, validationName) => {
@@ -44,6 +64,18 @@ export const useValidation = (value, validations) => {
           if (value) setValidation(setEmpty);
           else setValidation(setEmpty, validation);
           break;
+        case "isEmptySelect":
+          if (value.id) setValidation(setEmptySelect);
+          else setValidation(setEmptySelect, validation);
+          break;
+        case "isEmptyImage":
+          if (value.path) setValidation(setEmptyImage);
+          else setValidation(setEmptyImage, validation);
+          break;
+        case "isEmptyArray":
+          if (value.length) setValidation(setEmptyArray);
+          else setValidation(setEmptyArray, validation);
+          break;
         case "isModelName":
           if (regExpModelName.test(String(value))) setValidation(setModelName);
           else setValidation(setModelName, validation);
@@ -52,6 +84,11 @@ export const useValidation = (value, validations) => {
           if (regExpColor.test(String(value)) || !value)
             setValidation(setColorError);
           else setValidation(setColorError, validation);
+          break;
+        case "isAddress":
+          if (regExpAddress.test(String(value)) || !value)
+            setValidation(setAddressError);
+          else setValidation(setAddressError, validation);
           break;
         case "minError":
           if (value > validations[validation].min) setValidation(setMinError);
@@ -62,12 +99,20 @@ export const useValidation = (value, validations) => {
             setValidation(setMaxError, validation);
           else setValidation(setMaxError);
           break;
+        case "rangeError":
+          if (
+            value >= validations[validation].max ||
+            value <= validations[validation].min
+          )
+            setValidation(setRangeError, validation);
+          else setValidation(setRangeError);
+          break;
         default: {
           break;
         }
       }
     });
-  }, [value]);
+  }, [value, ...arrayChange]);
 
   useEffect(() => {
     if (
@@ -81,19 +126,30 @@ export const useValidation = (value, validations) => {
     }
   }, [
     isEmpty.value,
+    isEmptySelect.value,
+    isEmptyImage.value,
+    isEmptyArray.value,
     isModelName.value,
     isColor.value,
+    isAddress.value,
     maxError.value,
     minError.value,
+    rangeError.value,
   ]);
 
   return {
     isEmpty,
+    isEmptySelect,
+    isEmptyImage,
+    isEmptyArray,
     isModelName,
     isColor,
+    isAddress,
     maxError,
     setMaxError,
     minError,
+    rangeError,
+    setRangeError,
     setMinError,
     inputValid,
     setInputValid,
