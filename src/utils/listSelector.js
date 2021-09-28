@@ -23,6 +23,7 @@ const ListSelector = () => {
 
   const points = useSelector(getStateBy)("point")("points");
   const newPoints = useSelector(getStateBy)("point")("newPoints");
+  const pointId = useSelector(getStateBy)("point")("pointId");
   const cities = useSelector(getStateBy)("point")("cities");
 
   return {
@@ -42,6 +43,7 @@ const ListSelector = () => {
     orderId,
     points,
     newPoints,
+    pointId,
     cities,
   };
 };
