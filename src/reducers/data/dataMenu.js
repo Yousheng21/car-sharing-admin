@@ -9,5 +9,6 @@ export const tabs = [
   { text: "Список авто", icon: <CarIcon />, path: "/cardList" },
   { text: "Карточка заказа", icon: <OrderIcon />, path: "/orderCard" },
   { text: "Заказы", icon: <OrderIcon />, path: "/orderList" },
+  { text: "Карточка пункта", icon: <PointIcon />, path: "/pointCard" },
   { text: "Пункты", icon: <PointIcon />, path: "/pointList" },
 ];
