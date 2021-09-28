@@ -1,0 +1,19 @@
+@import "src/index";
+.error-500{
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  margin: auto auto;
+  grid-gap: 10px;
+
+  h1.number{
+    font-size: 75px;
+    color: $second-color;
+  }
+  h6{
+    color: $third-color;
+  }
+  button{
+    padding: 5px 25px;
+  }
+}
