@@ -35,7 +35,7 @@ const AppLayout = ({ children, title, page, entity, kind, id, entityId }) => {
   return (
     <div
       className={classNames({
-        "order-layout": true,
+        "app-layout": true,
         edit: viewTooltip,
       })}
     >
