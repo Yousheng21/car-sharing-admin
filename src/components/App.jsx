@@ -9,12 +9,16 @@ import { auth } from "../actions/login";
 import PointList from "./PointList/PointList";
 import OrderCard from "./OrderCard/OrderCard";
 import ListSelector from "../utils/listSelector";
+import PointCard from "./PointCard/PointCard";
+import ErrorPages from "./ErrorPages/ErrorPages";
+import Error500 from "./ErrorPages/Error500";
+import Error404 from "./ErrorPages/Error404";
 
 const App = () => {
   const dispatch = useDispatch();
   const [token, setToken] = useState("");
 
-  const { isAuth } = ListSelector();
+  const { isAuth, tooltip } = ListSelector();
 
   useEffect(() => {
     if (token) dispatch(auth());
@@ -28,6 +32,7 @@ const App = () => {
       ) : (
         <Redirect to="/car-sharing-admin/cardCar" />
       )}
+      {tooltip.type === "error" && <Redirect to="/car-sharing-admin/500" />}
       <Switch>
         <Route
           path="/car-sharing-admin/cardCar/:id?"
@@ -43,12 +48,32 @@ const App = () => {
           render={() => <OrderList page={3} />}
         />
         <Route
+          path="/car-sharing-admin/pointCard/:id?"
+          render={(props) => <PointCard match={props.match} page={4} />}
+        />
+        <Route
           path="/car-sharing-admin/pointList"
-          render={() => <PointList page={4} />}
+          render={() => <PointList page={5} />}
         />
         <Route
           path="/car-sharing-admin/orderCard/:id?"
           render={(props) => <OrderCard match={props.match} page={2} />}
+        />
+        <Route
+          path="/car-sharing-admin/500"
+          render={(props) => (
+            <ErrorPages>
+              <Error500 props={props} />
+            </ErrorPages>
+          )}
+        />
+        <Route
+          path="/"
+          render={(props) => (
+            <ErrorPages>
+              <Error404 props={props} />
+            </ErrorPages>
+          )}
         />
       </Switch>
     </BrowserRouter>
