@@ -1,13 +1,30 @@
 @import "src/index";;
-.input{
-  display: flex;
-  flex-direction: column;
-  input{
-    color: $color-title;
+.input {
+  h6.necess{
     font-weight: bold;
   }
-
-  .error{
-    color: $color-error;
+  label, div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    input {
+      @extend %style-input;
+      width: 100%;
+      height: auto;
+      color: black;
+    }
+  }
+  &.error{
+    display: flex;
+    flex-direction: column;
+    label input{
+      border-color: $color-error;
+    }
+    span{
+      margin-top: 10px;
+      color: $color-error;
+      align-self: center;
+    }
   }
 }
