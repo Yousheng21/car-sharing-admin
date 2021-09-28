@@ -5,7 +5,7 @@ import getCities from "../../actions/city";
 import { getDropdownPoint } from "../../actions/app";
 import AppLayout from "../layouts/AppLayout/AppLayout";
 import EntitiesLayout from "../layouts/EntitiesLayout/EntitiesLayout";
-import getPoints from "../../actions/point";
+import getPoints, { requestPoint } from "../../actions/point";
 import Point from "./Point";
 import ListSelector from "../../utils/listSelector";
 
@@ -17,7 +17,7 @@ const PointList = ({ page }) => {
   const [dropdown, setDropdown] = useState([]);
   const [currentPoints, setCurrentPoints] = useState([]);
 
-  const { cities, points, newPoints } = ListSelector();
+  const { cities, points, newPoints, pointId } = ListSelector();
 
   useEffect(() => {
     if (!points.length) {
@@ -35,12 +35,22 @@ const PointList = ({ page }) => {
     dispatch(getPoints(filters));
   };
 
+  const handleDelete = (id) => {
+    dispatch(requestPoint("DELETE", {}, id));
+  };
+
   const handleReset = () => {
     dispatch(getPoints());
   };
 
   return (
-    <AppLayout title="Пункты выдачи" page={page}>
+    <AppLayout
+      title="Пункты выдачи"
+      entity="Пункт"
+      kind
+      entityId={pointId}
+      page={page}
+    >
       <EntitiesLayout
         className="point-list"
         dropdown={dropdown}
@@ -53,6 +63,8 @@ const PointList = ({ page }) => {
         reset={handleReset}
         titleLoader="Загрузка пунктов..."
         viewEntities={currentPoints}
+        linkRefactor="pointCard"
+        handleDelete={handleDelete}
       >
         <Point points={currentPoints} />
       </EntitiesLayout>
