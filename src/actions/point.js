@@ -1,7 +1,8 @@
 import { instance } from "../reducers/data/api/server";
 import { getUrl } from "./app";
-import { setIsUpdated } from "../reducers/appReducer";
-import { setNewPoints, setPoints } from "../reducers/pointReducer";
+import { setIsUpdated, setTooltip } from "../reducers/appReducer";
+import { setNewPoints, setPointId, setPoints } from "../reducers/pointReducer";
+import { store } from "../reducers";
 
 const getPoints = (parameters) => {
   return async (dispatch) => {
@@ -17,6 +18,29 @@ const getPoints = (parameters) => {
       );
       dispatch(setIsUpdated(false));
     } catch (e) {
+      console.error(e.response);
+    }
+  };
+};
+
+export const requestPoint = (method, req, id) => {
+  const { accessToken } = store.getState().user.user;
+  return async (dispatch) => {
+    try {
+      const response = await instance({
+        method,
+        url: `/api/db/point/${id || ""}`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        data: req,
+      });
+      dispatch(setPointId(response.data.data.id ?? id));
+      dispatch(setIsUpdated(true));
+      dispatch(getPoints());
+      dispatch(setTooltip("success", method));
+    } catch (e) {
+      dispatch(setTooltip("error", ""));
       console.error(e.response);
     }
   };
