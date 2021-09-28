@@ -1,4 +1,5 @@
 import { orderCloseId, orderCompleteId, orderNewId } from "./api/server";
+import { useInput } from "../../utils/Validator/useInput";
 
 export const additional = [
   { name: "Полный бак", price: 500, key: "isFullTank" },
@@ -14,30 +15,46 @@ export const arrOrderStatus = [
 
 export const dataFormOrder = {
   orderStatusId: {
-    value: { id: "", name: "" },
-    inputValid: false,
+    id: "",
+    name: "",
   },
   cityId: {
-    value: { name: "", id: "" },
-    inputValid: false,
+    name: "",
+    id: "",
   },
-  pointId: {
-    value: { name: "", id: "" },
-    inputValid: false,
-  },
-  carId: {
-    value: { thumbnail: null, name: "", id: "", colors: "" },
-    inputValid: false,
-  },
-  color: { value: "", inputValid: true },
-  dateFrom: { value: 0, inputValid: false },
-  dateTo: { value: 0, inputValid: false },
-  rateId: {
-    value: { price: 0, id: "" },
-    inputValid: false,
-  },
-  price: { value: 0, inputValid: false },
-  isFullTank: { value: false, inputValid: true },
-  isNeedChildChair: { value: false, inputValid: true },
-  isRightWheel: { value: false, inputValid: true },
+  pointId: { name: "", id: "" },
+  carId: { thumbnail: null, name: "", id: "", colors: "" },
+  color: "",
+  dateFrom: 0,
+  dateTo: 0,
+  rateId: { price: 0, id: "" },
+  price: 0,
+  isFullTank: false,
+  isNeedChildChair: false,
+  isRightWheel: false,
+};
+
+export const dataFormOrderWithHook = () => {
+  return {
+    orderStatusId: useInput(dataFormOrder.orderStatusId, {
+      isEmptySelect: { value: false, text: "" },
+    }),
+    cityId: useInput(dataFormOrder.cityId, {}),
+    pointId: useInput(dataFormOrder.pointId, {
+      isEmptySelect: { value: false, text: "" },
+    }),
+    carId: useInput(dataFormOrder.carId, {
+      isEmptySelect: { value: false, text: "" },
+    }),
+    color: useInput(dataFormOrder.color, {
+      isEmpty: { value: false, text: "" },
+    }),
+    dateFrom: useInput(dataFormOrder.dateFrom, {}),
+    rateId: useInput(dataFormOrder.rateId, {
+      isEmptySelect: { value: false, text: "" },
+    }),
+    isFullTank: useInput(dataFormOrder.isFullTank, {}),
+    isNeedChildChair: useInput(dataFormOrder.isNeedChildChair, {}),
+    isRightWheel: useInput(dataFormOrder.isRightWheel, {}),
+  };
 };
