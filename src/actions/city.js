@@ -7,9 +7,6 @@ const getCities = () => {
       const response = await instance({
         method: "GET",
         url: `/api/db/city`,
-        params: {
-          limit: 5,
-        },
       });
       dispatch(setCities(response.data.data));
     } catch (e) {
