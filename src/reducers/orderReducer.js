@@ -1,7 +1,5 @@
 const SET_ORDERS = "SET_ORDERS";
 const SET_ORDERS_NEW = "SET_ORDERS_NEW";
-const SET_ORDER_STATUS = "SET_ORDER_STATUS";
-const SET_ORDER_ID = "SET_ORDER_ID";
 const SET_TARIFFS = "SET_TARIFFS";
 
 const defaultState = {
@@ -9,7 +7,6 @@ const defaultState = {
   newOrders: [],
   orderStatuses: [],
   tariffs: [],
-  orderId: "",
 };
 
 export default function orderReducer(state = defaultState, action) {
@@ -24,16 +21,6 @@ export default function orderReducer(state = defaultState, action) {
       return {
         ...state,
         newOrders: action.orders,
-      };
-    case SET_ORDER_STATUS:
-      return {
-        ...state,
-        orderStatuses: action.arrayStatus,
-      };
-    case SET_ORDER_ID:
-      return {
-        ...state,
-        orderId: action.id,
       };
     case SET_TARIFFS:
       return {
@@ -53,16 +40,6 @@ export const setOrders = (orders) => ({
 export const setNewOrders = (orders) => ({
   type: SET_ORDERS_NEW,
   orders,
-});
-
-export const setOrderStatus = (arrayStatus) => ({
-  type: SET_ORDER_STATUS,
-  arrayStatus,
-});
-
-export const setOrderId = (id) => ({
-  type: SET_ORDER_ID,
-  id,
 });
 
 export const setTariffs = (tariffs) => ({

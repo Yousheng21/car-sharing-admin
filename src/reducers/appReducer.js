@@ -29,6 +29,7 @@ const defaultState = {
   tooltip: {
     type: "",
     method: "",
+    text: "",
   },
 };
 
@@ -58,6 +59,7 @@ export default function appReducer(state = defaultState, action) {
         tooltip: {
           type: action.tooltip,
           method: action.method,
+          text: action.id,
         },
       };
     default:
@@ -82,8 +84,9 @@ export const setCurrentPage = (state, page) => ({
   page,
 });
 
-export const setTooltip = (tooltip, method) => ({
+export const setTooltip = (tooltip, method, id) => ({
   type: SET_TOOLTIP,
   tooltip,
   method,
+  id,
 });

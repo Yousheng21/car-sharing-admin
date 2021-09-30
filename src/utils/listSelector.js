@@ -6,7 +6,6 @@ const ListSelector = () => {
   const models = useSelector(getStateBy)("car")("models");
   const categories = useSelector(getStateBy)("car")("categories");
   const newModels = useSelector(getStateBy)("car")("newModels");
-  const curModelId = useSelector(getStateBy)("car")("curModelId");
 
   const isUpdated = useSelector(getStateBy)("app")("isUpdated");
   const tooltip = useSelector(getStateBy)("app")("tooltip");
@@ -17,20 +16,16 @@ const ListSelector = () => {
 
   const orders = useSelector(getStateBy)("order")("orders");
   const newOrders = useSelector(getStateBy)("order")("newOrders");
-  const orderStatuses = useSelector(getStateBy)("order")("orderStatuses");
   const tariffs = useSelector(getStateBy)("order")("tariffs");
-  const orderId = useSelector(getStateBy)("order")("orderId");
 
   const points = useSelector(getStateBy)("point")("points");
   const newPoints = useSelector(getStateBy)("point")("newPoints");
-  const pointId = useSelector(getStateBy)("point")("pointId");
   const cities = useSelector(getStateBy)("point")("cities");
 
   return {
     models,
     categories,
     newModels,
-    curModelId,
     isUpdated,
     tooltip,
     user,
@@ -38,12 +33,9 @@ const ListSelector = () => {
     isErrorAuth,
     orders,
     newOrders,
-    orderStatuses,
     tariffs,
-    orderId,
     points,
     newPoints,
-    pointId,
     cities,
   };
 };
