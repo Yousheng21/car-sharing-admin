@@ -15,7 +15,7 @@ const orderPerPage = 5;
 const OrderList = ({ page }) => {
   const dispatch = useDispatch();
 
-  const { cities, models, orderId, orders, newOrders } = ListSelector();
+  const { cities, models, orders, newOrders } = ListSelector();
 
   const [dropdown, setDropdown] = useState([]);
   const [currentOrders, setCurrentOrders] = useState(
@@ -48,13 +48,7 @@ const OrderList = ({ page }) => {
   };
 
   return (
-    <AppLayout
-      entity="Заказ"
-      kind
-      entityId={orderId}
-      title="Заказы"
-      page={page}
-    >
+    <AppLayout entity="Заказ" kind title="Заказы" page={page}>
       <EntitiesLayout
         className="order-list"
         dropdown={dropdown}

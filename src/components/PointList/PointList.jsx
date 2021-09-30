@@ -17,7 +17,7 @@ const PointList = ({ page }) => {
   const [dropdown, setDropdown] = useState([]);
   const [currentPoints, setCurrentPoints] = useState([]);
 
-  const { cities, points, newPoints, pointId } = ListSelector();
+  const { cities, points, newPoints } = ListSelector();
 
   useEffect(() => {
     if (!points.length) {
@@ -44,13 +44,7 @@ const PointList = ({ page }) => {
   };
 
   return (
-    <AppLayout
-      title="Пункты выдачи"
-      entity="Пункт"
-      kind
-      entityId={pointId}
-      page={page}
-    >
+    <AppLayout title="Пункты выдачи" entity="Пункт" kind page={page}>
       <EntitiesLayout
         className="point-list"
         dropdown={dropdown}

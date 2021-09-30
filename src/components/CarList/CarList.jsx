@@ -19,7 +19,7 @@ const CarList = ({ page }) => {
   const [dropdown, setDropdown] = useState([]);
   const [currentModels, setCurrentModels] = useState([]);
 
-  const { models, newModels, categories, currModelId } = ListSelector();
+  const { models, newModels, categories } = ListSelector();
 
   useEffect(() => {
     if (!models.length) {
@@ -46,12 +46,7 @@ const CarList = ({ page }) => {
   };
 
   return (
-    <AppLayout
-      entity="Машина"
-      entityId={currModelId}
-      title="Список авто"
-      page={page}
-    >
+    <AppLayout entity="Машина" title="Список авто" page={page}>
       <EntitiesLayout
         className="car-list"
         dropdown={dropdown}
