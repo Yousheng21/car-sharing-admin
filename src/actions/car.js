@@ -2,12 +2,7 @@ import { instance } from "../reducers/data/api/server";
 import { setIsUpdated, setTooltip } from "../reducers/appReducer";
 import { getUrl } from "./app";
 import { store } from "../reducers";
-import {
-  setCarModelId,
-  setCategories,
-  setModels,
-  setNewModels,
-} from "../reducers/carReducer";
+import { setCategories, setModels, setNewModels } from "../reducers/carReducer";
 
 const getCarModels = (parameters) => {
   return async (dispatch) => {
@@ -54,10 +49,9 @@ export const requestCarModel = (method, req, id) => {
         },
         data: req,
       });
-      dispatch(setCarModelId(response.data.data.id ?? id));
       dispatch(setIsUpdated(true));
       dispatch(getCarModels());
-      dispatch(setTooltip("success", method));
+      dispatch(setTooltip("success", method, response.data.data.id ?? id));
     } catch (e) {
       dispatch(setTooltip("error", ""));
       console.error(e.response);

@@ -2,7 +2,7 @@ import { instance } from "../reducers/data/api/server";
 import { setIsUpdated, setTooltip } from "../reducers/appReducer";
 import { store } from "../reducers";
 import { getUrl } from "./app";
-import { setNewOrders, setOrderId, setOrders } from "../reducers/orderReducer";
+import { setNewOrders, setOrders } from "../reducers/orderReducer";
 
 const getOrders = (parameters) => {
   const { accessToken } = store.getState().user.user;
@@ -39,10 +39,9 @@ export const setOrderTable = (method, req, id) => {
         },
         data: req,
       });
-      dispatch(setOrderId(response.data.data.id ?? id));
       dispatch(setIsUpdated(true));
       dispatch(getOrders());
-      dispatch(setTooltip("success", method));
+      dispatch(setTooltip("success", method, response.data.data.id ?? id));
     } catch (e) {
       dispatch(setTooltip("error", ""));
       console.error(e.response);

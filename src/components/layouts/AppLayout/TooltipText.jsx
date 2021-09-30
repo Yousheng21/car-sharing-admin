@@ -1,4 +1,4 @@
-const TooltipText = ({ tooltip, id, entity, kind }) => {
+const TooltipText = ({ tooltip, entity, kind }) => {
   const getTextKind = () => {
     let textKind = "";
     switch (tooltip.method) {
@@ -18,7 +18,7 @@ const TooltipText = ({ tooltip, id, entity, kind }) => {
     return textKind;
   };
   if (tooltip.type === "success") {
-    return `Успех! ${entity} №${id} ${getTextKind()}`;
+    return `Успех! ${entity} №${tooltip.text} ${getTextKind()}`;
   }
   if (tooltip.type === "error") return "Что-то пошло не-так";
   return "";

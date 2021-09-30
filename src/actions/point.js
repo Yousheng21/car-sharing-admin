@@ -1,7 +1,7 @@
 import { instance } from "../reducers/data/api/server";
 import { getUrl } from "./app";
 import { setIsUpdated, setTooltip } from "../reducers/appReducer";
-import { setNewPoints, setPointId, setPoints } from "../reducers/pointReducer";
+import { setNewPoints, setPoints } from "../reducers/pointReducer";
 import { store } from "../reducers";
 
 const getPoints = (parameters) => {
@@ -35,10 +35,9 @@ export const requestPoint = (method, req, id) => {
         },
         data: req,
       });
-      dispatch(setPointId(response.data.data.id ?? id));
       dispatch(setIsUpdated(true));
       dispatch(getPoints());
-      dispatch(setTooltip("success", method));
+      dispatch(setTooltip("success", method, response.data.data.id ?? id));
     } catch (e) {
       dispatch(setTooltip("error", ""));
       console.error(e.response);

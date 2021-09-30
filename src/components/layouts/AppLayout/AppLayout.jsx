@@ -11,7 +11,7 @@ import TooltipText from "./TooltipText";
 import Delete from "../../../images/Delete.svg";
 import ListSelector from "../../../utils/listSelector";
 
-const AppLayout = ({ children, title, page, entity, kind, id, entityId }) => {
+const AppLayout = ({ children, title, page, entity, kind, id }) => {
   const dispatch = useDispatch();
 
   const [viewTooltip, setViewTooltip] = useState(!!id);
@@ -46,12 +46,7 @@ const AppLayout = ({ children, title, page, entity, kind, id, entityId }) => {
         <div className={classNameTooltip}>
           <span>
             <Check />
-            <TooltipText
-              entity={entity}
-              kind={kind}
-              tooltip={tooltip}
-              id={id ?? entityId}
-            />
+            <TooltipText entity={entity} kind={kind} tooltip={tooltip} />
           </span>
           <button type="button" onClick={() => dispatch(setTooltip("", ""))}>
             <Delete />
