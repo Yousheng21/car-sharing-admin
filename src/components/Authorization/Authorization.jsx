@@ -2,6 +2,7 @@ import React from "react";
 import "./authorization.scss";
 
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import Logo from "../../images/Logo Icon.svg";
 import Input from "../common/Input/Input";
 import { useInput } from "../../utils/Validator/useInput";
@@ -55,9 +56,9 @@ const Authorization = () => {
             necessarily
           />
           <section className="auth-footer">
-            <a className="link-primary" href="/car-sharing-admin">
+            <Link className="link-primary" to="/car-sharing-admin">
               Запросить доступ
-            </a>
+            </Link>
             <button
               type="submit"
               className="btn btn-primary"
