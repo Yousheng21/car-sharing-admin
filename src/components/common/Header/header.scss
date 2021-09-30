@@ -5,7 +5,7 @@ $shadow: rgba(0, 0, 0, 0.1);
   grid-area: 1/2/2/3;
   display: grid;
   grid-template-columns: 6fr 0.5fr 1.5fr;
-  box-shadow: 0 5px 5px 0 $color-shadow;
+  box-shadow: 0px 2.5px 9.5px rgba(90, 97, 105, 0.22);;
   width: 100%;
 
   &>section{

@@ -8,7 +8,7 @@
     display: grid;
     grid-template-rows: 1fr 0.1fr 0.5fr;
     border-radius: 10px;
-    box-shadow: -5px 5px 5px $color-shadow;
+    box-shadow: -1px 3px 4px 0px rgba(90, 97, 105, 0.22);
     height: auto;
     >div{
       padding: 15px 30px;
@@ -16,7 +16,6 @@
     &-main{
       display: grid;
       grid-template-rows: 1fr 0.4fr 0.2fr 0.2fr;
-      grid-row-gap: 10px;
       align-items: center;
       justify-items: center;
       .upload-img{
@@ -134,7 +133,12 @@
 
 @media screen and (max-width: 768px){
   .card-car{
-    grid-template: 1fr 1fr/1fr;
+    grid-template: 1fr 0.7fr/1fr;
+    &__card{
+      &-main{
+        grid-gap: 10px;
+      }
+    }
   }
 }
 
