@@ -28,3 +28,22 @@
     }
   }
 }
+
+.select{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  .necess{
+    font-weight: bold;
+  }
+  &-body{
+    @extend %style-select;
+    select{
+      height: auto;
+      width: 100%;
+      &.error{
+        border-color: $color-error;
+      }
+    }
+  }
+}
