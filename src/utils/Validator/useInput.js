@@ -7,12 +7,7 @@ export const useInput = (initialState, validations, arrayChange) => {
   const valid = useValidation(value, validations, arrayChange);
 
   const onChange = (event) => {
-    const { type } = event.currentTarget;
-    setValue(
-      type === "number"
-        ? Number(event.currentTarget.value)
-        : event.currentTarget.value
-    );
+    setValue(event.currentTarget.value);
   };
 
   const setChange = (valueInput) => {
