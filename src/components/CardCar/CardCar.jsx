@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./cardCar.scss";
 import { useDispatch } from "react-redux";
 import AppLayout from "../layouts/AppLayout/AppLayout";
-import Settings from "./Settings/Settings";
+import ViewCarSettings from "./Settings/ViewCarSettings";
 import getCarModels, {
   getCategories,
   requestCarModel,
 } from "../../actions/car";
-import Card from "./Card";
+import ViewCarCard from "./ViewCarCard";
 import RefactorEntitiesLayout from "../layouts/RefactorEntitiesLayout/RefactorEntitiesLayout";
 import { useInput } from "../../utils/Validator/useInput";
 import { dataFormCar } from "../../reducers/data/dataCar";
@@ -18,9 +18,9 @@ const CardCar = ({ page, match }) => {
   const { id } = match.params;
   const dispatch = useDispatch();
 
-  const { categories, models, currModelId } = ListSelector();
+  const { categories, models } = ListSelector();
 
-  const [stateMax, setStateMax] = useState(100000);
+  const [stateMax, setStateMax] = useState(0);
   const [stateMin, setStateMin] = useState(0);
 
   const dataForm = {
@@ -28,7 +28,7 @@ const CardCar = ({ page, match }) => {
       isEmpty: { value: false, text: "Пустое поле" },
       isModelName: {
         value: false,
-        text: "Введите от 4-х букв латиницы, цифр или знаков -+(),.",
+        text: "от 4-х букв и доступных знаков -+(),.",
       },
     }),
     priceMin: useInput(
@@ -69,6 +69,7 @@ const CardCar = ({ page, match }) => {
     colors: useInput(dataFormCar.colors, {
       isEmptyArray: { value: false, text: "Введите хотя бы один цвет" },
     }),
+    number: useInput(dataFormCar.number, {}),
   };
   useEffect(() => {
     if (!categories.length) dispatch(getCategories());
@@ -90,13 +91,7 @@ const CardCar = ({ page, match }) => {
   };
 
   return (
-    <AppLayout
-      id={id}
-      entityId={currModelId}
-      entity="Машина"
-      title="Карточка автомобиля"
-      page={page}
-    >
+    <AppLayout id={id} entity="Машина" title="Карточка автомобиля" page={page}>
       <RefactorEntitiesLayout
         load={!categories.length}
         dataForm={dataForm}
@@ -107,8 +102,8 @@ const CardCar = ({ page, match }) => {
         id={id}
       >
         <section className="card-car">
-          <Card dataForm={dataForm} />
-          <Settings dataForm={dataForm} categories={categories} />
+          <ViewCarCard dataForm={dataForm} />
+          <ViewCarSettings dataForm={dataForm} categories={categories} />
         </section>
       </RefactorEntitiesLayout>
     </AppLayout>

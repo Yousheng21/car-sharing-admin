@@ -1,7 +1,7 @@
 import React from "react";
 import { arrOrderStatus, additional } from "../../../reducers/data/dataOrder";
 import ViewOrderSettingDate from "./Inputs/ViewOrderSettingDate";
-import OrderCardInput from "./Inputs/OrderCardInput";
+import InputSelect from "../../common/Input/InputSelect";
 import Input from "../../common/Input/Input";
 
 const ViewOrderSetting = ({ dataForm, tariffs, handleSelect }) => {
@@ -10,15 +10,15 @@ const ViewOrderSetting = ({ dataForm, tariffs, handleSelect }) => {
       <h1>Настройки заказа</h1>
       <section className="setting">
         <ViewOrderSettingDate dataForm={dataForm} />
-        <OrderCardInput
+        <InputSelect
           dataForm={dataForm}
           array={tariffs}
           handleChange={handleSelect}
-          typeInput="select"
           property="rateTypeId"
           isId
           id="rateId"
-          text="Тариф"
+          text="Тариф аренды"
+          placeholder="Выберите тариф"
         />
         <section className="extra-additional">
           {additional.map((item) => (
@@ -41,19 +41,20 @@ const ViewOrderSetting = ({ dataForm, tariffs, handleSelect }) => {
         <Input
           title="Цена"
           id="name"
-          type="number"
+          number
           arrValid={["isEmpty", "rangeError"]}
           objInput={dataForm.price}
+          type="text"
           necessarily
         />
-        <OrderCardInput
+        <InputSelect
           dataForm={dataForm}
           handleChange={handleSelect}
           array={arrOrderStatus}
-          typeInput="select"
           isId
           id="orderStatusId"
-          text="Статус"
+          text="Статус заказа"
+          placeholder="Выберите статус"
         />
       </section>
     </section>

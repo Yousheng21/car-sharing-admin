@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "../../common/Image/Image";
-import OrderCardInput from "./Inputs/OrderCardInput";
+import InputSelect from "../../common/Input/InputSelect";
 
 const ViewOrderCard = ({ dataForm, points, handleSelect, models }) => {
   const viewPoint = (item) => {
@@ -13,35 +13,33 @@ const ViewOrderCard = ({ dataForm, points, handleSelect, models }) => {
           <Image thumbnail={dataForm.carId.value.thumbnail} />
         )}
       </div>
-      <OrderCardInput
+      <InputSelect
         dataForm={dataForm}
-        typeInput="select"
         isId
         id="carId"
-        text="Модель"
+        text="Модель автомобиля"
+        placeholder="Выберите модель"
         handleChange={handleSelect}
         array={models}
       />
-      <OrderCardInput
+      <InputSelect
         dataForm={dataForm}
-        typeInput="select"
         isId
         id="pointId"
-        text="Пункт"
+        text="Пункт выдачи"
+        placeholder="Выберите адрес"
         view={viewPoint}
         handleChange={handleSelect}
         array={points}
       />
-      {dataForm.carId.value.id && dataForm.carId.value.colors.length ? (
-        <OrderCardInput
+      {dataForm.carId.value.id && !!dataForm.carId.value.colors.length && (
+        <InputSelect
           dataForm={dataForm}
-          typeInput="select"
           id="color"
           text="Цвет машины"
+          placeholder="Выберите цвет"
           array={dataForm.carId.value.colors}
         />
-      ) : (
-        ""
       )}
     </section>
   );

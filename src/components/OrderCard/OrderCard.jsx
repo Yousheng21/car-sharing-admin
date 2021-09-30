@@ -23,9 +23,9 @@ const OrderCard = ({ page, match }) => {
 
   const [stateDateFrom, setDateFrom] = useState(0);
   const [stateMin, setStateMin] = useState(0);
-  const [stateMax, setStateMax] = useState(99999);
+  const [stateMax, setStateMax] = useState(0);
 
-  const { orderId, models, orders, points, tariffs } = ListSelector();
+  const { models, orders, points, tariffs } = ListSelector();
 
   const dataForm = {
     ...dataFormOrderWithHook(),
@@ -42,7 +42,10 @@ const OrderCard = ({ page, match }) => {
         isEmpty: { value: false, text: "Введите натуральное число" },
         rangeError: {
           value: false,
-          text: `Введите число от ${stateMin} до ${stateMax}`,
+          text:
+            !stateMax && !stateMin
+              ? "Выберите модель"
+              : `Введите число от ${stateMin} до ${stateMax}`,
           min: stateMin,
           max: stateMax,
         },
@@ -91,14 +94,7 @@ const OrderCard = ({ page, match }) => {
   };
 
   return (
-    <AppLayout
-      kind
-      entityId={orderId}
-      id={id}
-      entity="Заказ"
-      title="Карточка заказа"
-      page={page}
-    >
+    <AppLayout kind id={id} entity="Заказ" title="Карточка заказа" page={page}>
       <RefactorEntitiesLayout
         load={!models.length || !points.length || !tariffs.length}
         dataForm={dataForm}

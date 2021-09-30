@@ -14,14 +14,14 @@ import ViewPointCard from "./ViewPointCard";
 const PointCard = ({ page, match }) => {
   const dispatch = useDispatch();
   const { id } = match.params;
-  const { pointId, cities, points } = ListSelector();
+  const { cities, points } = ListSelector();
 
   const dataForm = {
     name: useInput(dataFormPoint.name, {
       isEmpty: { value: false, text: "Пустое поле" },
       isAddress: {
         value: false,
-        text: "кириллица,цифры и запятая от 3-х символов",
+        text: "кириллица, цифры, точка и запятая от 4-х символов",
       },
     }),
     cityId: useInput(dataFormPoint.cityId, {
@@ -31,7 +31,7 @@ const PointCard = ({ page, match }) => {
       isEmpty: { value: false, text: "Пустое поле" },
       isAddress: {
         value: false,
-        text: "кириллица,цифры и запятая от 3-х символов",
+        text: "кириллица, цифры, точка и запятая от 4-х символов",
       },
     }),
   };
@@ -47,7 +47,6 @@ const PointCard = ({ page, match }) => {
   return (
     <AppLayout
       kind
-      entityId={pointId}
       id={id}
       entity="Пункт"
       title="Карточка пункта выдачи"

@@ -1,6 +1,6 @@
 import React from "react";
 import Input from "../common/Input/Input";
-import OrderCardInput from "../OrderCard/ViewOrderCard/Inputs/OrderCardInput";
+import InputSelect from "../common/Input/InputSelect";
 import { dataFormPoint } from "../../reducers/data/dataPoint";
 
 const ViewPointCard = ({ dataForm, cities }) => {
@@ -16,24 +16,24 @@ const ViewPointCard = ({ dataForm, cities }) => {
       <Input
         title="Название"
         id="name"
-        type="text"
         arrValid={["isEmpty", "isAddress"]}
         objInput={dataForm.name}
         necessarily
+        type="text"
       />
       <Input
         title="Адрес"
         id="address"
-        type="text"
         arrValid={["isEmpty", "isAddress"]}
         objInput={dataForm.address}
         necessarily
+        type="text"
       />
-      <OrderCardInput
+      <InputSelect
         dataForm={dataForm}
         array={cities}
         handleChange={handleSelect}
-        typeInput="select"
+        placeholder="Выберите город"
         property="cityId"
         isId
         id="cityId"

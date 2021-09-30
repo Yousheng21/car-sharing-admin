@@ -15,7 +15,7 @@ const ImgCard = ({ thumbnail }) => {
   return <Image thumbnail={thumbnail} />;
 };
 
-const Card = ({ dataForm }) => {
+const ViewCarCard = ({ dataForm }) => {
   const [activeModal, setActiveModal] = useState(false);
 
   const onImageChange = async (event) => {
@@ -43,7 +43,6 @@ const Card = ({ dataForm }) => {
           <ImgCard thumbnail={dataForm.thumbnail.value} />
         ) : (
           <div className="upload-img">
-            <h3>Загрузите изображение</h3>
             <Upload />
           </div>
         )}
@@ -82,7 +81,7 @@ const Card = ({ dataForm }) => {
       </div>
       <div className="card-progress">
         <div className="card-progress__info">
-          <span>Заполнено</span>
+          <span>Уровень топлива</span>
           <span>{dataForm.tank.value}%</span>
         </div>
         <input
@@ -106,4 +105,4 @@ const Card = ({ dataForm }) => {
   );
 };
 
-export default Card;
+export default ViewCarCard;
