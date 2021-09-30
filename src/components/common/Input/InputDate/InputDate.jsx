@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import ru from "date-fns/locale/ru";
 import "./inputDate.scss";
 import "react-datepicker/dist/react-datepicker.css";
+import classNames from "classnames";
 import Delete from "../../../../images/Delete.svg";
 
 const InputDate = ({
@@ -31,7 +32,13 @@ const InputDate = ({
         locale={ru}
         disabled={disabled}
       />
-      <button type="button" onClick={onClose}>
+      <button
+        type="button"
+        className={classNames({
+          active: selected,
+        })}
+        onClick={onClose}
+      >
         <Delete />
       </button>
     </div>
