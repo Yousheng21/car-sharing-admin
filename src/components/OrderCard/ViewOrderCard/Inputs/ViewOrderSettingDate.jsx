@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import InputDate from "../../../common/Input/InputDate/InputDate";
 
-const ViewOrderSettingDate = ({ dataForm, handleDataForm }) => {
+const ViewOrderSettingDate = ({ dataForm }) => {
   const { dateFrom, dateTo } = dataForm;
 
   function handleDateFrom(date) {
@@ -12,7 +12,7 @@ const ViewOrderSettingDate = ({ dataForm, handleDataForm }) => {
     if (dateFrom.value) {
       const nextDate = new Date(dateFrom.value);
       nextDate.setMinutes(nextDate.getMinutes() + 30);
-      if (dateTo.value < dateFrom.value) {
+      if (dateTo.value <= dateFrom.value) {
         dataForm.dateTo.setChange(nextDate.getTime());
       }
     }
@@ -21,6 +21,10 @@ const ViewOrderSettingDate = ({ dataForm, handleDataForm }) => {
   function handleDateTo(date) {
     dataForm.dateTo.setChange(date.getTime());
   }
+
+  const handleReset = (obj) => {
+    obj.setChange(0);
+  };
 
   const filterPassedTimeTo = (time) => {
     const selectedDate = new Date(time);
@@ -34,7 +38,7 @@ const ViewOrderSettingDate = ({ dataForm, handleDataForm }) => {
           <h6 className="necess">С</h6>
           <InputDate
             onChange={handleDateFrom}
-            onClose={() => handleDataForm("dateFrom", 0)}
+            onClose={() => handleReset(dateFrom)}
             selected={dateFrom.value}
             popperPlacement="bottom-start"
           />
@@ -43,7 +47,7 @@ const ViewOrderSettingDate = ({ dataForm, handleDataForm }) => {
           <h6 className="necess">По</h6>
           <InputDate
             onChange={handleDateTo}
-            onClose={() => handleDataForm("dateTo", 0)}
+            onClose={() => handleReset(dateTo)}
             minDate={dateFrom.value}
             selected={dateTo.value}
             filterTime={filterPassedTimeTo}
