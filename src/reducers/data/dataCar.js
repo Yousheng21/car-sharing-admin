@@ -1,6 +1,6 @@
 export const dataFormCar = {
-  priceMax: 0,
-  priceMin: 0,
+  priceMax: "",
+  priceMin: "",
   name: "",
   thumbnail: {
     originalname: "Выберите изображение...",
@@ -16,4 +16,5 @@ export const dataFormCar = {
     id: "",
   },
   colors: [],
+  number: "",
 };
