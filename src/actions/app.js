@@ -1,13 +1,12 @@
 import { arrOrderStatus } from "../reducers/data/dataOrder";
 
 export const getDropdownOrder = (storeModels, storeCities) => {
-  const models = storeModels.map((model) => {
-    return { name: model.name, id: model.id };
-  });
+  const models = storeModels.map((model) => ({
+    name: model.name,
+    id: model.id,
+  }));
+  const cities = storeCities.map((city) => ({ name: city.name, id: city.id }));
 
-  const cities = storeCities.map((city) => {
-    return { name: city.name, id: city.id };
-  });
   const day = new Date();
   day.setHours(0);
   day.setMinutes(0);
@@ -48,13 +47,15 @@ export const getDropdownOrder = (storeModels, storeCities) => {
 };
 
 export const getDropdownCar = (storeModels, storeCategories) => {
-  const models = storeModels.map((model) => {
-    return { name: model.name, id: model.id };
-  });
+  const models = storeModels.map((model) => ({
+    name: model.name,
+    id: model.id,
+  }));
 
-  const categories = storeCategories.map((category) => {
-    return { name: category.name, id: category.id };
-  });
+  const categories = storeCategories.map((category) => ({
+    name: category.name,
+    id: category.id,
+  }));
 
   return [
     {
@@ -81,13 +82,12 @@ export const getDropdownCar = (storeModels, storeCategories) => {
 };
 
 export const getDropdownPoint = (storePoints, storeCities) => {
-  const points = storePoints.map((point) => {
-    return { name: point.address, id: point.id };
-  });
+  const points = storePoints.map((point) => ({
+    name: point.address,
+    id: point.id,
+  }));
 
-  const cities = storeCities.map((city) => {
-    return { name: city.name, id: city.id };
-  });
+  const cities = storeCities.map((city) => ({ name: city.name, id: city.id }));
 
   return [
     {
