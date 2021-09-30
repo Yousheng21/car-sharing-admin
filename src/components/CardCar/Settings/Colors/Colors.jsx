@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import classNames from "classnames";
 import Plus from "../../../../images/Plus.svg";
-import Reject from "../../../../images/Delete.svg";
 import { regExpTab } from "../../../../reducers/data/regExp";
 import { useInput } from "../../../../utils/Validator/useInput";
 
 const Colors = ({ colors }) => {
-  const [activeColor, setActiveColor] = useState(null);
-
   const currColor = useInput("", {
     isColor: { value: false, text: "только кириллица от 3-х символов" },
   });
@@ -28,14 +25,6 @@ const Colors = ({ colors }) => {
   const handlePressKey = (event) => {
     if (event.key !== "Enter" || !currColor.inputValid) return false;
     handleClick();
-  };
-
-  const handleDelete = (color) => {
-    colors.setChange(
-      colors.value.filter((item) => {
-        return item !== color;
-      })
-    );
   };
 
   return (
@@ -66,40 +55,6 @@ const Colors = ({ colors }) => {
       <span className="error">
         {currColor.isDirty && currColor.printError(["isColor"])}
       </span>
-      <div className="view-colors">
-        {colors.value.map((color, index) => (
-          <label
-            key={color}
-            onFocus={() => setActiveColor(index)}
-            onMouseOver={() => setActiveColor(index)}
-            onBlur={() => setActiveColor(null)}
-            onMouseOut={() => setActiveColor(null)}
-            htmlFor={color}
-          >
-            <input
-              className="form-check-input"
-              type="checkbox"
-              value=""
-              name="colors"
-              id={color}
-              checked
-              readOnly
-            />
-            {color}
-            <button
-              className={classNames({
-                delete: true,
-                active: index === activeColor,
-              })}
-              onClick={() => handleDelete(color)}
-              type="button"
-            >
-              <Reject />
-            </button>
-          </label>
-        ))}
-        <span className="error">{colors.printError(["isEmptyArray"])}</span>
-      </div>
     </div>
   );
 };
