@@ -2,7 +2,22 @@ import React from "react";
 import classNames from "classnames";
 import "./input.scss";
 
-const Input = ({ title, objInput, arrValid, id, type, necessarily }) => {
+const Input = ({
+  title,
+  objInput,
+  arrValid,
+  id,
+  number,
+  necessarily,
+  type,
+}) => {
+  const handleChange = (event) => {
+    const { value } = event.currentTarget;
+    if (number) {
+      if (Number(value)) objInput.setChange(Number(value));
+      else if (!value) objInput.setChange("");
+    } else objInput.onChange(event);
+  };
   return (
     <div
       className={classNames({
@@ -19,7 +34,7 @@ const Input = ({ title, objInput, arrValid, id, type, necessarily }) => {
           title
         )}
         <input
-          onChange={objInput.onChange}
+          onChange={handleChange}
           onBlur={objInput.onBlur}
           onFocus={objInput.onFocus}
           type={type}
