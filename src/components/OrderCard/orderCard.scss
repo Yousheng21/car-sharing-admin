@@ -108,23 +108,6 @@
       }
     }
   }
-  .necess{
-    font-weight: bold;
-  }
-  .select{
-    display: flex;
-    flex-direction: column;
-    &>div{
-      @extend %style-select;
-      select{
-        height: 35px;
-        width: 100%;
-        &.error{
-          border-color: $color-error;
-        }
-      }
-    }
-  }
   input{
     @extend %style-input;
     height: 35px;
@@ -139,7 +122,7 @@
   .order-card{
     grid-template: 0.5fr 1fr/1fr;
     .card{
-      grid-template-rows: 2fr 1fr 1fr 2fr;
+      grid-template-rows: 2fr 1fr 1fr 1fr;
     }
     .setting-list{
       .setting{
