@@ -59,10 +59,10 @@ a{
   appearance: none;
   outline: none;
   border: $color-select 1px solid;
-  width: 150px;
+  min-width: 150px;
   height: 100%;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 5px 15px 5px 10px;
   color: $color-option;
 }
 
