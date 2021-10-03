@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import classNames from "classnames";
 import { domain } from "../../../reducers/data/api/server";
 import Photo from "../../../images/no-image.png";
 import "./image.scss";
@@ -16,7 +17,9 @@ const Image = ({ thumbnail }) => {
     <img
       crossOrigin="anonymous"
       referrerPolicy="origin"
-      className="car-img"
+      className={classNames({
+        "car-img": thumbnail,
+      })}
       src={getSrc}
       alt={thumbnail ? thumbnail.originalname : "photo"}
     />

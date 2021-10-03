@@ -1,7 +1,13 @@
 .car-img{
-    max-width: 100%;
-    max-height: 90%;
+  width: 250px;
+  height: 100px;
+  &.photo{
+    width: 150px;
+    height: 100px;
+  }
 }
+
+
 
 @media screen and (max-width: 768px) and (min-width: 426px){
   .car-img{
