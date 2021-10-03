@@ -62,6 +62,8 @@ $shadow: rgba(0, 0, 0, 0.1);
       outline: none;
       border-radius: 3px;
       color: $color-btn;
+      display: flex;
+      flex-direction: row;
     }
   }
 }
