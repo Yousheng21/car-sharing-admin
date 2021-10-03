@@ -18,6 +18,9 @@
       grid-template-rows: 1fr 0.4fr 0.2fr 0.2fr;
       align-items: center;
       justify-items: center;
+      >h1{
+        margin: 0;
+      }
       .upload-img{
         display: flex;
         flex-direction: column;
@@ -26,7 +29,7 @@
       }
       >img{
         max-width: 250px;
-        max-height: 150px;
+        max-height: 140px;
         box-sizing: content-box;
       }
       .category-title{
