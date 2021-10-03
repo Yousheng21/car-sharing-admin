@@ -41,12 +41,10 @@
             @extend %style-input;
           }
           button {
-            @extend %style-input;
-            width: auto;
-            color: $color-btn;
+            @extend %style-btn;
             padding: 5px 15px;
             &:active{
-              box-shadow: 0px 0px 10px 2px rgba(190, 202, 214, 0.68) inset;
+              box-shadow: 0 0 10px 2px rgba(190, 202, 214, 0.68) inset;
             }
           }
         }
@@ -72,15 +70,13 @@
         }
 
         button {
-          @extend %style-input;
-          width: auto;
-          color: $color-select;
+          @extend %style-btn;
           padding: 5px;
           &:disabled{
             opacity: 0.5;
           }
           &:active{
-            box-shadow: 0px 0px 10px 2px rgba(190, 202, 214, 0.68) inset;
+            box-shadow: 0 0 10px 2px rgba(190, 202, 214, 0.68) inset;
           }
         }
       }

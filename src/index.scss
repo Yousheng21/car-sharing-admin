@@ -44,6 +44,13 @@ a{
   text-decoration: none;
 }
 
+%style-template-1{
+  appearance: none;
+  outline: none;
+  border: $color-select 1px solid;
+  border-radius: 5px;
+}
+
 %style-select-row{
   content: "";
   display: block;
@@ -55,13 +62,15 @@ a{
   z-index: 1;
 }
 
+%style-btn{
+  @extend %style-template-1;
+  color: $color-select;
+}
+
 %style-input{
-  appearance: none;
-  outline: none;
-  border: $color-select 1px solid;
+  @extend %style-template-1;
   min-width: 150px;
   height: 100%;
-  border-radius: 5px;
   padding: 5px 15px 5px 10px;
   color: $color-option;
 }
