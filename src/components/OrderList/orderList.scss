@@ -105,6 +105,7 @@ $color-check-mark:#0EC261;
       }
       .additional {
         grid-area: 2/2/3/4;
+        justify-self: center;
         label{
           font-size: 14px;
         }
