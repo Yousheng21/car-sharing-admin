@@ -1,0 +1,72 @@
+@import "src/index";
+.point-list{
+  .point{
+    display: grid;
+    grid-template: 1fr/0.3fr 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    h1{font-size: 32px}
+    height: 100%;
+
+    &-img{
+      justify-self: center;
+    }
+    &-address{
+      h1{font-size: 24px;}
+    }
+    &-city{
+      justify-self: center;
+      h1{
+        &.empty{
+          color: $second-color;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 426px){
+  .point-list{
+    .point{
+      grid-template: 1fr 1fr/0.5fr 1fr 1fr;
+      grid-row-gap: 10px;
+      h1{
+        font-size: 24px;
+      }
+      &-name{
+        grid-area: 2/1/3/3;
+      }
+      &-address{
+        grid-area: 1/2/2/4;
+        h1{font-size: 20px;}
+      }
+      .buttons{
+        grid-column: 1/4;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px){
+  .point-list {
+    .point {
+      grid-template: 1fr 1fr 1fr/0.3fr 1fr;
+      grid-column-gap: 0;
+      h1{
+        font-size: 24px;
+      }
+      &-address{
+        grid-area: 2/2/2/3;
+        h1{font-size: 20px;}
+      }
+      &-city{
+        grid-area: 3/2/4/3;
+        align-self: flex-start;
+        justify-self: flex-start;
+      }
+      .buttons{
+        grid-area: 4/2/5/3;
+        justify-self: flex-end;
+      }
+    }
+  }
+}

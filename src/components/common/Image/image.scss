@@ -1,0 +1,21 @@
+.car-img{
+  max-width: 250px;
+  min-height: 100px;
+  max-height: 150px;
+}
+
+
+
+@media screen and (max-width: 768px) and (min-width: 426px){
+  .car-img{
+    max-width: 200px;
+    max-height: 100px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .car-img{
+    max-width: 300px;
+    max-height: 300px;
+  }
+}

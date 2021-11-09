@@ -1,0 +1,76 @@
+@import "../../../index";
+$color-shadow-2: #A5B6C9;
+.navBar{
+  min-height: 100vh;
+  max-height: 100%;
+  grid-area: 1/1/4/2;
+  display: grid;
+  grid-template-rows: 80px 3fr;
+  box-shadow: 0 1px 75px $color-shadow,
+  0 2px 14px $color-shadow,
+  0 7.5px 11px $color-shadow,
+  0 3.5px 17.5px rgba($color-shadow-2, 0.1);
+
+  &-header{
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    height: 100%;
+    padding: 20px 0;
+    border-bottom: 1px $color-border solid;
+    h1{
+      font-size: 20px;
+      align-self: center;
+      margin: 0;
+    }
+    svg{
+      align-self: center;
+    }
+  }
+  &-tab{
+    display: flex;
+    gap: 10px;
+    padding: 15px 0 15px 10%;
+    cursor: pointer;
+    color: $color-title;
+    border-bottom: 1px $color-border solid;
+    svg{
+      align-self: center;
+    }
+    &:hover{
+      color: $main-color;
+    }
+    &.active{
+      color: $main-color;
+      border-left: $main-color 5px solid;
+      svg{
+        path{
+          fill: $main-color;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px){
+  .navBar{
+    grid-template-rows: 70px 3fr 0.2fr;
+
+    &-header{
+      h1{
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px){
+  .navBar{
+    &-tab{
+      svg{
+        align-self: flex-start;
+        margin-top: 5px;
+      }
+    }
+  }
+}

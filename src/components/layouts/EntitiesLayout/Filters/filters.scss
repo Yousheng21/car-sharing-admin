@@ -1,0 +1,74 @@
+@import "src/index";
+
+.parameters{
+  display: grid;
+  grid-template-columns: 1fr 0.1fr;
+  grid-gap: 10px;
+  padding-bottom: 15px;
+  border-bottom: 1px $color-border solid;
+  .dropdown{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    .filter{
+      .select{
+        @extend %style-select;
+      }
+      input{
+        width: 150px;
+        outline: none;
+        border: $color-select 1px solid;
+        border-radius: 5px;
+        padding: 5px 10px;
+      }
+    }
+  }
+  &-buttons{
+    display: flex;
+    gap: 10px;
+    button{
+      height: 36px;
+      background-color: $main-color;
+      color: white;
+      &:hover{
+        color: white;
+      }
+      &.reset{
+        background-color: $color-error;
+        border:1px $main-color solid;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 768px){
+  .parameters{
+    .dropdown{
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    &-buttons{
+      flex-direction: column;
+      justify-content: space-around;
+    }
+  }
+}
+
+@media screen and (max-width: 1078px){
+  .parameters{
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .parameters{
+    grid-template: 1fr 0.1fr/1fr;
+    grid-gap: 20px;
+    &-buttons{
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}

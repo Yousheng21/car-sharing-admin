@@ -1,0 +1,16 @@
+@import "src/index";
+.point-card{
+  .vew-point-card{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .point-card {
+    .vew-point-card {
+      grid-template: repeat(3,0.5fr)/1fr;
+    }
+  }
+}

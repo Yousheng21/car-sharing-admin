@@ -1,0 +1,112 @@
+@import "src/index";
+.car-list{
+  .model{
+    display: grid;
+    grid-template: 1fr/0.5fr 0.7fr 0.7fr 0.5fr;
+    grid-column-gap: 20px;
+    align-items: center;
+    .empty{
+      color: $second-color;
+    }
+    .img{
+      display: flex;
+      justify-content: center;
+    }
+    .info{
+      align-self: flex-start;
+      color: $third-color;
+      padding-left: 15px;
+      h1{
+        font-size: 22px;
+        padding: 0;
+        margin: 0;
+      }
+      p{
+        font-size: 18px;
+        text-align: left;
+        margin: 0;
+      }
+      &-title{
+        color: black;
+      }
+    }
+    .price{
+      h1{
+        font-size: 28px;
+      }
+    }
+    .category{
+      justify-self: center;
+      font-size: 20px;
+    }
+    .colors{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      .color{
+        display: flex;
+        gap: 10px;
+        .circle{
+          border: 3px #cedeeb double;
+          align-self: center;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 426px){
+  .car-list .model{
+    grid-template: 1fr 0.5fr/1fr 1fr 0.5fr;
+    grid-row-gap: 20px;
+    .price{
+      justify-self: center;
+      grid-area: 2/2/3/4;
+      h1{
+        font-size: 20px;
+      }
+    }
+    .category{
+      grid-area: 2/3/3/4;
+    }
+    .info{
+      grid-area: 1/2/2/4;
+    }
+    .buttons{
+      grid-area: 3/1/4/4;
+      justify-self: center;
+    }
+  }
+}
+
+@media screen and (max-width: 425px){
+  .car-list{
+    .model{
+      display: grid;
+      grid-template-rows: repeat(2,1fr) 0.5fr 0.2fr;
+      grid-template-columns: 1fr;
+      grid-gap: 15px;
+      .info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        p{
+          text-align: center;
+        }
+      }
+      .colors{
+        justify-content: center;
+      }
+      .price {
+        justify-self: center;
+      }
+      .buttons{
+        justify-self: center;
+      }
+    }
+  }
+}

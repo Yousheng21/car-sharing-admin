@@ -1,0 +1,49 @@
+@import "src/index";;
+.input {
+  h6.necess{
+    font-weight: bold;
+  }
+  label, div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    input {
+      @extend %style-input;
+      width: 100%;
+      height: auto;
+      color: black;
+    }
+  }
+  &.error{
+    display: flex;
+    flex-direction: column;
+    label input{
+      border-color: $color-error;
+    }
+    span{
+      margin-top: 10px;
+      color: $color-error;
+      align-self: center;
+    }
+  }
+}
+
+.select{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  .necess{
+    font-weight: bold;
+  }
+  &-body{
+    @extend %style-select;
+    select{
+      height: auto;
+      width: 100%;
+      &.error{
+        border-color: $color-error;
+      }
+    }
+  }
+}

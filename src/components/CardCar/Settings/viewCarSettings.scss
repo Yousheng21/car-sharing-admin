@@ -1,0 +1,168 @@
+@import "src/index";
+
+.card-car{
+  .settings {
+    display: grid;
+    grid-template-rows: 0.1fr 3fr;
+    grid-row-gap: 30px;
+
+    h1 {
+      font-size: 24px;
+      font-family: Roboto-Bold, sans-serif;
+    }
+
+    &-main {
+      display: grid;
+      grid-template: 0.1fr 0.1fr/1fr 1fr;
+      align-items: flex-start;
+      grid-gap: 20px;
+
+      .div-category {
+        .select {
+          @extend %style-select;
+
+          select {
+            width: 100%;
+            color: black;
+          }
+        }
+      }
+      .div-number{
+        display: grid;
+        grid-template-rows: 0.1fr 1fr;
+        grid-row-gap: 10px;
+        grid-area: 3/2/4/3;
+        justify-self: center;
+        h6{font-weight: bold}
+        &>div{
+          display: flex;
+          gap: 10px;
+          input{
+            @extend %style-input;
+          }
+          button {
+            @extend %style-btn;
+            padding: 5px 15px;
+            &:active{
+              box-shadow: 0 0 10px 2px rgba(190, 202, 214, 0.68) inset;
+            }
+          }
+        }
+      }
+      .div-colors {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 5px;
+        > div {
+          display: grid;
+          grid-template-columns: 1fr 0.1fr;
+          gap: 10px;
+          input{
+            @extend %style-input;
+            width: 100%;
+            height: auto;
+            color: black;
+            &.error{
+              border-color: $color-error;
+            }
+          }
+        }
+
+        button {
+          @extend %style-btn;
+          padding: 5px;
+          &:disabled{
+            opacity: 0.5;
+          }
+          &:active{
+            box-shadow: 0 0 10px 2px rgba(190, 202, 214, 0.68) inset;
+          }
+        }
+      }
+      .view-colors {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        grid-area: 3/1/4/2;
+        label {
+          vertical-align: center;
+           color: $color-btn;
+          input {
+            width: 5%;
+            padding: 10px;
+            margin-right: 5%;
+          }
+
+          svg {
+            align-self: center;
+          }
+        }
+
+        button.delete {
+          border: none;
+          padding: 5px;
+          align-self: flex-end;
+        }
+        span.error{
+          color: $color-error;
+        }
+      }
+      .div-price{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        input{
+          @extend %style-input;
+          width: 100%;
+          height: 40px;
+          color: black;
+          align-self: flex-end;
+          &:disabled{
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px){
+  .card-car{
+    .settings{
+      grid-template-rows: 0.1fr 1fr;
+      &-main{
+        grid-template: repeat(2,0.1fr) 0.5fr/1fr 1fr;
+        .div-number{
+          justify-self: auto;
+          &>div{
+            display: grid;
+            grid-template-columns: 0.7fr 0.3fr;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px){
+  .card-car {
+    .settings {
+      &-main{
+        grid-template: repeat(5,0.1fr)/1fr;
+        .div-number, .view-colors{
+          grid-area: auto;
+        }
+        .div-price{
+          grid-row: 3/4;
+        }
+        .div-number{
+          grid-row: 4/5;
+          &>div{
+            grid-template-columns: 0.3fr 0.3fr;
+          }
+        }
+      }
+    }
+  }
+}

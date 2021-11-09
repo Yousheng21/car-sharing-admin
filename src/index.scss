@@ -1,0 +1,94 @@
+$main-color:#007BFF;
+$second-color:#CACEDB;
+$third-color: #818EA3;
+$color-shadow: rgba(#5A6169, 0.15);
+$color-btn-add: #0EC261;
+$color-error: #C4183C;
+$color-btn-error: #CB3656;
+$color-title: #3D5170;
+$color-select: #BECAD6;
+$color-btn: #5A6169;
+$color-border: rgba(202, 206, 219, 0.5);
+$color-option: #868E96;
+
+@font-face {
+  font-family: 'Roboto-Light';
+  src: local('Light'), url(fonts/Roboto-Light.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Roboto-Black';
+  src: local('Black'), url(fonts/Roboto-Black.ttf);
+}
+
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: local('Bold'), url(fonts/Roboto-Bold.ttf);
+}
+
+body{
+  margin: 0;
+  overflow-x: hidden;
+}
+
+*{
+  font-weight: bold;
+  font-family: Roboto-Light, serif;
+}
+h1,h2{
+  font-weight: bold;
+  color: $color-title;
+}
+a{
+  text-decoration: none;
+}
+
+%style-template-1{
+  appearance: none;
+  outline: none;
+  border: $color-select 1px solid;
+  border-radius: 5px;
+}
+
+%style-select-row{
+  content: "";
+  display: block;
+  border-style: solid;
+  border-width: 4px 3px 0 3px;
+  border-color: black transparent transparent transparent;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+%style-btn{
+  @extend %style-template-1;
+  color: $color-select;
+}
+
+%style-input{
+  @extend %style-template-1;
+  min-width: 150px;
+  height: 100%;
+  padding: 5px 15px 5px 10px;
+  color: $color-option;
+}
+
+%style-select{
+  position: relative;
+  &:after{
+    @extend %style-select-row;
+    top: 50%;
+    right: 5px;
+  }
+  &:before{
+    @extend %style-select-row;
+    top: 30%;
+    right: 5px;
+    transform: scale(1, -1);
+  }
+  select{
+    @extend %style-input;
+  }
+}
